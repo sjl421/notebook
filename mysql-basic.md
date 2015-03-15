@@ -3,6 +3,9 @@
 `mysql -h hostname -D dbname -u username -p < cmd.sql`
 
 * `\h` for help
+* `\!` for execute shell cmd
+* `\e` for edit with `$EDITOR`
+* `\. f_name` for execute f_name
 * `\q` for exit
 
 ## User
@@ -12,29 +15,30 @@ mysql的用户数据存储在mysql数据库的user表中,对用户进行的创�
 * create
 
 ```sql
-mysql> insert into mysql.user(Host, User, Password) values("localhost", "user1", password("12345678"));
+mysql> insert into mysql.user(Host, User, Password) values("localhost", "user_name", password("user_pwd"));
 mysql> flush privileges;
 ```
 
 * grant privileges
 
 ```sql
-mysql> create database user1db;
-mysql> grant all privileges on user1db.* to user1@localhost identified by "12345678";
+mysql> create database user_db;
+mysql> grant all privileges on user_db.* to user_name@localhost identified by "user_pwd";
+mysql> grant select, insert on user_db.* to user_name@localhost identified by "user_pwd";
 mysql> flush privileges;
 ```
 
 * delete
 
 ```sql
-mysql> delete from mysql.user where User="user1" and Host="localhost";
+mysql> delete from mysql.user where User="user_name" and Host="localhost";
 mysql> flush privileges;
 ```
 
 * change password
 
 ```sql
-mysql> update mysql.user set password=password("new pwd") where User="user1" and Host="localhost";
+mysql> update mysql.user set password=password("new_pwd") where User="user_name" and Host="localhost";
 mysql> flush privileges;
 ```
 
@@ -48,6 +52,8 @@ mysql> drop database db_name;
 ```
 
 ## table
+
+`mysql> show tables;`
 
 * create
 
@@ -82,7 +88,7 @@ mysql> delete from tb_name where condition;
 
 * alter
 
-`alter`用于在表创建后对表进行更改,如添加列,更改列名,
+`alter`用于在表创建后对表进行更改.
 
 ```sql
 mysql> alter table tb_name add new_col col_type [after col_name];
