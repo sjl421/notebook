@@ -13,6 +13,14 @@ if you have install the android-sdk to your disk.
 * `adb push/pull`: copy file from local to device, or reverse.
 * `adb shell`: start a android device's shell, usually `sh`
 * `adb shell {cmd [args]}`: just execute a shell cmd, not start a shell
+* `adb install/uninstall *.apk`: install/uninstall app
+* `adb connect/disconnect ip:port`: connect phone by wifi
+* `adb logcat`: get the log of phone
+
+## adb shell
+
+* `$ dd if=file1 of=file2`: copy file from one partition to another, `mv` can't
+* `$ mount -o remount rw /system`: remount the `/system` partition to `rw` mode
 
 ## fastboot
 
