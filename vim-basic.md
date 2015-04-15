@@ -30,7 +30,7 @@
 * 左跳一个word/WORD首: `b`, `B`
 * 右跳一个word/WORD尾: `e`, `E`
 * 左跳一个word/WORD尾: `ge`, `gE`
-* 行首/尾: `0`, `\$`
+* 行首/尾: `0`, `$`
 * 行的第一个非空白字符: `^`
 * 行内单字符右/左查找: `f`, `F`
 * 行内右/左查找并置光标于字符前: `t`, `T`
@@ -48,19 +48,19 @@
 * 查找/反向查找: `/`, `?`
 * 查找整个word(\<匹配word头,\>匹配word尾): `/\<the\>`
   * 下/上一个匹配: `n`, `N`
-* 右/左查找光标处整个/部分word: `\*`, `#`, `g\*`, `g#`
-* 标记/跳转到标记: `m\[a-zA-Z\]`, `'\[a-zA-Z\]`
+* 右/左查找光标处整个/部分word: `*`, `#`, `g*`, `g#`
+* 标记/跳转到标记: `m[a-zA-Z]`, `'[a-zA-Z]`
   * `a-z`标记是单个文件独有的,
   * `A-Z`标记被多个文件共有
 * 列出所有的标记列表: `:marks`
   * 特殊标记: 跳转前的光标位置\`, 最后编辑的光标位置", 最后修改的开始位置\[, 最后修改的结束位置\]
-  * 列出标记位置: `:marks \[a-zA-Z\]`
+  * 列出标记位置: `:marks [a-zA-Z]`
 * 跳回"较老/新"的位置: `Ctrl-O`, `Ctrl-I`
 * 列出可跳转位置列表: `:jumps`
 
 ## 小改动
 
-* 删除一个word(操作符+动作): `dw`, `d4w`, `d\$`
+* 删除一个word(操作符+动作): `dw`, `d4w`, `d$`
 * 修改word(删除并插入): `cw`, `c4w`
 * 删除到行尾: `D`
 * 修改到行尾: `C`
@@ -75,18 +75,18 @@
 * 交换两个字符: `xp`
 * 拷贝文本: `y`
   * 拷贝一行: `yy`, `Y`
-* 剪贴板: `"\*y`, `"\*p`
-* word中删除word: `\[dcy]iw`, `\[dcy]aw`
-* sentence中删除sentence(`as`包括sentence后的空白字符): `\[dcy]is`, `\[dcy]as`
+* 剪贴板: `"*y`, `"*p`
+* word中删除word: `[dcy]iw`, `[dcy]aw`
+* sentence中删除sentence(`as`包括sentence后的空白字符): `[dcy]is`, `[dcy]as`
 * 执行修改:
-  * 操作符+动作: `d\$`
+  * 操作符+动作: `d$`
   * 可视模式
   * 文本对象: `daw`
 * 转换大小写: `~`
 * 列出当前已定义映射: `:map`
 * 列出选项: `:options`
 * 恢复选项默认值(`&`): `:set iskeyword&`
-* 使用寄存器: `"\[a-z]`, `"fyas`/`"fp`
+* 使用寄存器: `"[a-z]`, `"fyas`/`"fp`
 * 添加到文件(或可在可视模式选中文本): `:write >> logfile`
 
 ## .vimrc
@@ -110,8 +110,8 @@
   * `b`是<BS>键, `s`是<SPACE>
   * `<`是<Left>, `>`是<Right>
   * `[`是插入模式中的<Left>, `]`是插入模式中的<Right>
-* 显示TAB键和行尾符`\$`: `set list`
-  * TAB显示为`^I`, 行尾符显示为`\$`
+* 显示TAB键和行尾符`$`: `set list`
+  * TAB显示为`^I`, 行尾符显示为`$`
   * 自定义显示: `set listchars=tab:>-,trail:-`
 * 界定word: `set iskeyword+=-`
 * 设定命令行高度: `set cmdheight=2`
@@ -140,8 +140,8 @@
 ## 编辑多个文件
 
 * 编辑另一个文件: `:edit fname.txt`
-* 保存文件: `:write \[fname.txt]`
-* 文件列表: `\$ vim f1.txt f2.txt f3.txt`
+* 保存文件: `:write [fname.txt]`
+* 文件列表: `$ vim f1.txt f2.txt f3.txt`
   * 默认显示第一个文件,编辑第二个文件: `:next`, `:n`
   * 保存第一个文件并编辑第二个文件: `:wnext`, `:wn`
   * 查看文件列表: `:args`
@@ -151,43 +151,43 @@
   * 后跳两个文件: `:2next`
   * 编辑另一个文件列表: `:args t1.txt t2.txt t3.txt`
   * 两文件间跳转(不改变文件列表位置): `Ctrl-^`
-  * 为列表中每个文件创建窗口: `:all`, `:vert\[ical] all`
+  * 为列表中每个文件创建窗口: `:all`, `:vert[ical] all`
   * 水平分割窗口并编辑next/prev文件,first/last文件:
-    * `:spr\[evious]`, `:sn\[ext]`, `:sfir\[st]`, `:sla\[st]`
+    * `:spr[evious]`, `:sn[ext]`, `:sfir[st]`, `:sla[st]`
 * 跳转到上次离开这个文件时位置: `'"`
 * 跳转到最后一次修改文件的位置: `'.`
 * 只读模式启动Vim: `$ vim -R file`
   * 严格的只读: `$ vim -M file`
-* 另存为: `:sav\[eas] new_name.txt`
+* 另存为: `:sav[eas] new_name.txt`
 
 ## 分割窗口
 
-* 水平分割窗口: `:sp\[lit] f1.txt`, `:new f1.txt`, `Ctrl-W s`
-* 垂直分割窗口: `:vsp\[lit] f1.txt`, `:vne\[w] f1.txt`, `Ctrl-W v`
+* 水平分割窗口: `:sp[lit] f1.txt`, `:new f1.txt`, `Ctrl-W s`
+* 垂直分割窗口: `:vsp[lit] f1.txt`, `:vne[w] f1.txt`, `Ctrl-W v`
 * 分割窗口并指定大小: `:3sp f1.txt`
-* 改变窗口大小(接受计数前缀): `3 Ctrl-W +`, `3 Ctrl-W -`, `3 Ctrl-W \_`
+* 改变窗口大小(接受计数前缀): `3 Ctrl-W +`, `3 Ctrl-W -`, `3 Ctrl-W _`
   * 跳转窗口(`t`顶,`b`底): `Ctrl-W h/j/k/l/t/b`
   * 移动窗口: `Ctrl-W H/J/K/L`
   * 转窗口为tab页面: `Ctrl-W T`
-* 关闭窗口: `:clo\[se]`
-* 关闭其余窗口: `:on\[ly]`
-* 退出/保存所有窗口: `:qa\[ll]`, `:wa\[ll]`, `:wa\[ll]`
+* 关闭窗口: `:clo[se]`
+* 关闭其余窗口: `:on[ly]`
+* 退出/保存所有窗口: `:qa[ll]`, `:wa[ll]`, `:wa[ll]`
 * 为文件列表中每个文件打开一个窗口: `$ vim -o f1.txt f2.txt f3.txt`
 * 用vimdiff显示文件差异: `$ vimdiff f1.txt f2.txt`
-  * 在内部启动比较模式: `:vert\[ical] diffs\[plit] f2.txt`
-  * 有当前文件的补丁: `:vert\[ical] diffp\[atch] f2.txt patch.txt`
+  * 在内部启动比较模式: `:vert[ical] diffs[plit] f2.txt`
+  * 有当前文件的补丁: `:vert[ical] diffp[atch] f2.txt patch.txt`
   * 关闭比较模式的滚动绑定: `set noscrollbind`
   * 跳转/反向跳转到修改点: `]c`, `[c`
-  * 消除差异: `:diffu\[pdate]`
+  * 消除差异: `:diffu[pdate]`
   * 文本左右拷贝: `dp`, `do`
     * 在左边窗口,从左边拷贝到右边: `diff put`, `dp`
     * 在右边窗口,从左边拷贝到右边: `diff obtain`, `do`
 * 打开/关闭折叠: `zo`, `zc`
-* 新标签页编辑: `:tabe\[dit] new_file`
+* 新标签页编辑: `:tabe[dit] new_file`
   * 切换标签页: `gt`
   * 任何会打开窗口的命令前都可前加`:tab`,在新标签页打开: `:tab split`, `:tab help gt`
-  * 关闭其余标签页: `:tabo\[nly]`
-* 指定什么时候对最后一个窗口显示状态条: `set laststatus=\[012]`
+  * 关闭其余标签页: `:tabo[nly]`
+* 指定什么时候对最后一个窗口显示状态条: `set laststatus=[012]`
 
 ## GUI(.gvimrc)
 
@@ -196,20 +196,20 @@
 * 去右边滚动条: `:set guioptions-=r/R`
 * 去左边滚动条: `:set guioptions-=l/L`
 * X-window系统有两个地方可以在程序间交换文本:
-  * 当前选择区:在一个程序选中文本,鼠标左键在另一个程序粘贴, `"\*`寄存器表示
+  * 当前选择区:在一个程序选中文本,鼠标左键在另一个程序粘贴, `"*`寄存器表示
   * "真"剪贴板:选中文本,通过菜单的copy/paste进行复制和粘贴, `"+`寄存器
 * 设置鼠标模式: `:behave xterm/mswin`
 
 ## 大修改
 
 * 记录和回放命令:
-  * 启动记录: `q\[a-z]`
+  * 启动记录: `q[a-z]`
   * 终止记录: `q`
-  * 执行记录: `\[n] @\[a-z`
+  * 执行记录: `[n] @[a-z`
   * 执行上次执行的记录: `@@`
   * 记录到大写字母寄存器\[A-Z]的命令会追加到小写字母寄存器\[a-z]中
 * 命令记录作为文本内容保存在寄存器,可以先写出命令再复制到寄存中,再执行记录
-* 字符串替换: `:\[range]s/from/to/\[flags]`
+* 字符串替换: `:[range]s/from/to/[flags]`
   * 默认当前行,`%`为全部行
   * 默认只替换第一个匹配点,`g`替换所有匹配点
   * 默认不提示替换,`c`提示
@@ -229,7 +229,7 @@
   * `5:`用于指定行数,得到范围: `:.,.+4s/this/that/g`
 * `:write`命令不指定范围时,默认写入整个文件
   * 只写入当前行: `:.write`
-* 找到匹配点并在那里执行一个命令: `:\[range]g/{pattern}/{command}`
+* 找到匹配点并在那里执行一个命令: `:[range]g/{pattern}/{command}`
   * `{command}`只能是冒号命令,普通命令使用`:normal`
   * 只修改C++风格注释内容中的"foobar"为"barfoo"(`+`为分隔符): `:g+//+s/foobar/barfoo/g`
   * 默认整个文件
@@ -242,10 +242,10 @@
   * 用单字符填充: `r`
   * 将选中文本右移一个单位(由`:set shiftwidth=4`决定): `>`
   * 连接若干行: `J`, 不改变行前后的空白符: `gJ`
-* 在光标处读入文本内容: `:r\[ead] {filename}`
+* 在光标处读入文本内容: `:r[ead] {filename}`
   * 插入文件最后: `:$r {filename}`
   * 插入文件最前: `:0r {filename}`
-* 保存文件部分行内容: `:\[range]w\[rite] {filename}`
+* 保存文件部分行内容: `:[range]w[rite] {filename}`
   * 保存当前行到文件: `:.w {filename}`
   * 追加内容到文件: `:.w >> {filename}`
 * 自动换行: `:set textwidth=72`
@@ -254,7 +254,7 @@
   * 改变单词的大写: `gUw`
   * 改变整行的大小写(重复): `gugu`, `gUgU`, `g~~`
 * 使用外部程序对文本块进行过滤, 会改变文本的: `!{motion}{program}`
-  * 相当于`:\[range]!{program}`
+  * 相当于`:[range]!{program}`
   * 例如排序文本: `!5Gsort<Enter>`, `:.,.+4!sort<Enter>`
   * `!!`对当前行进行过滤
 * 读入命令输出: `:read !ls`
@@ -265,14 +265,14 @@
 * `$ vim -r help.txt`
   * vim在停止输入4秒或输入约200字符会更新交换文件,由`updatetime`和`updatecount`指定
   * 若编辑时未给出文件名,`$ vim -r ""`
-  * 命令: `:rec\[over]`
+  * 命令: `:rec[over]`
 * 交换文件保存目录: `set dir`
 
 ## 小窍门
 
 * 单词替换: `:%s/\<four\>/4/g`
 * 多文件替换(使用记录-回放):
-  * 用多文件作为文件参数列表: `$ vim \*.cpp`
+  * 用多文件作为文件参数列表: `$ vim *.cpp`
   * 用q寄存器记录: `qq`
   * 替换单文件(`e`标记通知替换命令找不到匹配点不是错误,不终止): `:%s/\<four\>/4/ge`
   * 保存并开启下一个文件: `:wn`
@@ -295,7 +295,7 @@
 * 编辑包含"frame\_counter"的所有C源文件: `$ vim 'grep -l frame_counter *.c'`
   * `grep`从一组文件中查找特定的单词,`-l`参数令只列出文件不列出匹配点
   * 以`grep`命令的结果做为vim的输入文件列表
-  * 在所有C文件中查找"error\_string": `:grep error\_string \*.c`
+  * 在所有C文件中查找"error\_string": `:grep error_string *.c`
     * 下一个匹配点: `cnext`
     * 上一个匹配点: `cprev`
     * 列出所有匹配点: `clist`
@@ -316,9 +316,9 @@
 * 命令行中<tab>键可以进行上下文相关的自动补全
   * 当有多个匹配时,列出匹配列表: `Ctrl-D`
   * 将词补全为最长无歧义字符串: `Ctrl-L`
-* 四种历史记录功能: `:his\[tory]`
+* 四种历史记录功能: `:his[tory]`
   * `:`冒号命令
-  * `/`, `?`搜索命令: `:his\[tory] /`
+  * `/`, `?`搜索命令: `:his[tory] /`
   * 函数`input()`的表达式
   * 输入行
 * 打开命令行窗口,使用普通vim窗口的命令编辑命令: `q:`
@@ -329,7 +329,7 @@
   * 执行`{program}`: `:!{program}`
   * 执行`{program}`并读取其输出: `:r !{program}`
   * 执行`{program}`传送文本至其输入: `:w !{program}`
-  * 经由`{program}`过滤文本: `:\[range]!{program}`
+  * 经由`{program}`过滤文本: `:[range]!{program}`
 * 执行新的shell: `:shell`
 * 信息文件viminfo设计用来储存状态信息:
   * 选项`'`用于规定你为多少文件保存标记(a-z)
@@ -345,13 +345,13 @@
   * 上上次离开vim的中断: `'1`
   * 上上上次离开vim的中断: `'2`
   * 类推
-* 重返某曾编辑过的文件: `:ol\[dfiles]`
+* 重返某曾编辑过的文件: `:ol[dfiles]`
   * 编辑列表中第2个文件: `:e #<2`
-  * 或: `:bro\[wse] ol\[dfiles]`
-* 保存和还原viminfo信息: `:wv\[iminfo] {fname}`, `:rv\[iminfo] {fname}`
+  * 或: `:bro[wse] ol[dfiles]`
+* 保存和还原viminfo信息: `:wv[iminfo] {fname}`, `:rv[iminfo] {fname}`
 * vim的会话保存跟编辑相关的信息,如文件列表,窗口而已,全局变量,选项以及其它,由`sessionoptions`,`ssop`指定:
-  * 创建会话: `:mks\[ession] vimbook.vim`
-  * 还原会话: `:so\[urce] vimbook.vim`
+  * 创建会话: `:mks[ession] vimbook.vim`
+  * 还原会话: `:so[urce] vimbook.vim`
   * 从shell中启动: `$ vim -S vimbook.vim`
     * `blank`: 保留空窗口
     * `buffers`: 所有缓冲区
@@ -362,8 +362,8 @@
     * `winsize`: 窗口大小
     * `resize`: 还原窗口大小
     * 若有需要在在Unix和Windows中切换工作,建议加`unix`, `slash`选项
-  * 会话储存所有窗口的特性,若只存储当前窗口的特性: `:mkv\[iew]`, `:lo\[adview]`
-    * 为同一个窗口可储存不同的视图: `:mkv \[1-9]`, `:lo \[1-9]`
+  * 会话储存所有窗口的特性,若只存储当前窗口的特性: `:mkv[iew]`, `:lo[adview]`
+    * 为同一个窗口可储存不同的视图: `:mkv [1-9]`, `:lo [1-9]`
     * 为视图指定文件: `:mkv {fname}`, `:so {fname}`
     * 选项`viewdir`储存视图文件目录
 * 模式行,针对特定文件设定特定选项,在正在编辑的文件文本中添加:
