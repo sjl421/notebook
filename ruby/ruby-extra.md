@@ -1,4 +1,4 @@
-## extra
+# extra
 
 ```ruby
 a = %{a b c}   #=> "a b c"

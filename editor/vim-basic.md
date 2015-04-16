@@ -95,7 +95,7 @@
 * 增量式查找: `set incsearch`
 * 查找字符忽略大小写: `set ignorecase`
 * 遇文件头尾循环查找: `set wrapscan`
-* 设置在插入模式下允许<BS>删除光标前字符的位置: `set backspace=indent,eol,start`
+* 设置在插入模式下允许`<BS>`删除光标前字符的位置: `set backspace=indent,eol,start`
   * 分别表示: 行首空白符,换行符,插入模式开始前字符
 * 新行缩进: `set autoindent`
 * 覆盖文件时保留备份: `set backup`, `set backupext=.bak`, `set backupdir=/path/to/your/backupdir`
@@ -107,9 +107,9 @@
 * 禁止回绕行: `set nowrap`
   * 一次右滚10个字符: `set sidescroll=10`
 * 设置可换行移动命令: `set whichwrap=b,s`
-  * `b`是<BS>键, `s`是<SPACE>
-  * `<`是<Left>, `>`是<Right>
-  * `[`是插入模式中的<Left>, `]`是插入模式中的<Right>
+  * `b`是`<BS>`键, `s`是`<SPACE>`
+  * `<`是`<Left>`, `>`是`<Right>`
+  * `[`是插入模式中的`<Left>`, `]`是插入模式中的`<Right>`
 * 显示TAB键和行尾符`$`: `set list`
   * TAB显示为`^I`, 行尾符显示为`$`
   * 自定义显示: `set listchars=tab:>-,trail:-`
@@ -313,7 +313,7 @@
   * 删除整个单词: `Ctrl-W`
   * 删除全部: `Ctrl-U`
   * 取消命令: `Ctrl-C`, `<ESC>`
-* 命令行中<tab>键可以进行上下文相关的自动补全
+* 命令行中`<tab>`键可以进行上下文相关的自动补全
   * 当有多个匹配时,列出匹配列表: `Ctrl-D`
   * 将词补全为最长无歧义字符串: `Ctrl-L`
 * 四种历史记录功能: `:his[tory]`
@@ -539,7 +539,7 @@
     * `|`: 匹配A或B
     * `&`:
     * `\[]`, `\[^]`: 匹配包含或不含在其中的字符
-      * `\e`: <esc>, `\t`: <tab>, `\r`: <cr>, `\b`: <bs>
+      * `\e`: `<esc>`, `\t`: `<tab>`, `\r`: `<cr>`, `\b`: `<bs>`
     * 预定义范围, 加前缀`\_`可兼任匹配换行符:
       * `\a`: 字母
       * `\d`: 数字, `\D`: 非数字
