@@ -293,3 +293,71 @@ raise MyError, msg
 raise msg  # 默认RuntimeError异常
 raise
 ~~~
+
+## Ruby类继承关系
+
+* BasicObject
+  * Object
+    * Array
+    * String
+    * Hash
+    * Regexp
+    * IO
+      * File
+    * Dir
+    * Numeric
+      * Integer
+        * Fixnum
+        * Bignum
+      * Float
+      * Complex
+      * Rational
+    * Exception
+      * SystemExit
+      * NoMemoryError
+      * SignalException
+      * ScriptException
+        * LoadError
+        * SyntaxError
+        * NotImplementedError
+      * StandardError
+        * RuntimeError
+        * SecurityError
+        * NameError
+          * NoMethodError
+        * IOError
+          * EOFError
+        * SystemCallError
+          * Errno::EPERM
+          * Errno::ENOENT
+    * Time
+    * Range
+    * Symbol
+
+## block
+
+```ruby
+# do~end 等价 {}
+# 1,块用于循环（各种each_xx)
+# 2,块用于隐藏常规处理
+File.open(path) do |file|
+  file.each_line do |line|
+    ...
+  end
+end
+# 等价
+file = File.open(path)
+begin
+  file.each_line do |line|
+    ...
+  end
+ensure
+  file.close    #文件一定会关闭，无论是否异常
+end
+# 3,替换部分算法
+ary.sort {|a, b| a.size <=> b.size} # 对每两个元素基于.size比较排序
+ary.sort_by {|a| a.size}    # 对每个元素.size后再排序
+# 将块封装为对象
+hello = Proc.new {|name| puts "hello, #{name}"}
+hello.call("Ruby")
+```
