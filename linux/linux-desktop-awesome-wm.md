@@ -2,20 +2,25 @@
 
 awesome的几个概念: 屏幕,标签(上方1..9),布局(右上角).
 
-configure file: ~/.config/awesome/rc.lua
+configure file: `~/.config/awesome/rc.lua`
 
 ## 快捷鍵
 
-* `<M-enter>`: open terminal
-* `<M-z>`: close window
-* `<M-[1..9]>`: change current tags
-* `<S-M-[1..9]>`: change to another window's tags
-* `<S-M-q>`: quit awesome, like the `log-out`
-* `<M-r>`: run application
-* `<M-x>`: run lua code
-* `<C-M-space>`: change layour
-* `<M-o>`: send the client to another screen
-* `<S-M-j/k>`: change the client's layouts
+* open terminal: `<M-enter>`
+* kill window(I config this): `<M-z>`
+* switch prev/next tag: `<M-left/right>`
+* switch to specify tags: `<M-[1..9]>`
+* switch window: `<M-j/k>`
+* open menu: `<M-w>`
+* restart awesome: `<M-C-r>`
+* quit awesome: `<S-M-q>`
+* run application: `<M-r>`
+* run lua code: `<M-x>`
+* increase window's size: `<M-l>`
+* decrease window's size: `<M-h>`
+* change layout: `<M-space>`
+* make current window fullscreen: `<M-f>`
+* move current client to another screen: `<M-o>`
 
 ## more monitor
 
