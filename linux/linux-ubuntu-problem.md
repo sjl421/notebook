@@ -31,3 +31,24 @@ bookmarks messy code
 ~~~ sh
 sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 ~~~
+
+## file manager
+
+文件管理器侧边栏错误:
+
+* edit the `~/.config/user-dirs.dirs`
+* 确保相关目录存在
+* 注销重登陆
+
+## monaco font
+
+install: `curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font-ubuntu.sh | bash`
+
+## grub fixed
+
+```sh
+sudo grub-install /dev/sda
+sudo update-grub2
+# update-grub2是个脚本，内部调用下列命令
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```

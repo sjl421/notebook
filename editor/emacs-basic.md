@@ -1,5 +1,7 @@
 # emacs
 
+using the purcell emacs' config: `git clone https://github.com/purcell/emacs.d ~/.emacs.d`
+
 ## base
 
 备份文件(`filename~`), 自动保存文件(`filename`)

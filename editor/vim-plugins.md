@@ -29,3 +29,17 @@
 ## wmgraphviz
 
 * install graphviz and dot2tex: `$ sudo apt-get install graphviz graphviz-dev dot2tex`
+
+## youcompleteme
+
+* install:
+
+```sh
+mkdir ycm_build && cd ycm_build
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+make ycm_support_libs
+```
+
+## vimproc
+
+在`~/.vim/bundle/vimproc.vim`中执行`make`命令或在vim中执行`VimProcInstall`命令.
