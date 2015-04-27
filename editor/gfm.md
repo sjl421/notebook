@@ -6,9 +6,9 @@
 * `GFW`的代码块标志`\`\`\``,且允许有空行
 
 ```ruby
-\`\`\`ruby
+```ruby
 def hello(name)
   puts "hello, #{name}
 end
-\`\`\`
+```
 ```
