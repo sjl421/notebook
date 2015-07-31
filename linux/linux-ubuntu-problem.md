@@ -4,6 +4,9 @@
   * `sudo apt-get -f install && sudo dpkg --configure -a`
 * 若遇到'MergeList'和'Package:header' error：
   * `sudo rm -rf /var/lib/apt/lists/* && sudo apt-get update`
+* 若遇到`Hash Sum mismatch` error:
+  * `sudo rm -rf /var/lib/apt/lists/partial/*`
+  * `sudo apt-get update`
 * 若遇到不能获取apt缓存锁：
   * `sudo fuser -cuk /var/lib/dpkg/lock`;
   * `sudo rm -f /var/lib/dpkg/lock`;
