@@ -255,7 +255,7 @@
   * 改变整行的大小写(重复): `gugu`, `gUgU`, `g~~`
 * 使用外部程序对文本块进行过滤, 会改变文本的: `!{motion}{program}`
   * 相当于`:[range]!{program}`
-  * 例如排序文本: `!5Gsort<Enter>`, `:.,.+4!sort<Enter>`
+  * 例如排序文本: `5G!sort<Enter>`, `:.,.+4!sort<Enter>`
   * `!!`对当前行进行过滤
 * 读入命令输出: `:read !ls`
   * 读入日期: `:0read !date -u`

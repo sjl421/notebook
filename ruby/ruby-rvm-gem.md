@@ -27,7 +27,9 @@ sed -i 's!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' $rvm_path/
 
 usage:
 
-* install package: `$ gem install package`
+* search package: `gem search [-r] pkg-name`
+* install package (from local or remote) (use pointed server url): `$ gem install [-l|-r] package [--source url]`
+* list (matched name) (local or remote) package (with details): `gem list [-l|-r|-d] [regx]`
 * update package or itself: `$ gem update [--system]`
 * build your gem: `$ gem build foo.gemspec`
 * deploy your gem: `$ gem push foo-1.0.0.gem`
