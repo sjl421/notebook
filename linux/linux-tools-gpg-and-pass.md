@@ -21,7 +21,7 @@
 * 导入公钥或私钥 :`gpg --import file.gpg`
 * 加密文件，默认输出为`file.gpg`,`e`加密,`r`指定ID :`gpg [-o file.gpg] -er pubID file`
 * 解密文件，默认输出到`stdout`，`d`解密 :`gpg [-o file] -d file.gpg`
-* 签名，`s`签名，`e`加密，`u`指定ID :`gpg -o file.sig -seu pubID`
+* 签名，`s`签名，`e`加密，`u`指定自己的secID, `r`指定接收者的pubID :`gpg -o file.sig -seu pubID`
 
 ## pass
 
