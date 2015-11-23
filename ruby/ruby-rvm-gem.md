@@ -51,3 +51,16 @@ if you use `bundle` to manager your dependency. change your Gemfile.
 source 'https://ruby.taobao.org/'
 gem 'rails', '4.2.0'
 ```
+
+## rails' Gemfile
+
+Everytime you new a rails' project, the Gemfile's first line has the wrong source.
+
+first method:
+* changing its template.
+* `gems/railties-x.x.x/lib/rails/generators/rails/app/templates/Gemfile`
+
+second method:
+* `~/.railsrc` file will be loaded after rails new all files before bundle install.
+* write `--template=~/.template.rb` into `~/.railsrc`, then the file will be exce.
+* write `gsub_file Gemfile, /^source.*$/, "source 'https://ruby.taobao.org/'"` into `~/.template.rb` to exec substitude
