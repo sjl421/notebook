@@ -1,4 +1,12 @@
-# ubuntu make
+# PPA
+
+## Usage
+
+基本命令:
+* 添加仓库: `sudo add-apt-repository ppa:ppa_name`
+* 移除仓库: `sudo add-apt-repository -r ppa:ppa_name`
+
+## ubuntu make
 
 * add ppa: `sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make`
 * update and install: `sudo apt-get update && sudo apt-get install ubuntu-make`

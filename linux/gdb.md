@@ -6,7 +6,7 @@
 
 很多命令只要写前几个字母，能从众多命令中辨识，即可执行
 
-~~~ sh
+``` sh
 $> b   -(break num | func(class::method) | *addr | +-offset)
 $> d   -(delete bpnum)
 $> dis|en -(disable|enable bpnum)
@@ -17,7 +17,7 @@ $> f   -(frame num, now)
 $> bt  -(backtrace  all stack)
 $> fin -(run till exit from func)
 $> set|show args -(set or show args)
-~~~
+```
 
 ## 启动
 
@@ -49,7 +49,7 @@ $> set|show args -(set or show args)
 
 ## more usage
 
-~~~ sh
+``` sh
 $> path [<path>] -(show or add path)
 $> set|show env [<name>=<value>] -(set or show env)
 $> shell <cmd> -(run shell cmd)
@@ -58,4 +58,4 @@ $> b if var=value -(stop when var equal value)
 $> watch | rwatch | awatch  -(set watchpoint, when expr c|r|rw, stop
 $> catch throw|catch|exec|fork|load|unload
 $> display/i $pc -(undisplay, delete display, disable|enable display, info display)
-~~~
+```

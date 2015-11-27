@@ -52,7 +52,7 @@ source 'https://ruby.taobao.org/'
 gem 'rails', '4.2.0'
 ```
 
-## rails' Gemfile
+### rails' Gemfile
 
 Everytime you new a rails' project, the Gemfile's first line has the wrong source.
 

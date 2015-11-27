@@ -1,5 +1,9 @@
 # tmux
 
+## install
+
+`github`官网: `https://github.com/tmux/tmux`
+
 compile install tmux: 
 * `sudo apt-get install libevent-dev`
 * `./configure && make`

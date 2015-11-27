@@ -18,8 +18,10 @@ diff -r dir1 dir2
 
 ## meld
 
+安装: `sudo apt-get install meld`
+
 meld is visual diff and merge tool targeted at developers.
 
-```sh
-sudo apt-get install meld
-```
+## vimdiff
+
+`vimdiff file1 file2`

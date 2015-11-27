@@ -55,3 +55,14 @@ sudo update-grub2
 # update-grub2是个脚本，内部调用下列命令
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
+
+## ibus
+
+默认的ubuntu英文安装环境是不会安装中文输入法。
+
+如果你不能调出ibus的中文输入法，安装如下：
+
+* `sudo apt-get install ibus-pinyin`
+* `sudo apt-get install ibus-sunpinyin`
+
+可通过调用`ibus-setup`命令来输入法。
