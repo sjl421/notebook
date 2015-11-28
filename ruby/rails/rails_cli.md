@@ -10,12 +10,13 @@ rails new demo
 
 ```sh
 rails server [webrick]
+rails server -b ip:port  #监听指定主机的指定端口
 ```
 
 ## generate controller
 
 ```sh
-rails generate controller Welcome index
+rails generate controller Welcome index  # 生成控制器和其方法
 ```
 
 ## generate scaffold
