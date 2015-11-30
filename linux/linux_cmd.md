@@ -1,5 +1,37 @@
 # linux cmd
 
+## scp
+
+用于计算机间文件传输
+`scp /dir/src_file name@ip:/dir/dest_file`
+* `-r` 复制目录 
+* `-p` 通过指定端口
+* `-f` 若dest存在，则删除再复制
+* `-v` 显示复制过程 
+* `-4|6` 强制IPv4或IPv6
+
+## useradd
+
+用来建立用户帐号和创建用户的起始目录。
+`useradd [－d home] [－s shell] [－c comment] [－m [－k template]] [－f inactive] [－e expire ] [－p passwd] [－r] name`
+* `-c`：加上备注文字，备注文字保存在passwd的备注栏中。 
+* `-d`：指定用户登入时的启始目录。
+* `-D`：变更预设值。
+* `-e`：指定账号的有效期限，缺省表示永久有效。
+* `-f`：指定在密码过期后多少天即关闭该账号。
+* `-g`：指定用户所属的起始群组。
+* `-G`：指定用户所属的附加群组。
+* `-m`：自动建立用户的登入目录。
+* `-M`：不要自动建立用户的登入目录。
+* `-n`：取消建立以用户名称为名的群组。
+* `-r`：建立系统账号。
+* `-s`：指定用户登入后所使用的shell。
+* `-u`：指定用户ID号。
+
+1, 建立一个新用户账户，并设置ID：`useradd david -u 544`
+2, 新创建一个oracle用户，这初始属于oinstall组，且同时让他也属于dba组: `useradd oracle -g oinstall -G dba`
+3, 无法使用shell，且其用户目录至/var/servlet/service: `useradd tomcat  -d /var/servlet/service -s /sbin/nologin`
+
 ## crontab
 
 * usage: `crontab [options]`
@@ -14,7 +46,7 @@
 
 ## wget
 
-* usage: `wget [options] url`
+usage: `wget [options] url`
   * `-r`: recurse
   * `-l`: level
   * `=m`: mirror

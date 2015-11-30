@@ -6,4 +6,5 @@ the book of my knowledge
 def hello(name)
   "hello, #{name}"
 end
+hello "enalix"
 ```
