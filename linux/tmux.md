@@ -6,6 +6,7 @@
 
 compile install tmux: 
 * `sudo apt-get install libevent-dev`
+* `sudo apt-get install libncurses5-dev`
 * `./configure && make`
 * `sudo make install`
 
