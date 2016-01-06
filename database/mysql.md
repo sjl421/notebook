@@ -14,6 +14,7 @@ mysql的用户数据存储在mysql数据库的user表中,对用户进行的创�
 注意: `mysql`很多操作都需要紧跟`flush privileges;`来刷新权限.
 
 * 创建用户: `insert into mysql.user(Host, User, Password) values("localhost", "dbuser", password("password"));`
+* 或`create user 'dbuser'@'localhost' identified by 'password';`
 * 删除用户: `delete from mysql.user where User="dbuser";`
 * 更改密码: `update mysql.user set Password=password("newpass") where User="dbuser";`
 

@@ -16,3 +16,5 @@ host hname_alias
     port 22
     identityfile ~/.ssh/enali.pub
 ```
+
+禁止`ssh`使用域名解析:`/etc/ssh/sshd_config`中改`UseDNS no`.再重启服务`systemctl restart sshd.service`.
