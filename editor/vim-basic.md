@@ -179,9 +179,7 @@
   * 关闭比较模式的滚动绑定: `set noscrollbind`
   * 跳转/反向跳转到修改点: `]c`, `[c`
   * 消除差异: `:diffu[pdate]`
-  * 文本左右拷贝: `dp`, `do`
-    * 在左边窗口,从左边拷贝到右边: `diff put`, `dp`
-    * 在右边窗口,从左边拷贝到右边: `diff obtain`, `do`
+  * 文本左右拷贝: 推`dp`, 拉`do`
 * 打开/关闭折叠: `zo`, `zc`
 * 新标签页编辑: `:tabe[dit] new_file`
   * 切换标签页: `gt`

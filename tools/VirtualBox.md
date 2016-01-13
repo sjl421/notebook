@@ -1,5 +1,13 @@
 # VirtualBox
 
+## Ubuntu install
+
+* add `deb http://download.virtualbox.org/virtualbox/debian trusty contrib` to source list.
+* get key `wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -`
+* update and install `sudo apt-get update && sudo apt-get install virtualbox-5.0`
+* select install `dkms`
+* 手动安装拓展
+
 ## cli manage
 
 First, add your install directory to system path.
@@ -12,7 +20,7 @@ Type `VBoxManage --help` to get help infomation.
 * 列出支持的系统类型: `VBoxManage list ostypes`
 * 显示虚拟机信息: `VBoxManage showvminfo vmname`
 * 启动虚拟机: `VBoxManage startvm vmname`
-* 启动虚拟机但不显示界面: `VBoxManage starvm vmname --type headless`
+* 启动虚拟机但不显示界面: `VBoxManage startvm vmname --type headless`
 * 关闭/重启/暂停/恢复虚拟机: `VBoxManage controlvm vmname poweroff|reset|pause|resume`
 * `poweroff`相当于拔电源,`reset`相当于硬件上的重置,都不保存状态,可能丢失数据
 * 发送关机|休眼信息给虚拟机: `VBoxManage controlvm vmname acpipowerbutton|acpisleepbutton`(估计休眼只对windows有效)

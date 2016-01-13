@@ -16,3 +16,6 @@ lsmod  #显示内核模块状态
 lsblk  #显示块设备
 lsb_release  #显示发行版信息
 ```
+
+7. `cmd | wc [-l|-w|-b]`, 显示命令输出的行数/字数/字节数
+8. `pkg-config pkg --modversion`,显示安装C库的版本
