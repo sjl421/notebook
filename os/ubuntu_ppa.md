@@ -12,3 +12,9 @@
 * update and install: `sudo apt-get update && sudo apt-get install ubuntu-make`
 * install visual-studio-code: `umake web visual-studio-code`
 * remove visual-studio-code: `umake web visual-studio-code --remove`
+
+## useful ppa list
+
+* shadowsocks-qt5: `ppa:hzwhuang/ss-qt5`
+* oracle java: `ppa:webup8team/java`
+* openscad: `ppa:openscad/releases`

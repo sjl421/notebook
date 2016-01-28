@@ -13,7 +13,7 @@
 
 TCP参数: `tcp.flags`, `tcp.flags.syn==0x02`, `tcp.window_size==0 && tcp.flags.reset !=1`
 
-过滤协议: `tcp/udp/icmp/arp`或`http/ftp/smtp`, `等协议名
+过滤协议: `tcp/udp/icmp/arp`或`http/ftp/smtp`, 等协议名
 
 过滤http: 动作`http.request.method=="GET/POST"`, 链接`http.request.uri=="/img/logo-edu.git"`, header`http contains "HTTP/1."`
 

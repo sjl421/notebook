@@ -18,3 +18,9 @@ host hname_alias
 ```
 
 禁止`ssh`使用域名解析:`/etc/ssh/sshd_config`中改`UseDNS no`.再重启服务`systemctl restart sshd.service`.
+
+强烈建议使用`config`文件配置,同时对所有使用`ssh`的命令也有用.
+
+如: `scp local_file user@host:/path/to/file`, 可直接写为`scp local_file hname_alias:/path/to/file`
+
+如: `sftp hname_alias`

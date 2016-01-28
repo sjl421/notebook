@@ -53,3 +53,20 @@
 本地包安装: `rpm -ivh abc.rpm`
 
 ## pacman
+
+## emerge
+
+`Gentoo`发行版的包管理器.
+
+Usage:
+* `emerge pkg`, 安装软件
+* `emerge -s pkg`, `--search`, 通过名称查找软件
+* `emerge -S pkg`, `--searchdesc`, 通过软件描述查找软件
+* `emerge -p pkg`, `--pretend`, 假装安装软件
+* `emerge -C pkg`, `--unmerge`, 移除软件
+
+更新系统:
+* `emerge --sync`, 更新portage树
+* `emerge -u -D -N world`, `--update`, `--deep`, `--newuse`, 更新系统
+* `emerge -c`, `--depclean`, 移除依赖包
+* `revdep-rebuild`, 逆向依赖构建,解决共享库缺失, 先安装`gentoolkit`包
