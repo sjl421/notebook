@@ -24,6 +24,7 @@ expr1 -eq/-ne/-gt/-lt/-le expr2 #=> the comparison of expr1 and expr2
 -g/u file                       #=> the file has setgit or setuid
 -r/w/x file                     #=> the file is readable, writable, executable
 -s file                         #=> file size is zero
+-L                              #=> the file is symbol link file
 ```
 
 ## control structure
