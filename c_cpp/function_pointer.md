@@ -6,7 +6,6 @@
 
 如果函数指针的返回类型也是函数指针, 则形式为`char (* (* func)(float, int (*)(int, int)))(char, char)`, 好吧, 现在有点复杂了. 它表示返回一个函数指针(返回类型为`char`, 参数类型为`(char, char)`), 其本身也是函数指针(注意这里已经指定返回类型为参数类型为`(float, int (*)(int, int))`), 同时其一个参数还是函数指针(返回类型为`int`, 参数类型为`(int, int)`).
 
-
 声明一个函数指针: `float (*fp)(float, float)`, 注意这是变量声明, 声明的只是一个变量, 变量类型为`float (*)(float, float)`, 它必须指向一个函数, 函数有这样的形式: `float xxx(float, float)`. 其中`xxx`是函数名. 
 
 声明一个带函数指针的函数指针: `float (*fp)(float (*)(float, float), float, float)`, 这同样是变量声明, 变量类型为`float (*)(float (*)(float, float), float, float)`, 指向有这样形式的函数: `float xxx(float (*)(float, float), float, float)`.

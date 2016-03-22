@@ -58,3 +58,5 @@ fgets(ary, 300, stdin); //6
 char *c;
 printf("%p\n", c);
 ```
+
+

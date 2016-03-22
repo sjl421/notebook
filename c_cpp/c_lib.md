@@ -1,8 +1,8 @@
 # C语言标准库
 
-## <stdio.h>
+## stdio.h
 
-## <string.h>
+## string.h
 
 因为C语言的字串与字符数组本质上相同的，因此此处的大部分函数其实都可以自己写一个临时实现。
 
@@ -63,7 +63,7 @@ while (token != NULL) {
 }
 ```
 
-## <stdlib.h>
+## stdlib.h
 
 ### 字符串转换
 
@@ -126,9 +126,9 @@ rand() % 50;
 ```
 
 
-## <math.h>
+## math.h
 
-## <ctype.h>
+## ctype.h
 
 主要提供一个字符测试和映射函数。
 * `isalnum`，字母或数字
@@ -147,7 +147,7 @@ rand() % 50;
 
 所有函数的参数都是`int`，返回值都是`int`。大写字母转换考虑了所有情况，且只处理字母。
 
-## <time.h>
+## time.h
 
 关于时间方面，`time.h`文件主要定义了以下3种相关的数据类型：
 * `clock_t`，存储处理器时间的类型
@@ -203,7 +203,7 @@ gmt = gmtime(&now);  //格林尼治标准时间
 asctime(&local);  //或使用strftime()可以控制显示的格式
 ```
 
-## <errno.h>
+## errno.h
 
 当程序出错时，由系统调用重置`errno`整型变量，再调用`strerror(errno)`来获取错误信息。
 
@@ -214,7 +214,7 @@ if ((fp=fopen("data.txt", "r")) == NULL)
     fprintf(stderr, "Error opening file: %s\n", strerror(errno));
 ```
 
-## <limits.h>
+## limits.h
 
 定义一些整型的范围的宏。
 * `INT_MAX`, `INT_MIN`, `UINT_MAX`
@@ -222,7 +222,7 @@ if ((fp=fopen("data.txt", "r")) == NULL)
 * `SHRT_MAX`, `SHRT_MIN`, `USHRT_MAX`
 * `CHAR_MIN`, `CHAR_MAX`, `UCHAR_MAX`
 
-## <stdarg.h>
+## stdarg.h
 
 定义函数的变参。`va_start, va_arg, va_end`都是宏。
 
