@@ -91,7 +91,7 @@ Random.rand(n)                  #=> [0,n-1)整数
 {a:1, b:2}.to_a              #=> [[:a, 1], [:b, 2]]
 "hello world".split(/\s+/)   #=> ["hello", "world"]
 ["hello", "world"].join(" ") #=> "hello, world"
-a = Array.new(3, [0, 0, 0])  #=> a[0], a[1], a[2]指向同一对象[0, 0, 0],变一则都变
+a = Array.new(3, [0, 0, 0])  #=> 指向同一对象[0, 0, 0],变一则都变
 a = Array.new(3) {[0, 0, 0]} #=> 指向不同对象，矩阵
 a= Array.new(3) {|i| i+=1}   #=> [1, 2, 3]
 a = %w(a b c); b = %w(aa bb cc); c = %w(aaa bbb ccc);

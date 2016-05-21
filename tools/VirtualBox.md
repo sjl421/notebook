@@ -34,16 +34,21 @@ Type `VBoxManage --help` to get help infomation.
 * 将虚拟机从所有组中移除,并删除空组: `VBoxManage modifyvm vmname --groups ""`
 * 将虚拟机添加到多个组中: `VBoxManage modifyvm vmname --groups "/group1, /group2"`
 * 将虚拟机添加到嵌套组中: `VBoxManage modifyvm vmname --groups "/group1/subgroup"`
+* 为虚拟机重命名: `vboxmanage modifyvm vmname --name newname`
 
 ### port forward端口转发
 
-`VBoxManage modifyvm vmname --natpf n "rulename,protocol,hostip,hostport,vmip,vmport"`
+添加: `VBoxManage modifyvm vmname --natpf n "rulename,protocol,hostip,hostport,vmip,vmport"`
+
+删除: `vboxmanage modifyvm vmname --natpf1 delete rulename`
 
 * `--natpf n`: 表示对虚拟机第几块网卡配置
 * `hostip`: 省略表示对主机所有网络接口,也可指定为特定`ip`
 * `vmip`: 当虚拟机为`dhcp`时可省略,若虚拟机为静态`ip`则不能省略
 
 如配置`ssh`: `VBoxManage modifyvm vmname --natpf1 "ssh,tcp,,2222,,22`
+
+在虚拟机运行时不能样更改.
 
 ### createvm
 
@@ -76,12 +81,58 @@ Type `VBoxManage --help` to get help infomation.
 
 ### import/export
 
-虚拟机导出: `VBoxManage export vmname -o <name>.<ovf/ova>`,会导出到当前目录.`ovf`是多个文件,`ova`则为一个文件.
+虚拟机导出: `VBoxManage export vmname -o <name>.<ovf/ova>`,会导出到当前目录.`ovf`是多个文件,`ova`则为一个文件. 另外, `ova`其实就是`ovf`文件通过`tar`打包后生成的. 通常包含三个文件, `.vmdk`, `.mf`, `.ovf`. 其中`.mf`为文本文件,保存了另外两个文件的`SHA`值, 用于安装检验. `.ovf`是`XML`文本文件, 保存了虚拟机的相关信息.
 
-也可以添加一些别的信息: `--product pname`产品名, `--producturl purl`产品链接, `--vendor vname`厂商名, `--vendorurl vurl`厂商链接, `--version v`产品版本, `--description desc`产品描述, `--eula`最终用户许可协议信息,`--eulafile fname`版权文件.由于可以导出多个虚拟机到一个文件中,因此上述信息必须指定是对第几个虚拟机的描述,通过`--vsys num`指定.
-
-通常推荐加入`--manifest`以生成`manifest`文件,可在导入时进行完整性检查,加入`--iso`以生成镜像,也可以使用`--options manifest,iso,nomacs,nomacsbutnat`,其中`nomacs`表示去掉导出虚拟机的`mac`地址.
+一个`ova`文件可以包含多个虚拟机. 导出时, 可指定`ova`文件的标准, `--ovf09/10/20`, 默认1.0, 当然要使用最新标准2.0了. 可指定生成`mf`文件`--options manifest|iso|nomacs|nomacsbutnat`. 其中`nomacs`是去除虚拟机的网卡号. 也可以添加一些别的信息, 但这些信息是针对指定虚拟机的, 要`--vsys n`来指定, 从0开始: `--product pname`产品名, `--producturl purl`产品链接, `--vendor vname`厂商名, `--vendorurl vurl`厂商链接, `--version v`产品版本, `--description desc`产品描述, `--eula`最终用户许可协议信息,`--eulafile fname`版权文件.
 
 导入虚拟机: `VBoxManage import ovafile|ovffile`
+
+* 列出支持的更改选项: `-n`;
+* 若要改变虚拟机名: `--vsys 0 --vmname newname`; 
+* 若要改变系统类型: `--vsys 0 --ostype newtype`; 
+* 若要改变cpu数: `--vsys 0 --cpus n`; 
+* 若要改变内存: `--vsys 0 --memory newmb`; 
+* 若要禁止声卡,各种控制器: `--vsys 0 --unit x --ignore`
+* 改变虚拟磁盘路径: `--vsys 0 --unit x --disk newpath`
+
+因为一个`ova`文件可能包含多个虚拟机, 因此所有设置选项需要通过`--vsys n`来指定是对哪个虚拟机设定. 另外, 各种控制器的`unit`数并不固定, 取决于你在导出时有没有加入多余的描述信息, 如产品名, 产品描述等. 也就是说, 最好在导入前`-n`选项查看一个.
+
+通常情况下, 在导入虚拟机时, 可能需要改变虚拟机名, 内存, CPU数以及磁盘路径.
+
+## networking
+
+虚拟机可选择`nat network`, 选择同一个`nat`网络的虚拟机彼此可通信, 可访问外部网络. 同时可`dhcp`获取`ip`地址. 注意, 同一个网卡`mac`地址的获取到的是同一`ip`, 因此, 确保`mac`地址不同. 这就要求在导出虚拟机时去掉`mac`.
+
+`virtual box`的`GUI`界面不提供创建`nat network`的功能. 需要使用命令行:
+
+列出已建立的网络: `vboxmanage list natnetworks`
+
+创建同时打开dhcp:
+```sh
+vboxmanage natnetwork add --netname bigdata --network "192.168.15.0/24" --enable --dhcp on  
+```
+
+创建后打开dhcp:
+```sh
+vboxmanage natnetwork modify --netname bigdata --dhcp on/off
+```
+
+开始和关闭, 移除网络:
+```sh
+vboxmanage natnetwork start/stop/remove --netname bigdata
+```
+
+添加删除端口转发:
+
+```sh
+vboxmanage natnetwork modify --netname bigdata --port-forward-4 "ssh:tcp:[]:1022:[192.168.15.5]:22"
+vboxmanage natnetwork modify --netname bigdata --port-forward-4 delete ssh
+```
+
+添加名称为`ssh`的`tcp`协议的端口转发, 从主机的`1022`到客户机`192.168.15.5`的`22`端口. `--port-forward-4`是`ipv4`协议.
+
+
+
+
 
 
