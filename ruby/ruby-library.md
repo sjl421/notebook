@@ -140,7 +140,7 @@ a.slice!(n)
 a.slice!(n..m)
 a.slice!(n, len) # 删除索引处元素
 a.uniq[!]   # 删除重复元素
-a.collect[!]{|item| expr}
+a.collect[!]{|item| expr}  #同 map
 a.map[!]{|item| expr} # 用expr结果替换数组元素
 a.fill(val)
 a.fill(val,begin)
@@ -151,7 +151,6 @@ a.reverse[!]
 a.sort[!]
 a.sort[!]{|i,j| …}
 a.sort_by{|i| …}
-3..7.collect{|i| i+2}   # 将迭代处理结果以数组形式返回
 ```
 
 ## String
