@@ -147,6 +147,7 @@ a.fill(val,begin)
 a.fill(val, begin, len)
 a.fill(val, n..m) #元素替换成val
 a.flatten[!]
+a.find(x) {|i| ...}  # 返回满足块的元素, 都不满足则执行方法 x
 a.reverse[!]
 a.sort[!]
 a.sort[!]{|i,j| …}
