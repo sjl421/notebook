@@ -121,9 +121,13 @@ a + b #=> ['a', 'b', 'c', 'b', 'c', 'd'] # 等价a.concat b
 
 ```ruby
 # 数组头
-a.unshift #追加 a.shift #删除 a.first #引用
+a.unshift #追加 
+a.shift #删除 
+a.first #引用
 # 数组尾
-a.push #追加,等价<<  a.pop #删除 a.last #引用
+a.push #追加,等价<<  
+a.pop #删除 
+a.last #引用
 # queue, 先进先出，unshift, push
 # stack, 先进后出，pop, push
 ```

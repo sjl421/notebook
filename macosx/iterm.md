@@ -16,10 +16,12 @@
 * `command + f`, 在当前屏的所有历史内容查找, `tab` 向右扩展复制, `shift + tab`则向左扩展复制, 即可在别的屏粘贴
 * `command + d`, 垂直分屏
 * `command + shift + d`, 水平分屏
-* `command + [/]`, 切换分屏
+* `command + [/]`, 左右切换分屏
 * `command + ;`, 查看历史命令, 直接键入字符回车, 插入匹配的命令, 再回车执行
 * `str command + ;`, 列出匹配前字串`str`的历史命令
 * `command + shift + h`, 查看剪贴板历史, 直接键入字符回车, 插入匹配的条目
+* `command + /`, 提示光标位置
+* `option + command + E`, 将标签提出显示在窗口便于选择
 
 其他在命令行中的快捷键, 这些命令多半是 bash 的功能:
 * `ctrl + a/e`, 到行首/行尾

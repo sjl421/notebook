@@ -6,12 +6,15 @@ install: `$ curl -sSL https://get.rvm.io | bash -s stable`
 
 usage:
 
-* list all ruby versions: `$ rvm list [known]`
-* install a ruby version: `$ rvm install ruby [2.2.0]`
-* use a ruby version: `$ rvm [--default] use ruby [2.2.0]`
+* 列出已安装 Ruby 版本: `rvm list`
+* 列出已知的 Ruby 版本: `rvm list known`
+* 安装指定版本的 Ruby: `rvm install x.y.z`
+* 移除安装的 Ruby 版本: `rvm remove x.y.z`
+* 指定使用的 Ruby 版本: `rvm [--default] use x.y.z`
 * remove rvm: `$ rvm implode`
 * update rvm: `$ rvm get stable`
 * generate doc: `$ rvm docs generate [ri|rdoc|gem]`
+* 重新生成配置文件: `rvm get stable --auto-dotfiles`
 
 ### change ruby sources
 

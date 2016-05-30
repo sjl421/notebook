@@ -8,6 +8,8 @@ Install: `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homeb
 
 如上, 请确保系统已经安装有 `ruby`, `curl` 和 `git` 两个工具.
 
+brew默认安装软件到`/usr/local/bin`目录下, 但默认情况下这个目录在PATH下并不是最前的, 导致brew安装的软件并不会被优先使用. 可`export PATH=/usr/local/bin:PATH`来完成.
+
 ## 用法
 
 Usage:
