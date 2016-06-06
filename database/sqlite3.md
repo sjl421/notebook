@@ -1,5 +1,21 @@
 # sqlite3
 
+> live with scope    --enalix
+
+## 序
+
+最近突发奇想, 想写个coreutils的增强版, 实现一个非常简单的功能: 给目录加书签. 比如, `cd abc`是切换到abc目录, 但`cd ,abc`就是切换到abc书签, 这个书签可能对应很长的目录, 比如`/etc/apt/sources.d/`等.
+
+初步思考了下书签和目录的对应用文件存取, 但发现控制逻辑太过复杂, 想着用数据库看看. 这里是学习笔记, 主要学习[菜鸟教程](www.runoob.com)提供的资料.
+
+至于为什么用sqlite3, 因为简单, 轻量级. 本来要实现的项目就不大, 再搞个mysql或postgresql就小题大作了. android上好像有存储数据需求时也用的是sqlite.
+
+其实项目的难点在于我还没想好要实现成什么样, 如果只是上面的cd, 其实可以简单的写个函数: `ncd() { [[ ${1:0:1} = "," ]] && cd $(sqlite3 file.db "select path from tbname where bm==${1:1} || cd $1; }`. 函数名不能是cd, 会提醒无限嵌套. 也不能代理给ruby脚本, 因为脚本会在子shell执行, 是不会改变当前shell的当前目录的.
+
+注意, 一般在公众号发布的都不是最终稿, 笔记嘛, 总会有新认识或新见解, 又不能在公众号一发再发.可以关注我的github中的[笔记](https://github.com/enali/notebook).
+
+## 开始
+
 安装: 
 * Ubuntu: `sudo apt-get install sqlite3`
 * Mac: `brew install sqlite3`
@@ -11,8 +27,6 @@
 `sqlite_master`是一个特殊表, 存储有数据库的元信息, 如表(table), 索引(index), 视图(view), 触发器(trigger), 可通过`select`查询相关信息.
 
 sql关键字以常用函数, 大小写不敏感, 反正我喜欢都小写, 因为caps lock要给esc.
-
-`--`开始注释.
 
 ## 常用命令
 
@@ -42,13 +56,12 @@ sqlite3提供的特殊命令, 以`.`开头:
 创建新表create:
 
 ```sql
-create table company (
-  id int primary key not null autoincrement,
-  name text not null,
-  age int not null unique,
-  address char(50),
-  salary real default 50000.00
-  --salary real check(salary>0)
+create table company ( 
+  id int primary key not null autoincrement, 
+  name text not null, 
+  age int not null unique, 
+  address char(50), 
+  salary real default 50000.00 check(salary>0) 
 );
 ```
 

@@ -131,7 +131,25 @@ vboxmanage natnetwork modify --netname bigdata --port-forward-4 delete ssh
 
 添加名称为`ssh`的`tcp`协议的端口转发, 从主机的`1022`到客户机`192.168.15.5`的`22`端口. `--port-forward-4`是`ipv4`协议.
 
+## 共享文件夹
 
+设置共享条目:
+
+```sh
+vboxmanage sharedfolder add vmname --name share --hostpath d:\share [--transient] [--readonly] [--automount]
+vboxmanage sharedfolder remove vmname --name share [--transient]
+```
+
+设置共享属性:
+
+```sh
+vboxmanage guestproperty set vmname /VirtualBox/GuestAdd/SharedFolders/MountPrefix "abc_"
+# 设置挂载点前缀, 默认为"sf_"
+vboxmanage guestproperty set vmname /VirtualBox/GuestAdd/SharedFolders/MountDir "/mnt"
+# 设置挂载点目录, 默认为"/media"
+```
+
+最终会挂载到`/mnt/abc_share`.
 
 
 
