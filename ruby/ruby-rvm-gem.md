@@ -36,6 +36,7 @@ usage:
 * update package or itself: `$ gem update [--system]`
 * build your gem: `$ gem build foo.gemspec`
 * deploy your gem: `$ gem push foo-1.0.0.gem`
+* 删除已安装的旧版本gem: `$ gem cleanup`
 
 ### change gems sources
 

@@ -53,12 +53,14 @@ sqlite3提供的特殊命令, 以`.`开头:
 
 ## 常用操作
 
+有趣的是, `sqlite3`使用动态类型, 默认情况下可以不指定类型, 除了主键是整数外, 其余列都可以插入任何类型, 会自动进行转换. 但你仍然 可以添加类型, 以表示优先选择此类型存储. `sqlite3`只有5种类型, `null`存储空, `integer`存储有符号整数, 字节占用看数的大小, `real`存储浮点数, `text`存储文本数据, `blob`存储(我也不知道这货做什么, 意思是说, 你怎么输入怎么存储, 不进行转换). 下表的类型其实都没有太大意义, 都会被转换成上述类型, 如`varchar(30)`, 数字参数被忽略, `varchar`含有子串`char`, 会作为`text`类型.
+
 创建新表create:
 
 ```sql
 create table company ( 
   id int primary key not null autoincrement, 
-  name text not null, 
+  name text not null collate nocase,   --大小写不敏感
   age int not null unique, 
   address char(50), 
   salary real default 50000.00 check(salary>0) 
@@ -117,8 +119,8 @@ update company set address='Texas', salary=20000.00;
 
 ```sql
 select * from company;
-select id, name from company; 
---查询company表中id和name字段
+select id, name from company where name = "someone" collate nocase; 
+--查询company表中id和name字段, 大小写不敏感
 select tbl_name from sqlite_master where type=='table'; 
 --查询当前数据库存在的表
 select current_timestamp; 

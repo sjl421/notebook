@@ -14,6 +14,7 @@ brew默认安装软件到`/usr/local/bin`目录下, 但默认情况下这个目�
 
 Usage:
 * 安装包: `brew install pkg`
+* 添加链接: `brew linkapps pkg`
 * 卸载包: `brew uninstall pkg`
 * 搜索包: `brew search pkg`
 * 查看包信息: `brew info pkg`

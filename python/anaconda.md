@@ -28,3 +28,13 @@
 不同版本的`conda`有默认的`python`版本,但都可以用来创建`2|3`的环境.
 
 `anaconda`参数表示同时安装大量`anaconda`维护的用于科学计算的常量包.或者可以单独列出想安装的包.`--clone env`表示可以克隆某个环境.
+
+
+## 换源
+
+更换到清华的源:
+
+```sh
+conda config --add channels 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/'
+conda config --set show_channel_urls yes
+```
