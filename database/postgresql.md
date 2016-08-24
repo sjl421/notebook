@@ -6,6 +6,11 @@
 
 图形界面: `sudo apt-get install pgadmin3`
 
+Mac:
+* `brew install postgresql`
+* `brew services start postgresql`, 开机启动服务
+* `postgres -D /usr/local/var/postgres`, 启动服务
+
 ## 添加新用户和新数据库
 
 安装后,默认生成名为`postgres`的数据库,数据库用户名和`Linux`系统用户名.

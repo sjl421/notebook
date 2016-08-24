@@ -7,6 +7,8 @@
 * `\h` for help
 * `\q` for exit
 
+要先确认`mysqld`已经启动. 使用`mysql -uroot`回车, 如果没有设置`root`密码则可以直接进入. 否则, 加`-p`选项, 再输入根用户密码.
+
 ## 用户操作
 
 mysql的用户数据存储在mysql数据库的user表中,对用户进行的创建,更改,删除都是常规的对mysql.user表的CRUD.
@@ -24,3 +26,16 @@ mysql的用户数据存储在mysql数据库的user表中,对用户进行的创�
 * 授权用户: `grant all privileges on exampledb.* to dbuser@localhost identified by "password";`
 * 使用数据库: `use exampledb;`
 * 删除数据库: `drop database exampledb;`
+
+## 新版变化
+
+在`5.7`版本中, `mysql.user`中, `Password`列被移除, 而使用`authentication_string`列. 也就是说, 无论设置还是修改密码, 都必要将上述的`Password`修改为`authentication_string`, 其余不变.
+
+* `show databases;`: 打印已有数据库
+* `use dbname;`: 使用指定数据库
+* `show tables;`: 打印当前数据库的表
+* `describe tbname;`: 打印指定表的描述信息
+
+创建用户最好使用`create user 'uname'@'localhost' identified by 'passwd'`.
+
+

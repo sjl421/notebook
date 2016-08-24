@@ -48,4 +48,27 @@ d = [{a:1, b:2}, {a:3, b:3}]
 d.map {|i| i[:a]}
 d.map(&:[].(:a))
 ```
+## &.安全调用运算子
+
+在`nil`上调用方法`nil.length`, 会提示`NoMethodError`, 无方法错误.
+
+在`nil`上调用方法`nil&.length`, 会返回`nil`.
+
+在多条件的`if`判断非常有用:
+
+```ruby
+u = User.find(id)  # 查找指定id的用户
+# 在方法链调用中, 任何环节返回Nil都会出错
+if u && u.profile && u.profile.thumbnails && u.profile.thumbnails.large
+  ...
+end
+```
+
+注意其中的多条件:
+
+```ruby
+if u&.profile&.thumbnails&.large
+  ...
+end
+```
 

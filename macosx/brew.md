@@ -23,6 +23,11 @@ Usage:
 * 列出已安装包: `brew list [pkg]`
 * 列出已添加的库: `brew tap`
 * 添加新的库: `brew tap user/repo`
+* 开机启动服务: `brew services start pkg`
+  * `stop`, 停止服务
+  * `restart`, 重启服务
+  * `list`, 列出`brew services`管理的所有服务
+  * `cleanup`, 清除所有无效的服务
 
 通过 `brew -h` 获取帮助信息, 但其对包的称呼是 `formula`.
 
