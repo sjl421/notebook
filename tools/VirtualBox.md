@@ -151,6 +151,12 @@ vboxmanage guestproperty set vmname /VirtualBox/GuestAdd/SharedFolders/MountDir 
 
 最终会挂载到`/mnt/abc_share`.
 
+## 克隆
 
+相比导入导出, 可以用于传输虚拟机, 但如果只是在本地, 则没有必要. 可以直接使用`clonevm`.
+
+```sh
+vboxmanage clonevm vmname --name new_vm_name --register
+```
 
 

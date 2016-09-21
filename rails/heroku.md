@@ -35,3 +35,4 @@ mac$ brew install heroku  # 从s3.amazonaws.com下载, 国内似乎不能访问
 * `heroku pg:reset DATABASE`, 重置生产环境的数据库
   * `--confirm app_name`, 不用提示确认
 * `heroku restart`, 重启应用
+* `heroku config:get ENV_NAME`, 获取环境变量的值

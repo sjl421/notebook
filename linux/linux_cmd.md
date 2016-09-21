@@ -146,3 +146,26 @@ find在系统搜索文件: `find [path] [options] [tests] [actions]`
 ## '!'
 
 引用历史命令
+
+## cd
+
+* `cd ~`: 切换到用户主目录
+* `cd -`: 切换到上次切换前的目录
+* `cd !@`: 切换到上个命名的最后参数指定的目录
+
+`cd`有两个选项:
+```sh
+ln -s .vim abc  #将abc链接到.vim目录
+cd abc && pwd   #=> /home/spark/abc
+cd abc && pwd -P   #=> /home/spark/.vim
+cd -P abc  && pwd  #=> /home/spark/.vim
+```
+
+`-P`强制`cd`使用物理目录结构而不是符号链接.
+`-L`强制跟踪符号链接, 但貌似加不加一样
+
+`pwd -P`, 即使在符号链接的目录, 也能返回链接的真实目录.
+
+`cd -P`, 即使目录是符号链接, 也切换到真实目录.
+
+`cd`, 若目录是符号链接, 则切换到符号链接

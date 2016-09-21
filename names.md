@@ -25,3 +25,25 @@
 ## python
 
 [httpie](https://github.com/jkbrzt/httpie), 一个命令行的`http`工具, 提供比`wget`和`curl`更友好的选项和交互.
+
+[Canopy](http://enthought.com), 可以说是`Python`最好的`IDE`, 收费, 有学生`Licence`.
+
+## javascript
+
+[Ruff](http://ruff.io), 可使用`js`编程的硬件平台.
+
+## mac
+
+`iShowU`, `mac`平台的录屏软件, 收费(非常贵)
+
+## Linux
+
+[kali](http://kali.org), 用于渗透测试的`Linux`发行版.
+
+## other
+
+[hub](https://github.com/github/hub.git), 命令行工具, `git`的封装, 可更方便地配合`github`使用.
+
+[capstone](http://www.capstone-engine.org), 基于`llvm`实现的反汇编器.
+
+[vulkan](https://www.khronos.org/vulkan/), 跨平台的图形`API`, 类似`openGL`.

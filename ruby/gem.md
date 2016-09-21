@@ -6,6 +6,7 @@
 
 * 搜索包: `gem search [-r] pkg-name`
 * 安装本地/远程/指定URL的包, 可指定版本: `$ gem install [-l|-r] package [--source url] [-v x.y.z]`
+* 卸载包: `gem uninstall pkg [--version x.y.z]`
 * 列出本地/远程匹配的包, 可显示细节: `gem list [-l|-r|-d] [regx]`
 * 更新包或`gem`自己: `$ gem update [--system]`
 * 构建包: `$ gem build foo.gemspec`
@@ -18,7 +19,7 @@
 
 改变`gem`安装时的默认`源`:
 ```sh
-gem sources --remove https://rubygems.org/
+gem sources -r https://rubygems.org/
 gem sources -a https://ruby.taobao.org/
 gem sources -l
 gem update

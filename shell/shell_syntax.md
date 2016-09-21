@@ -7,10 +7,10 @@ environment variable: `$HOME`, `$PATH`.
 ```sh
 file=lzp     #=> no space between the 'file', '=' and 'lzp'
 echo "$file" #=> use the var by '$var'
-$0...$9      #=> the cmdline args
-$#           #=> the size of args
-$$           #=> the PID of script
-$*,$@        #=> all args strings
+$0...$9      #=> 引用脚本参数
+$#           #=> 脚本的参数个数
+$$           #=> 脚本的进程ID
+$*,$@        #=> 所有的脚本参数
 ```
 
 ## condition
@@ -25,6 +25,9 @@ expr1 -eq/-ne/-gt/-lt/-le expr2 #=> the comparison of expr1 and expr2
 -r/w/x file                     #=> the file is readable, writable, executable
 -s file                         #=> file size is zero
 -L                              #=> the file is symbol link file
+-e file                         #=> 文件是否存在
+`[[ expr ]]`, 测试, 同`test`和`[ expr ]`, 不同的是, 可以执行复合逻辑, 如`[[ expr1 && expr2 ]]`
+等同于`[ expr1 ] && [ expr2 ]`
 ```
 
 ## control structure
@@ -104,3 +107,11 @@ func_name
 * `shift [n]`
 * `trap cmd signal`
 * `set/unset`
+
+## strange
+
+`>&-`, 关闭标准输出
+
+`<&-`, 关闭标准输入
+
+`2>&-`, 关闭标准错误
