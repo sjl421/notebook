@@ -20,6 +20,7 @@
 * 创建环境: `conda create -n myenv [anaconda pkgname] [python=2|3] [--clone env]`
 * 列出所有环境: `conda info -e` 或 `conda env list`
 * 移除环境: `conda remove -n myenv --all`并移除所有的包
+* 清除不使用的包: `conda clean --all`
 * 激活环境: `source activate myenv`
 * 反激活环境: `source deactivate`
 * 导入环境: `conda env create -f environment.yml`

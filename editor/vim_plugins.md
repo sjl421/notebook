@@ -37,8 +37,23 @@
 ```sh
 mkdir ycm_build && cd ycm_build
 cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-make ycm_support_libs # make ycm_core
+cmake --build . --target ycm_core
 ```
+
+注意`cmake`时会声明此次编译使用的`python`库和`python`程序. 而如果这个不同,会导致`vim`运行时`python`崩溃.
+特别是对于`mac`平台,除了系统自带的旧的`python`版本,还有`brew`安装的不同`python`版本,还有`conda`安装的
+`python`版本,总之非常混乱,且库和程序不能混用. 在`cmake`配置时,可通过`-DPYTHON_EXECUTABLE=/path_to_py`和
+`-DPYTHON_LIBRARY=/path_to_lib`来指定`python`的程序和库路径,然后还需要在`.vimrc`中指定`let g:ycm_server
+_python_interpreter=/path_to_py`来指定使用的`python`版本.
+
+有关`python`的库, `brew`的安装位置`/usr/local/opt/python/Frameworks/Python.framework/Versions/Current/
+lib/libpython2.7.dylib`.
+
+如果使用系统的`llvm`, 可用`-DUSE_SYSTEM_LIBCLANG=ON`.
+
+另一个要注意的地方, 关于`macvim`可能出现的`the Python's site module could not be loaded.`问题,要确保`macvim`
+编译时使用的`python`和`youcomplete`编译时使用的`python`以及`ycm_server`运行时使用的`python`. 对这3个`python`
+要保持一致,至少保持兼容. 
 
 ## vimproc
 

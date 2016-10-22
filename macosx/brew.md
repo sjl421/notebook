@@ -14,6 +14,7 @@ brew默认安装软件到`/usr/local/bin`目录下, 但默认情况下这个目�
 
 Usage:
 * 安装包: `brew install pkg`
+* 重新安装包: `brew reinstall pkg`
 * 添加链接: `brew linkapps pkg`
 * 卸载包: `brew uninstall pkg`
 * 搜索包: `brew search pkg`
@@ -21,6 +22,7 @@ Usage:
 * 更新 `brew` 和包列表缓存: `brew update`
 * 更新已安装包: `brew upgrade [pkg]`
 * 列出已安装包: `brew list [pkg]`
+* 删除过时的已安装的包: `brew cleanup [pkg]`
 * 列出已添加的库: `brew tap`
 * 添加新的库: `brew tap user/repo`
 * 开机启动服务: `brew services start pkg`

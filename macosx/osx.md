@@ -61,6 +61,8 @@ OS X下的快捷键的字符比较特殊, 如`Command ⌘`, `Option ⌥`, `Shift
 
 安装一般的命令行工具推荐使用brew, 可参考brew.md文件. 当然, 你也可以编译安装, 但要提前安装庞大的`xcode`编程环境. 
 
+如果遇到编译程序错误, 一般要先运行`xcode-select --install`.
+
 有图形界面的程序, 虽然一部分可通过`Caskroom/cask`库源安装, 但大部分是通过App Store或程序官网下载`.dmg`或`.pkg`文件安装.
 
 通常, `.dmg`格式, 直接在界面中将程序拖放到应用程序目录即可. `.pkg`格式则会提供类似Windows下的`next..next..`安装方式.

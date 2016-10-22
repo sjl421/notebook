@@ -51,6 +51,8 @@
 
 在任意项目中, 新建`.rvmrc`文件, 并写入`rvm use x.y.z@set_name`, 则进入项目目录时, 会自动切换版本和`gemset`.
 
+现在好像推荐使用`.ruby-version`, 直接写入`2.3.0@rails5`即可.
+
 多`gemset`相同的`gem`要尽量安装在`@global`中, 否则, `gem`的重复安装会造成大量浪费. 
 
 本质上, `gem install`时, 会将`gem`安装在`GEM_HOME`环境变量中, 切换`gemset`会自动更新当前`shell`中的`GEM_HOME`环境变量.

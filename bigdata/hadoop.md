@@ -45,6 +45,9 @@
 这里要谈两个坑. 
 * 第一坑是, 一定要设置`etc/hadoop/hadoop-env.sh`文件中的`JAVA_HOME`环境变量, 无论你是否已经在`.bashrc`文件中`export`了.
 * 每二坑是, 一定要去掉`/etc/hosts`文件的`127.0.1.1`行, 其会解析到主机名. 此`ip`只在`Debian`系的发行版有.
+* 第三坑是, 请使用`jdk1.7`而不是最新版. 无论是`hadoop`还是`spark`的进程都会突然莫名其妙被关闭, 据说是个`bug`
+
+关于第二坑, 直接写`local_ip_address hostname`即可, 而不是将`127.0.1.1`改为`127.0.0.1`.
 
 启动`HDFS`后, 即在`web`浏览器中, 打开`localhost:50070`, 显示命名节点和数据节点的相关情况, 其中`Datanodes`栏, 
 可显示数据节点是否正确连接. 
@@ -53,6 +56,12 @@
 
 另外, 你总可以用`jps`命令来查看, 当前系统运行着的`JAVA`虚拟机, 能显示是否正在运行`namenode/datanode/secondarynamenode`和
 `resourcemanager/nodemanager`等. 此可以查看相应的守护进程是否已经被启动.
+
+如果你的`java`是直接下载二进制安装包再设置环境变量并加入`PATH`来做的, 那么`hadoop`
+的安装包中, 本地动态链接库`lib/native/libhadoop.so`文件会缺少`libjvm.so`库位置.
+此可以通过执行`ldd libhadoop.so`来查看. 但事实上, 通过`locate libjvm.so`来查看
+库在`java`的安装包里. 可能需要执行`ln -s $JAVA_HOME/jre/lib/amd64/server/libjvm.so
+/lib/x86_64-linux-gnu/libjvm.so`来修复.
 
 ## 非必要配置
 
