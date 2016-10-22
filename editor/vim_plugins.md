@@ -37,7 +37,7 @@
 ```sh
 mkdir ycm_build && cd ycm_build
 cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-make ycm_support_libs # make ycm_core
+make ycm_core
 ```
 
 ## vimproc
