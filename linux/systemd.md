@@ -34,4 +34,10 @@
 
 休mian: `systemctl hibernate`
 
+## 网络时间同步
 
+`systemctl status systemd-timesync.service`
+
+配置文件在`/etc/systemd/timesync.conf`.
+
+时间同步服务的端口: `123`.
