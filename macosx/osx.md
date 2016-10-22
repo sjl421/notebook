@@ -105,6 +105,8 @@ Dash用于查看技术文档, 免费, 但偶尔会请求付费. 基本上经常�
 
 Foxit PDF阅读器, 开发者总要看文档吧, 系统自带的Preview的标注功能有点恶心, 点击矩形直接在文档中间出现个很大的矩形框, 你再缩小移动, 太反人类了. App Store上提供有很多的PDF阅读器, 但在Windows上我习惯使用Foxit, 而它恰好有mac版本, 不带广告, 免费, 有种App Store上所有收费的都会死的节奏.
 
+注: 此处以血的教训告诉大家, 一旦你决定使用一款`PDF`软件, 并编辑标注文件, 在用另一款软件打开前, 一定要备份. 真没想到, `Mac`上`PDF`软件之间的兼容性这么差. 好了, 我要一页页地重新标注我的文件了-_-了.
+
 只是, 给Foxit设置标注快捷键是个蛋疼的事. 只能通过OSX的系统设置进行. "系统偏好设置->键盘->快捷键->应用快捷键", 点击"+"号, 为指定应用Foxit添加快捷键. 其中"菜单标题"就是在Foxit的顶部菜单中, 找到你要设置快捷键的操作名, 比如"Comments->Highline Text", 此处写"Highline Text", 快捷键你就直接按即可. 似乎Mac OS X上各种应用的快捷键原理都是这样的, 真不知道这种设计是直观呢还是蛋疼呢. 但有信仰什么都不是事.
 
 新的注意, 在阅读时, 只有点击工具栏, 位于中间上面, comments才会进行注释.
@@ -134,3 +136,23 @@ Foxit PDF阅读器, 开发者总要看文档吧, 系统自带的Preview的标注
 安装新字体, 就是将字体文件`.ttf`或`.ttc`拷贝到上述目录.
 
 至于两种字体格式的区别: `.ttc`文件可包含多种字体, 而`.ttf`则只是一种字体. 但并非简单打包.
+
+## 词典
+
+`mac`自带的`Dictionary`程序, 可以三指取词非常方便, 但局限于词典的数量太少, 可以自己添加新的.
+
+1, 在`http://abloz.com/huzheng/stardict-dic/zh_CN/`页面下载需要的词典, 先不要解压
+
+2, 下载[DictUnifier](https://github.com/jjgod/mac-dictionary-kit)词典转换工具, 将压缩包直接拖放, 开始转换, 时间较长, 这里的较长表示可能半小时到一小时多.
+
+3, 可能需要将转换后的`.dictionary`文件, 拖放到`/Library/Dictionaries`或`/Users/xxx/Library/Dictionaries`目录即可, 但`DictUnifier`会自动添加到目录
+
+4, 可能需要在`Dictionary`程序中的偏好设置, 勾选需要的词典
+
+## ssh
+
+之前以为要安装`openssh`, 像在`ubuntu`中的那样, 但查询了一下, 只需要在`System Preference`里面的`Sharing`中, 选择`Remote Login`即可.
+
+## usb
+
+U盘都会自动挂载到`/Volumes`目录中. 但是不确定是不是`shell`的问题, `ls`可能列不出磁盘的文件. 另外, `U`盘会对应`/dev/disk*`的设备. 通过`df -lh`查看.

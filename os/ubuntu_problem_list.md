@@ -66,3 +66,9 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 * `sudo apt-get install ibus-sunpinyin`
 
 可通过调用`ibus-setup`命令来输入法。
+
+## fcitx
+
+如果使用拼音输入法的话, 最好在语言支持里, 选择`fcitx`输入框架, 因为它支持搜狗输入法.
+
+通常情况, `fcitx`的相关文件在`/var/share/fcitx/*`目录下.

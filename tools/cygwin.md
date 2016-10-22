@@ -65,3 +65,11 @@ cygstart --action=runas "$@"
 ```
 
 如果需要运行特权命令,会弹出一个新的特权`cygwin`窗口,运行命令后退出.
+
+## 技巧
+
+另一个有用的技巧是, 建立对盘符的链接:
+```sh
+ln -s /cygdrive/c /c
+ln -s /cygdrive/d /d
+```
