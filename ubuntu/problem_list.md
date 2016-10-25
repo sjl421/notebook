@@ -18,15 +18,6 @@
   * `sudo apt-get -f install`, 修复依赖，自动安装packages
   * `sudo apt-get install what-you-want`
 
-## ibus wubi 98
-
-~~~ sh
-# you need abc.txt and abc.svg.
-$ ibus-table-createdb -s abc.txt
-$ sudo cp abc.db /usr/share/ibus-table/tables/
-$ sudo cp abc.svg /usr/share/ibus-table/icons/
-~~~
-
 ## chrome
 
 bookmarks messy code
@@ -42,10 +33,6 @@ sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei xfonts-wqy
 * edit the `~/.config/user-dirs.dirs`
 * 确保相关目录存在
 * 注销重登陆
-
-## monaco font
-
-install: `curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font-ubuntu.sh | bash`
 
 ## grub fixed
 
@@ -72,3 +59,9 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 如果使用拼音输入法的话, 最好在语言支持里, 选择`fcitx`输入框架, 因为它支持搜狗输入法.
 
 通常情况, `fcitx`的相关文件在`/var/share/fcitx/*`目录下.
+
+## 显示器的分辨率问题
+
+1, `Could not apply the stored configuration for the monitor`
+
+直接删除`~/.config/monitors.xml`即可.
