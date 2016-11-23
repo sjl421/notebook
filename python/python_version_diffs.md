@@ -55,3 +55,9 @@
 `3.x`中, 两者都返回`zip`类型对象.
 
 除此外, 还有对应的`keys`, `iterkeys`, `values`, `itervalues`.
+
+## 重新载入模块
+
+`2.x`中, `reload(module_name)`即可
+
+`3.x`中, `import imp; imp.reload(module_name)`

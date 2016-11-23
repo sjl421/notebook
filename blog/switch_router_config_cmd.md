@@ -53,6 +53,10 @@ flow-control  #开启流量控制, 可undo
 # S
 undo mac-address  #清空mac地址表
 undo arp  #清空arp缓存
+
+# R
+inter e0/0
+qos lr outbound cir 80  #配置接口转发速率
 ```
 
 保存设备配置信息: (复制输出的信息, 并保存到文本文件即可)
@@ -203,7 +207,16 @@ area 0  #区域号0, 可undo删除区域
 network 192.168.1.0 0.0.0.255  #注意是反掩码, 可undo取消网段
 dis ospf ?  #查看ospf相关信息, 其中brief可查看DR/BDR
 dis ospf lsdb ?  #查看不同类型的链路数据库
-<R1> reset ospf all  #重新启动OSPF, ???
+```
+
+配置链路花费:
+```sh
+# R
+inter e0/0
+ospf cost 100
+# S
+inter vlan 3
+ospf cost 100
 ```
 
 有关应用于`ipv6`的`ospfv3`协议, 替换相关关键字即可.
@@ -219,6 +232,10 @@ import-route static  #引入静态路由
 ip route-static 0.0.0.0 0.0.0.0 next_hop  #添加默认路由
 default-route-advertise cost 100  #广播此默认路由
 ```
+
+需要说明的一点是, 可以配置多个默认路由, 但默认情况下只有一个起作用, 具体哪个起
+作用, 可在配置时添加`preference xx`, 表示优先级, 数字越小越好. 默认静态路由为60;
+直连路由为0.
 
 ## NAT及ACL
 
