@@ -43,3 +43,10 @@ sudo chgrp wireshark /usr/bin/dumpcap
 sudo chmod 755 /usr/bin/dumpcap
 sudo setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
 ```
+## 过滤条件
+
+`TCP`重传: `tcp.analysis.retransmission`
+
+`TCP`窗口大小: `tcp.analysis.window_size == 0`
+
+`TCP`重复`ACK`报文: `tcp.analysis.duplicate_ack`
