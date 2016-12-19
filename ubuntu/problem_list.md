@@ -65,3 +65,15 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 1, `Could not apply the stored configuration for the monitor`
 
 直接删除`~/.config/monitors.xml`即可.
+
+## Gtk-Message: Failed to load module "canberra-gtk-module"
+
+`sudo apt install libcanberra-gtk3-module`
+
+## wireshark
+
+Q: lua error during loading
+A: `sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap`
+
+`wireshark`通常不希望以特权用户运行,但非特权用户运行往往看不到网络接口.所以可以为
+程序设置适当的权限.

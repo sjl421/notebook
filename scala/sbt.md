@@ -49,3 +49,26 @@ lazy val root = (project in file("."))
 `"testOnly TestA TestB"`表示只测试`A`和`B`, 因为3个字串其实是一个参数, 以`"`包围.
 
 `~ compile`表示持续编译, 即源码有改动则自动编译.
+
+## 添加库依赖
+
+```scala
+libraryDependencies ++= Seq(
+  "org.apache.spark" % "spark-core" % "2.0.2",
+  "org.apache.logging.log4j" % "log4j-core" % "2.7"
+  )
+```
+
+有个有趣的地方,"groupId", "artifactId", "version"3元组中,若有些库依赖`scala`版本,
+则会出现`log4j-core_2.11`的样子,至少在`maven`库中会出现,表示适用`scala2.11.x`版本.
+但在使用`sbt`时,如果声明了`scalaVersion`配置,可以去掉`_2.11`的字样.
+
+## 插件
+
+添加插件需要在`project`目录下新建`.sbt`文件,声明要添加的插件,如`sbt-assembly`用于
+打包`fat jar`的插件:
+
+```scala
+//assembly.sbt
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.3")
+```

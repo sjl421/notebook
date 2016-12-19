@@ -41,3 +41,11 @@ install: `curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font
 * 退出窗口: `Windows -> Close window`: `alt q`
 * 文件管理器: `Launchers -> Home folder`: `alt e`
 
+## 安装中文字体
+
+```sh
+sudo apt install language-pack-zh-hans
+```
+
+如果通过`cygwin`终端访问服务器版本,如果出现乱码,可以设置`cygwin`的选项:`options->text`,
+选择`utf-8`.
