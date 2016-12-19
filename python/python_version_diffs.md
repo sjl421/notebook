@@ -61,3 +61,9 @@
 `2.x`中, `reload(module_name)`即可
 
 `3.x`中, `import imp; imp.reload(module_name)`
+
+## 输入
+
+`2.x`中, `raw_input()`
+
+`3.x`中, `input()`
