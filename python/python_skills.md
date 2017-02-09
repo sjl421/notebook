@@ -31,3 +31,21 @@
 有两种:
 * `"%s, %d" % (s, n)`
 * `"{}, {}".format(s, n)`
+
+## 作用域
+
+```python
+k = 4
+def a():
+  print(k)  #对,可以看到外部作用域
+def b():
+  k += 1  #错,但不可以修改外部变量
+def c():
+  global k
+  k += 1  #对,声明k为全局变量, 可以修改
+def d():
+  n = 4
+  def e():
+    nonlocal n  #对,嵌套函数,使用外部变量,要nonlocal, 无论函数嵌套几层
+    n += 4
+```
