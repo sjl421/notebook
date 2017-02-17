@@ -31,3 +31,26 @@ reopen`4个信号.
 多个命令.
 
 `events`和`http`在`main`的上下文中,`server`在`http`中,`location`在`server`中.
+
+## https
+
+`https`会增加服务器的`cpu`资源消耗. 费力的操作是`SSL`握手. 有两种操作可减少每个
+客户端与服务器的握手次数: 一种是允许`keepalive`, 这样在一个连接中可以发送多个请求,
+另一种是重用`SSL`会话参数来避免并发和后续的连接.
+
+```nginx
+http {
+  ...
+  ssl_session_cache  shared:SSL:10m;  #设置会话缓存10分钟, 可在多worker共享
+  ssl_session_timeout  10m;  #设置会话超时10分钟
+  ...
+  server {
+    ...
+    listen              443 ssl;
+    keepalive_timeout   70;
+    ssl_certificate     /etc/nginx/certs/cert.pem;  #指定证书
+    ssl_certificate_key /etc/nginx/certs/privkey.pem;  #指定私钥
+    ...
+  }
+}
+```
