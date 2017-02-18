@@ -140,3 +140,25 @@ server {
 想要显示当前访问路径下的目录,可在`location`块中`autoindex on;`打开目录浏览.`auto
 index_exact_size off`使用`K/M/G`表示文件大小,`autoindex_localtime on`使用服务器
 本地时间.
+
+## https
+
+`https`会增加服务器的`cpu`资源消耗. 费力的操作是`SSL`握手. 有两种操作可减少每个
+客户端与服务器的握手次数: 一种是允许`keepalive`, 这样在一个连接中可以发送多个请求,
+另一种是重用`SSL`会话参数来避免并发和后续的连接.
+
+```nginx
+http {
+  ...
+  ssl_session_cache  shared:SSL:10m;  #设置会话缓存10分钟, 可在多worker共享
+  ssl_session_timeout  10m;  #设置会话超时10分钟
+  ...
+  server {
+    ...
+    listen              443 ssl;
+    keepalive_timeout   70;
+    ssl_certificate     /etc/nginx/certs/cert.pem;  #指定证书
+    ssl_certificate_key /etc/nginx/certs/privkey.pem;  #指定私钥
+    ...
+  }
+}
