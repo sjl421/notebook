@@ -22,6 +22,8 @@
 
 取消自启单元： `systemctl disable apache2`
 
+列出所有单元: `systemctl list-unit-files [--state=enabled]`
+
 查看单元帮助： `systemctl help apache2`
 
 ## 电源处理
