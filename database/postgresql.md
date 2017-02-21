@@ -11,6 +11,23 @@ Mac:
 * `brew services start postgresql`, 开机启动服务
 * `postgres -D /usr/local/var/postgres`, 启动服务
 
+`psql --host=localhost --dbname=db_name --username=uname --password`
+
+## 远程连接
+
+配置文件在`/etc/postgresql/9.x/main`目录下:
+
+1, 修改`postgresql.conf`文件, 令`listen_addresses = *`, 意为监听所有`IP`地址, 
+默认只监听`localhost`.
+
+2, 修改`pg_hba.conf`文件, 添加`host all all ip/xx md5`, 字段分别意为主机, 数据库,
+用户, 地址, 方法. 此文件控制哪个主机的哪个数据库哪个用户被允许哪个`IP`以什么方法
+连接. `ip/xx`是`CIDR`格式的地址, 如`192.168.0.1/24`.
+
+修改后, 需要重启: `sudo systemctl restart postgresql.service`
+
+默认远程端口为`5432`.
+
 ## 添加新用户和新数据库
 
 安装后,默认生成名为`postgres`的数据库,数据库用户名和`Linux`系统用户名.
@@ -27,7 +44,7 @@ Mac:
 
 1, 使用`PostgreSQL`控制台
 
-切换用户: `sudo su - postgres`
+切换用户: `sudo -u postgres psql`
 
 登录控制台: `psql` (系统用户以同名数据库用户身份登录)
 

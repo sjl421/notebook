@@ -1,5 +1,7 @@
 # ubuntu
 
+`cat /etc/issue`可以查看当前系统的发行版本信息.
+
 ## 精简
 
 ```sh
