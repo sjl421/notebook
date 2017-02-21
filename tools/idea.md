@@ -8,7 +8,7 @@
 `Ctrl + Shift + N`: 定位到指定名称的文件
 `Ctrl + /`: 注释当前行
 `Ctrl + j/k`: 用于在列表中上下选择,相当于`Down/Up`
-`Ctrl + E`: 选择最近打开文件
+`Ctrl + E`: 光标移动行行尾
 `Ctrl + I`: 插入模板
 `Ctrl + Q`: 显示光标处类的快速文档
 `Ctrl + ]`: 跳转到光标所在方法或类的定义处
@@ -23,4 +23,10 @@
 `Alt + B`: 调试
 `Alt + J`: 选择当前光标所在标识符,可继续选择,同时替换名称
 `Alt + [/]`: 光标跳转到上/下方法定义外
+`Alt + E`: 选择最近打开文件
 
+## 修改
+
+修改默认的`Terminal`: `File -> Settings -> Tools -> Terminal`, 选择`Shell path`
+为`Cygwin`安装目录下`bin/bash.exe`即可. 至少比`cmd.exe`好用. 字体在`Editor -> 
+Colors & Fonts -> Console Font`中修改, 可选择`Consolas 14`.

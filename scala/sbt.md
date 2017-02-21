@@ -63,6 +63,11 @@ libraryDependencies ++= Seq(
 则会出现`log4j-core_2.11`的样子,至少在`maven`库中会出现,表示适用`scala2.11.x`版本.
 但在使用`sbt`时,如果声明了`scalaVersion`配置,可以去掉`_2.11`的字样.
 
+除了托管依赖外, 对于非托管依赖, 如下载的`spark`安装目录下`jars`目录中的各种包, 可
+选择使用托管依赖如上, 也可选择添加本地依赖. 一种方式是将`jars`目录下所有的包拷贝到
+项目的`lib`目录下, 不实用; 另一种方式是在`build.sbt`目录下, 配置`unmanagedBase :=
+new File("jars_path")`. 后一种方式有个致命的问题, 即在`IDEA`中无法被识别.
+
 ## 插件
 
 添加插件需要在`project`目录下新建`.sbt`文件,声明要添加的插件,如`sbt-assembly`用于
