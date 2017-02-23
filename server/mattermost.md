@@ -1,6 +1,7 @@
 # Mattermost
 
-`Mattermost`是一个团队沟通工具. 通常可理解为开源的`Slack`.
+`Mattermost`是一个团队沟通工具. 通常可理解为开源的`Slack`. 用于在团队中进行信息
+沟通和文件共享.
 
 `Mattermost`通常由3个组件构成, `nginx`负责代理, `Mattermost`负责响应, `postgresql`
 负责存储数据. 可以全部安装在一台机器上, 也可以安装在不同机器上.

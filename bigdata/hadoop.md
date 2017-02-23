@@ -45,7 +45,6 @@
 这里要谈两个坑. 
 * 第一坑是, 一定要设置`etc/hadoop/hadoop-env.sh`文件中的`JAVA_HOME`环境变量, 无论你是否已经在`.bashrc`文件中`export`了.
 * 每二坑是, 一定要去掉`/etc/hosts`文件的`127.0.1.1`行, 其会解析到主机名. 此`ip`只在`Debian`系的发行版有.
-* 第三坑是, 请使用`jdk1.7`而不是最新版. 无论是`hadoop`还是`spark`的进程都会突然莫名其妙被关闭, 据说是个`bug`
 
 关于第二坑, 直接写`local_ip_address hostname`即可, 而不是将`127.0.1.1`改为`127.0.0.1`.
 
