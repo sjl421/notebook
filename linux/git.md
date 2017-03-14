@@ -4,6 +4,8 @@
 
 只有`name`和`email`是必要的. `--global`表示全局选项.
 
+当提交`commit`, 需要表明是谁提交的, 需要`name`和`email`.
+
 ```sh
 git config --global user.name $USER  # 配置提交用户名
 git config --global user.email $EMAIL  # 配置提交邮箱
@@ -45,3 +47,11 @@ git config --global alias.rt remote
 * `git remote get-url <name>`, 获取指定名称的仓库`url`
 * `git remote set-url <name> <newurl>`, 设定指定名称的仓库新`url`
 * `git remote -v`, 查看项目所有的远程仓库名称及地址
+
+克隆本地仓库:
+* `git clone file:///path/to/repo`
+* `git clone -l path/to/repo`, `-l`是`--local`的意思
+
+通常, 将一个开源项目克隆到本地后, 包含了所有的分支, 但往往进行代码对比时, 需要
+切换到不同分支, 即为不同分支创建项目. 可能需要使用`-b branch_name`来指定克隆特定
+分支.
