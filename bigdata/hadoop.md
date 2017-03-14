@@ -63,6 +63,11 @@
 库在`java`的安装包里. 可能需要执行`ln -s $JAVA_HOME/jre/lib/amd64/server/libjvm.so
 /lib/x86_64-linux-gnu/libjvm.so`来修复.
 
+`hdfs getconf`
+* `-namenodes`获得`name`节点的配置
+* `-secondarynamenodes`获取辅助`name`节点的配置
+* `-confKey`通用的配置, `xx.xx.xx`
+
 ## 非必要配置
 
 这样的配置实在是太多了, 以至于完全不知道从何说起. 反正, 就先列一些我自己能理解的配置.
