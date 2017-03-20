@@ -22,3 +22,8 @@ npm set registry https://npm.tuna.tsinghua.edu.cn/
 echo "registry=https://registry.npm.taobao.org" > ~/.npmrc
 npm install pkg --registry url
 ```
+
+可以换淘宝源, 之后就可以直接用`cnpm`安装了:
+```sh
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
