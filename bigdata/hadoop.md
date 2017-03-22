@@ -45,6 +45,7 @@
 这里要谈两个坑. 
 * 第一坑是, 一定要设置`etc/hadoop/hadoop-env.sh`文件中的`JAVA_HOME`环境变量, 无论你是否已经在`.bashrc`文件中`export`了.
 * 每二坑是, 一定要去掉`/etc/hosts`文件的`127.0.1.1`行, 其会解析到主机名. 此`ip`只在`Debian`系的发行版有.
+* 第三坑是, 如果设置了`hdfs`的`data`目录, 每次执行`hdfs namenode -format`格式化时, 都要删除数据节点的数据.
 
 关于第二坑, 直接写`local_ip_address hostname`即可, 而不是将`127.0.1.1`改为`127.0.0.1`.
 
@@ -61,6 +62,11 @@
 此可以通过执行`ldd libhadoop.so`来查看. 但事实上, 通过`locate libjvm.so`来查看
 库在`java`的安装包里. 可能需要执行`ln -s $JAVA_HOME/jre/lib/amd64/server/libjvm.so
 /lib/x86_64-linux-gnu/libjvm.so`来修复.
+
+`hdfs getconf`
+* `-namenodes`获得`name`节点的配置
+* `-secondarynamenodes`获取辅助`name`节点的配置
+* `-confKey`通用的配置, `xx.xx.xx`
 
 ## 非必要配置
 
@@ -115,6 +121,15 @@
 </property>
 ```
 此用于配置`mapreduce`应用程序需要设置的`shuffle`服务.
+
+```xml
+<property>
+  <name>yarn.log-aggregation-enable</name>
+  <value>true</value>
+</property>
+```
+
+是否开启日志聚合, 即将日志复制到`hdfs`, 并从本地删除
 
 ## 额外的技巧 
 
