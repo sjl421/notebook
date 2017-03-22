@@ -7,7 +7,7 @@ then just execute `mvn install:install-file` cmd.
 
 * `$ mvn install:install-file -DgroupId=xxx -DartifactId=xxx -Dversion=xxx -Dfile=xxx.jar`
 
-## execute a java class\
+## execute a java class
 
 You have another choice to config a specifial pom.xml,
 then just execute `mvn exec:java` or `mvn exec:exec`
