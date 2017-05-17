@@ -21,6 +21,6 @@ host hname_alias
 
 强烈建议使用`config`文件配置,同时对所有使用`ssh`的命令也有用.
 
-如: `scp local_file user@host:/path/to/file`, 可直接写为`scp local_file hname_alias:/path/to/file`
+如: `scp [-P port] local_file user@host:/path/to/file`, 可直接写为`scp local_file hname_alias:/path/to/file`
 
 如: `sftp hname_alias`

@@ -84,3 +84,4 @@ A: `sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap`
 
 通常会在`repo`的目录中找到`.key`文件, 可以手动下载后, 执行`sudo apt-key add key_file`即可.
 
+`curl -s https://host/path_to_key | sudo apt-key add -`
