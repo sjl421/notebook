@@ -55,6 +55,17 @@ lib/libpython2.7.dylib`.
 编译时使用的`python`和`youcomplete`编译时使用的`python`以及`ycm_server`运行时使用的`python`. 对这3个`python`
 要保持一致,至少保持兼容. 
 
+支持`c#`:
+
+安装`Mono`:
+```sh
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+sudo apt update && sudo apt install mono-complete
+```
+
+
+
 ## vimproc
 
 在`~/.vim/bundle/vimproc.vim`中执行`make`命令或在vim中执行`VimProcInstall`命令.

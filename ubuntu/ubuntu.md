@@ -51,3 +51,11 @@ sudo apt install language-pack-zh-hans
 
 如果通过`cygwin`终端访问服务器版本,如果出现乱码,可以设置`cygwin`的选项:`options->text`,
 选择`utf-8`.
+
+## 更改locale
+
+`locale`列出当前系统的语言环境
+
+`localectl list-locales`列出当前系统中所有可用的`locale`
+
+`localectl set-locales "LANG=zh_CN-utf8"`设置语言环境变量 

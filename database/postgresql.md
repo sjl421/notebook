@@ -97,3 +97,8 @@ Mac:
 * 表格更名: `ALTER TABLE user_tb1 RENAME TO backup_tb1;`
 * 删除表格: `DROP TABLE IF EXISTS backup_tb1;`
 
+## 查询计划
+
+在每条`SQL`命令的前面加上`explain`或`explain analyze`即可以查看此条命令的`Query Plan`. 后者是真正执行时的计划.
+
+简单地说, 在`SQL`语言的背后, 还有更低层的语言, 其构成查询计划, 并真正执行查询. 通常的`SQL`性能优化, 或`SQL`调试都是在此.

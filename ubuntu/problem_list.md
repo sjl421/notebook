@@ -77,3 +77,10 @@ A: `sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap`
 
 `wireshark`通常不希望以特权用户运行,但非特权用户运行往往看不到网络接口.所以可以为
 程序设置适当的权限.
+
+## apt pubkey
+
+经常有在`sources.list.d`目录中添加了`.list`文件后, `sudo apt update`会提示找不到`NO_PUBKEY`的错误.
+
+通常会在`repo`的目录中找到`.key`文件, 可以手动下载后, 执行`sudo apt-key add key_file`即可.
+

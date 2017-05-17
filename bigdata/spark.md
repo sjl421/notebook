@@ -48,7 +48,7 @@
 一般`spark`的日志在安装目录的`logs`目录下, 但应用运行的日志并不在, 所以如果查看
 应用为什么运行出错, 需要配置`spark.eventLog.enabled true`和`spark.eventLog.dir 
 hdfs:///logs`两个选项(注, 请创建`logs`目录), 这样就可以在`8088`端口的应用运行条目
-的`history`查看失败信息了.
+的`history`查看失败信息了. `8088`端口是`yarn`的资源管理器端口.
 
 配置方面, 应用内`SparkCOnf`优先级最高, 但不灵活, 传递给`spark-submit`的命令行选项
 次之, 但命令太长, `spark-defaults.conf`最低. 但所以的配置, 都可以在应用的`hosts:4040`

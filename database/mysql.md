@@ -38,4 +38,10 @@ mysql的用户数据存储在mysql数据库的user表中,对用户进行的创�
 
 创建用户最好使用`create user 'uname'@'localhost' identified by 'passwd'`.
 
+## python
+
+```sh
+sudo apt install mysql-client libmysqlclient-dev
+pip install mysql-python
+```
 
