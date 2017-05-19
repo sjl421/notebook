@@ -89,3 +89,15 @@ sudo apt-get install cloudera-manager-agent cloudera-manager-daemons
 目前未成功, 先如此, 再说-_-
 
 到目前为止, 解决的最大问题是, 在`server/agent`的所有主机上, 都要在`hosts`中写明主机和`ip`的对应.
+
+保证所有主机间主机名到`ip`的映射, 也就是说, `/etc/hosts`文件要包含所有主机的域名. 感觉需要一个`DNS`.
+
+在linux中，可以通过修改swappiness内核参数，降低系统对swap的使用，从而提高系统的性能。
+
+永久修改: 编辑`/etc/sysctl.conf`文件, 加入`vm.swappiness=xx`
+
+暂时修改: `sudo sysctl vm.swappiness=xx`
+
+查看当前系统的值: `sudo sysctl vm.swappiness`
+
+`CDH`建议值为`10`
