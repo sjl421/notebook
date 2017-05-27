@@ -73,7 +73,7 @@ Mac:
 
 ## 控制台命令
 
-* `\h`: 命令解释
+* `\h [cmd]`: 命令解释
 * `\?`: 命令列表
 * `\l`: 列出所有数据库
 * `\c`: 连接其他数据库
@@ -96,6 +96,13 @@ Mac:
 * 删除字段: `ALTER TABLE user_tb1 DROP COLUMN email;`
 * 表格更名: `ALTER TABLE user_tb1 RENAME TO backup_tb1;`
 * 删除表格: `DROP TABLE IF EXISTS backup_tb1;`
+
+`sudo -u postgres pg_dump dbname > xxx.sql`, 将数据库导出到文件
+
+`sudo -u postgres pg_restore [-d dbname] xxx.sql`, 将文件导入到数据库
+
+* `-C`, 如果指定的数据库不存在, 则创建
+* `-c`, 如果数据库存在, 则清空
 
 ## 查询计划
 

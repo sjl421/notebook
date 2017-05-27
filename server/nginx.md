@@ -36,6 +36,15 @@ reopen`4个信号.
 
 `events`和`http`在`main`的上下文中,`server`在`http`中,`location`在`server`中.
 
+开启目录浏览服务, 即如果打开的`URL`指向一个目录, 不是去寻找目录下的`index`文件, 而是将目录作为文件系统进行展示浏览.
+
+```nginx
+location / {
+  autoindex on;                //开启目录浏览功能；   
+  autoindex_exact_size off;    //关闭详细文件大小统计，让文件大小显示MB，GB单位，默认为b；   
+  autoindex_localtime on;      //开启以服务器本地时区显示文件修改日期！   
+}
+
 ## 静态文本
 
 ```nginx
