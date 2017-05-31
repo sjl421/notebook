@@ -72,3 +72,10 @@
 ```sh
 sed -i 's!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' $rvm_path/config/db
 ```
+
+或者:
+```sh
+echo "ruby_url=https://cache.ruby-china.org/pub/ruby" > ~/.rvm/user/db
+```
+
+安装的时候, 可以`--disable-binary`.

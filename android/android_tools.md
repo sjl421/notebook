@@ -20,7 +20,7 @@ if you have install the android-sdk to your disk.
 ## adb shell
 
 * `$ dd if=file1 of=file2`: copy file from one partition to another, `mv` can't
-* `$ mount -o remount rw /system`: remount the `/system` partition to `rw` mode
+* `$ mount -o remount,rw /system`: remount the `/system` partition to `rw` mode
 
 ## fastboot
 

@@ -49,3 +49,23 @@ def d():
     nonlocal n  #对,嵌套函数,使用外部变量,要nonlocal, 无论函数嵌套几层
     n += 4
 ```
+
+## import导入
+
+```py
+# a.py
+print("载入a.py")
+import c
+# c.py
+print("载入c.py")
+# b.py
+print("载入b.py")
+import a
+######
+python b.py  
+#=> 载入b.py
+#   载入a.py
+#   载入c.py
+```
+
+当运行`py`文件时, 其所导入的`py`文件中, 有`import`语句也会依次递归导入, 但同样的模块不会重复导入.
