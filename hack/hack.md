@@ -8,6 +8,8 @@
 
 2, `.net`程序, 可以用`.NET Reflector`反编译得到`c#`代码. `csharp`可以打开`c# REPL`进行交互式探索.
 
+3, `.pyc`程序, 可以`pip install uncompyle`, 再执行`uncompyle6 -o output_dir xxx.pyc`获取反编译文件.
+
 ## 文件
 
 `.vmdk`文件用`DiskGenius`打开
@@ -15,6 +17,9 @@
 ## 脱壳
 
 在用`IDA`文件打开时, 汇编指令前面写着`UPX`, 表示是`UPX`壳:
+
+`Ubuntu`: `apt install upx-ucl`
+
 ```sh
 upx.exe abc.exe  # 给程序加壳
 upx.exe -d abc.exe  # 给程序脱壳
