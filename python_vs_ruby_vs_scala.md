@@ -48,3 +48,27 @@ val a = new A("enali", 24)  //实例化对象
 a.hello  //=> "hello, enali"
 a.toString  //=> "enali's age is 24"
 ```
+
+## 文件
+
+`Python`:
+```python
+```
+
+`Ruby`:
+```ruby
+f = open("fname.txt")
+f.each_line {|l| puts l} # each_byte, each_char, each_codepoint, each_with_index(带行号)
+f.read  # readbyte, readchar, readline, readlines
+f.write str  # 写文件
+f.seek 0  # 移动文件读指针
+f.close   # 关闭文件流
+```
+
+`Scala`:
+```scala
+import scala.io.Source
+Source.fromFile(fname).getLines.foreach(println)  // 只要JVM运行, 则文件不会关闭
+val bufferedSource = Source.fromFile(fname)
+bufferedSource.close  // 手动关闭文件
+```
