@@ -25,3 +25,24 @@
 1, `Settings Sync`, 用来同步所有的配置和插件到`github gist`上, 因此需要`tokens`.
 
 `S+A+U`, 上传配置, `S+A+D`, 下载配置.
+
+2, `Project Manager`, 进行项目管理的插件, 通过`C+S+P`在命令面板中输入, 所有的命令都
+支持模糊匹配.
+
+* `Project Manager: Save Project`, 保存项目, 输入名称
+* `Project Manager: Edit Projects`, 查看和修改已经保存的项目
+* `Project Manager: List Projects to open`, 列出并选择要打开的项目
+
+## 配置
+
+1, 语言
+
+`C+S+P -> Configure Language`, 选择`en-US`
+
+2, 主题
+
+`C+S+P => Preferences: Color Theme`, 选择主题`Dracula`
+
+3, 快捷键
+
+`C+S+P -> Preferences: Keyboard Shortcuts`, 可修改快捷键
