@@ -30,6 +30,12 @@
 * `github.com/nsf/gocode`, `gocode`提供代码补全的守护程序
 * `github.com/rogpeppe/godef`, `godef`打印符号被定义的位置
 * `github.com/derekparker/delve/cmd/dlv`, `dlv`调试器
+* `github.com/lukehoban/go-outline`, `go-outline`从源码提取声明的`json`表示
+* `github.com/newhook/go-symbols`, `go-symbols`从源码提取包符号的`json`表示
+* `golang.org/x/tools/cmd/guru`, `guru`代码导航工具
+* `golang.org/x/tools/cmd/gorename`, `gorename`标识符重命名
+* `github.com/cweill/gotests`, `gotests`从源码生成测试文件
+* `github.com/fatih/gomodifytags`, `gomodifytags`在结构中修改/更新字段标签
 
 `gopkgs`将版本号映射到`github`仓库的分支:
 * `gopkg.in/pkg.v3`对应`github.com/go-pkg/pkg (branch/tag v3, v3.N, V3.N.M)`
