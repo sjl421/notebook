@@ -23,6 +23,7 @@ XP系统程序中开头的MOV  EDI,EDI指令的解释：在`VS .NET 2003`的`VC7
 `FS`寄存器指向当前活动线程的`TEB`结构（线程结构）
 
 偏移 说明:
+
 * `000` 指向SEH链指针
 * `004` 线程堆栈顶部
 * `008` 线程堆栈底部
@@ -44,5 +45,5 @@ assume fs:nothing       ;打开FS寄存器
 `mov eax,[eax + 0ch]`   ;得到PEB_LDR_DATA结构地址
 `mov esi,[eax + 1ch]`   ;InInitializationOrderModuleList
 `lodsd`                 ;得到KERNEL32.DLL所在LDR_MODULE结构的InInitializationOrderModuleList地址
-`mov edx,[eax + 8h]`    ;得到BaseAddress，既Kernel32.dll基址 
+`mov edx,[eax + 8h]`    ;得到BaseAddress，既Kernel32.dll基址
 ```

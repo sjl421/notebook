@@ -3,6 +3,7 @@
 ## Types类型
 
 基本类型:
+
 - `V`: void
 - `Z`: boolean
 - `B`: byte
@@ -14,15 +15,18 @@
 - `D`: double, 8字节
 
 引用类型:
+
 - `Lpackage/name/ObjectName;`, 其中`L`表示这是引用类型, 如`Ljava/lang/String;`表示`java.lang.String`
 
 数组:
+
 - `[I`: 表示基本类型的一维整数数组, 即`int[]`, 而`[[I`则表示基本类型的二维整数数组, 即`int[][]`.
 - `[Ljava/lang/String`: 表示引用类型的一维字符串数组, 即`String[]`, 多维数组同上.
 
 ## Methods方法
 
 `Lpackage/name/ObjectName;->MethodName(III)Z`, 分别是:
+
 - 调用对象`Lpackage/name/ObjectName;`例如`java.lang.String`
 - 调用方法`->MethodName()`例如`.method()`
 - 方法参数`III`即`int, int, int`
@@ -39,6 +43,7 @@
 ## 寄存器
 
 有两种等价的方法指定一个方法调用中使用的寄存器数.
+
 - `.register n`表示一共使用了`n`个寄存器数
 - `.locals n`表示除参数寄存器外一共使用的寄存器数
 
@@ -48,8 +53,9 @@
 
 注意, 对于非静态方法, 或者说是实例方法, 其调用对象总是隐含的第1参数, 也就是总存储在`p0`中.
 
-所有的寄存器都是`4字节`的, 因此对`8字节`的参数则使用2个寄存器表示. 如非静态方法`LMyObject;->MyMethod(IJZ)V`的调用, 因为有`J`即`double`参数, 其参数传递如下: 
-- `p0 - this`, 
-- `p1 - I(int)`, 
-- `p2,p3 - J(double)`, 
-- `p4 - Z(boolean)`.
+所有的寄存器都是`4字节`的, 因此对`8字节`的参数则使用2个寄存器表示. 如非静态方法`LMyObject;->MyMethod(IJZ)V`的调用, 因为有`J`即`double`参数, 其参数传递如下:
+
+- `p0 - this`
+- `p1 - I(int)`
+- `p2,p3 - J(double)`
+- `p4 - Z(boolean)`

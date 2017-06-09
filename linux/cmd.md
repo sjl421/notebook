@@ -4,18 +4,20 @@
 
 用于计算机间文件传输
 `scp /dir/src_file user@ip:/dir/dest_file`
-* `-r` 复制目录 
+
+* `-r` 复制目录
 * `-p` 通过指定端口
 * `-f` 若dest存在，则删除再复制
-* `-v` 显示复制过程 
+* `-v` 显示复制过程
 
 ## useradd
 
 用来建立用户帐号和创建用户的起始目录。
 `useradd [－d home] [－s shell] [－c comment] [－m [－k template]] [－f inactive] [－e expire ] [－p passwd] [－r] name`
+
 * `-d`：指定用户登入时的启始目录。
 * `-s`：指定用户登入后所使用的shell。
-* `-c`：加上备注文字，备注文字保存在`passwd`的备注栏中。 
+* `-c`：加上备注文字，备注文字保存在`passwd`的备注栏中
 * `-m`：自动建立用户的登入目录。
 * `-f`：指定在密码过期后多少天即关闭该账号。
 * `-e`：指定账号的有效期限，缺省表示永久有效。
@@ -46,35 +48,35 @@
 ## wget
 
 usage: `wget [options] url`
-  * `-r`: recurse
-  * `-l`: level
-  * `=m`: mirror
-  * `-c`: continue
-  * `-nc`: no-clobber
-  * `-t`: tries
-  * `-T`: timeout
-  * `-A/R/D`: reject/accept/exclude domain type
-  * `-I/X`: include/exclude dir
-  * `-p`: page-requisites
-  * `-np`: no parent
-  * `-L`: 仅跟踪相对链接
-  * `-http-user`,`-http-passwd`:
-  * `-proxy-user`,`-proxy-passwd`:
-  * `-Y`: proxy=on/off
-  * `-b`: background
-  * `-q`: quiet
-  * `-v`: verbose
-  * `-B`: base url
-  * `-bind-address`:
-  * `-N`: timestamp
-  * `-w`: wait
-  * `-waitretry`:
-  * `-random-wait`:
-  * `-Q`
-  * `-k`: convert link to local link
+
+* `-r`: recurse
+* `-l`: level
+* `=m`: mirror
+* `-c`: continue
+* `-nc`: no-clobber
+* `-t`: tries
+* `-T`: timeout
+* `-A/R/D`: reject/accept/exclude domain type
+* `-I/X`: include/exclude dir
+* `-p`: page-requisites
+* `-np`: no parent
+* `-L`: 仅跟踪相对链接
+* `-http-user`,`-http-passwd`:
+* `-proxy-user`,`-proxy-passwd`:
+* `-Y`: proxy=on/off
+* `-b`: background
+* `-q`: quiet
+* `-v`: verbose
+* `-B`: base url
+* `-bind-address`:
+* `-N`: timestamp
+* `-w`: wait
+* `-waitretry`:
+* `-random-wait`:
+* `-Q`
+* `-k`: convert link to local link
 
 ## curl
-
 
 ## lsof
 
@@ -156,6 +158,7 @@ find在系统搜索文件: `find [path] [options] [tests] [actions]`
 * `cd !@`: 切换到上个命名的最后参数指定的目录
 
 `cd`有两个选项:
+
 ```sh
 ln -s .vim abc  #将abc链接到.vim目录
 cd abc && pwd   #=> /home/spark/abc
@@ -175,6 +178,7 @@ cd -P abc  && pwd  #=> /home/spark/.vim
 ## lscpu
 
 获取CPU信息:
+
 ```sh
 $ lscpu
 Architecture:          x86_64         # 架构
@@ -250,6 +254,7 @@ text to speech
 `sudo apt-get install espeak espeak-data`
 
 Usage:
+
 * `espeak 'hello'`, 读字串
 * `espeak -f <file>`, 读文件
 
@@ -260,6 +265,7 @@ Usage:
 有两种形式的剪贴板,一种是高亮文本再通过鼠标中键粘贴,另一种是选择文本显式复制`C-c`和显式粘贴`C-v`.
 
 Usage:
+
 * `xclip file`, 将文件内容复制到剪贴板,中键粘贴
 * `xclip -o [file]`, 输出第一种剪贴板内容
 * `xclip -selection clipboard file`, `C-v`粘贴
@@ -271,6 +277,7 @@ Usage:
 安装: `sudo apt install mailutils`
 
 使用:
+
 * `mail -s "主题" user@example.com < file`, 将文件内容发送给邮件地址
 * `echo "内容" | mail -s "主题" user@example.com`, 将特定内容发送给邮件
 * `echo "内容" | mail -s "主题" -A test.txt user@example.com`, 可带附件
