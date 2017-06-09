@@ -5,7 +5,7 @@
 * `C+A+s`, 打开终端, `windows`上默认为`cmd.exe`
 * `C+P`, 快速打开, 可模糊搜索文件名, 输入`>`可转为命令面板
 * `C+A+P`, 打开命令面板, 命令以组划分, 有相同前缀
-    * `git: xxx`, 输入`git`相关的命令
+  * `git: xxx`, 输入`git`相关的命令
 * `C+,`, 打开配置文件
 * `C+\`, 在右侧打开垂直窗口
 
@@ -19,6 +19,10 @@
 
 * `ext`, 关于插件
 * `edt`, 关于编辑窗口
+* `task tkname`, 执行任务, `A-T`
+* `@ symname`, 跳转到文件的符号处, `A-F`
+* `@: symname`, 同上, 以不同类别的形式
+* `# symname`, 跳转到项目的符号处(必须是可公开访问的), `A-S`
 
 ## 插件
 
@@ -34,6 +38,11 @@
 * `Project Manager: Save Project`, 保存项目, 输入名称
 * `Project Manager: Edit Projects`, 查看和修改已经保存的项目
 * `Project Manager: List Projects to open`, 列出并选择要打开的项目
+
+3, `Code Runner`, 运行文件
+
+* `C-A-R`, 运行文件代码或选中的行代码
+* `C-A-J`, 选择语言来运行代码
 
 ## 配置
 
@@ -51,83 +60,3 @@
 3, 快捷键
 
 `C+S+P -> Preferences: Keyboard Shortcuts`, 可修改快捷键
-
-## task
-
-定义在`.vscode/tasks.json`文件中的任务, 可能通过`C+S+P -> Tasks: Configure Task Runner`
-来启动一个简单任务. 通过`C+P -> task `来选择运行的任务.
-
-```json
-// echo "hello world"
-{
-    "version": "0.1.0",
-    "command": "echo",
-    "isShellCommand": true,
-    "args": ["Hello World"],  // 全局参数
-    "showOutput": "always"  // 总是显示输出
-}
-```
-
-定义相同命令的多个任务
-
-```json
-// echo "Hello World"
-{
-    "version": "0.1.0",
-    "command": "echo",
-    "isShellCommand": true,
-    "args": [],
-    "showOutput": "always",
-    "echoCommand": true,  // 会显示执行的具体命令
-    "suppressTaskName": true,  // taskname不会成为参数的一部分
-    "tasks": [
-        {
-            "taskName": "hello",
-            "args": ["Hello World"]
-        },
-        {
-            "taskName": "bye",
-            "args": ["Good Bye"]
-        }
-    ]
-}
-```
-
-定义不同命令的多个任务
-
-```json
-{
-    "version": "0.1.0",
-    "tasks": [
-        {
-            "taskName": "tsc",
-            "command": "tsc",
-            "args": ["-w"],
-            "isShellCommand": true,
-            "isBackground": true,
-            "problemMatcher": "$tsc-watch"
-        },
-        {
-            "taskName": "build",
-            "command": "gulp",
-            "args": ["build"],
-            "isShellCommand": true
-        }
-    ]
-}
-```
-
-定义操作系统相关的命令和属性, `windows/linux/osx`
-
-```json
-{
-    "version": "0.1.0",
-    "windows": {
-        "command": "C:\\Program Files\\nodejs\\node.exe",
-        "showOutput": "always"
-    },
-    "linux": {
-        "command": "/usr/bin/node"
-    }
-}
-```

@@ -20,13 +20,13 @@
 改变`gem`安装时的默认`源`:
 ```sh
 gem sources -r https://rubygems.org/
-gem sources -a https://ruby.taobao.org/
+gem sources -a https://gems.ruby-china.org/
 gem sources -l
 gem update
 ```
 
 如果使用`bundle`在管理依赖, 可改变`Gemfile`文件:
 ```ruby
-source 'https://ruby.taobao.org/'
+source 'https://gems.ruby-china.org/'
 gem 'rails', '4.2.0'
 ```

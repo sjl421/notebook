@@ -15,28 +15,12 @@
 * `go clean`删除生成的目标文件
 * `go run a.go`编译并运行
 * `go get [flag] pkg`下载并安装包
-    * `-d`, 只下载
-    * `-v`, 显示详细信息
-    * `-u`, 更新包
+  * `-d`, 只下载
+  * `-v`, 显示详细信息
+  * `-u`, 更新包
 * `go install pgk`安装包
 
-## vscode 包
-
-`go get -v pkg_url`来安装
-
-* `github.com/golang/lint/golint`, `golint`代码质量检测
-* `github.com/tpng/gopkgs`, `gopkgs`带版本号的包管理
-* `sourcegraph.com/sqs/goreturns`, `goreturns`为返回值添加0值(对应不同类型)
-* `github.com/nsf/gocode`, `gocode`提供代码补全的守护程序
-* `github.com/rogpeppe/godef`, `godef`打印符号被定义的位置
-* `github.com/derekparker/delve/cmd/dlv`, `dlv`调试器
-* `github.com/lukehoban/go-outline`, `go-outline`从源码提取声明的`json`表示
-* `github.com/newhook/go-symbols`, `go-symbols`从源码提取包符号的`json`表示
-* `golang.org/x/tools/cmd/guru`, `guru`代码导航工具
-* `golang.org/x/tools/cmd/gorename`, `gorename`标识符重命名
-* `github.com/cweill/gotests`, `gotests`从源码生成测试文件
-* `github.com/fatih/gomodifytags`, `gomodifytags`在结构中修改/更新字段标签
-
 `gopkgs`将版本号映射到`github`仓库的分支:
+
 * `gopkg.in/pkg.v3`对应`github.com/go-pkg/pkg (branch/tag v3, v3.N, V3.N.M)`
 * `gopkg.in/user/pkg.v3`对应`github.com/user/pkg (branch/tag v3, v3.N, V3.N.M)`
