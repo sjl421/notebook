@@ -44,6 +44,14 @@
 * `C-A-R`, 运行文件代码或选中的行代码
 * `C-A-J`, 选择语言来运行代码
 
+4, `LaTeX Workshop`, 支持写`latex`文档
+
+5, `Git Lens`
+
+6, `REST Client`, 可以写`url`, 通过命令执行`send request`, 并显示`response`
+
+7, `ESLint`, 提供`js`代码风格检测
+
 ## 配置
 
 除了全局的`User`配置外, 还有`Workspace`配置, 即在当前项目目录中的`.vscode`目录中通过

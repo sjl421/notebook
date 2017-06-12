@@ -53,6 +53,6 @@
 
 `cnpm install -g eslint`
 
-## c#
+## csharp
 
 下载安装[.NET Core SDK](https://www.microsoft.com/net/core#windowscmd)

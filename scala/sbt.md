@@ -22,11 +22,12 @@ src/
     resources/
 ```
 
-除此外, 忽略所有别的目录, 和所有隐藏目录. 
+除此外, 忽略所有别的目录, 和所有隐藏目录.
 
 `project`目录放置额外的配置信息. 相关的输出文件在`target/`目录, 即应该加入`.gitignore`.
 
 有关`build.sbt`:
+
 ```scala
 lazy val root = (project in file("."))
   .settings(
@@ -49,6 +50,8 @@ lazy val root = (project in file("."))
 `"testOnly TestA TestB"`表示只测试`A`和`B`, 因为3个字串其实是一个参数, 以`"`包围.
 
 `~ compile`表示持续编译, 即源码有改动则自动编译.
+
+若检测到多个`main`函数, 则`run`时会有个选择, 或者直接`runMain xxx`运行指定的`main`函数, 又或者`sbt "run-main xxx"`从批处理模式执行.
 
 ## 添加库依赖
 
@@ -85,7 +88,7 @@ addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.3")
 * `latest.integration`, 最新
 * `latest.[any status]`, 可以是`milestone`, `release`
 * `2.1.+`, 即选择`2.1.x`的最新版本
-* 指定范围: 
+* 指定范围:
   * `[1.0, 2.0]`, 即`>=1.0`, `<=2.0`
   * `[1.0, 2.0[`, 即`>=1.0`, `<2.0`
   * `]1.0, 2.0]`, 即`>1.0`, `<=2.0`

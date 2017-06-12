@@ -77,11 +77,24 @@ close(buffered)       // 关闭
 * `Args`, 命令行参数, 0索引为程序名
 * `Exit(num)`, 退出程序
 * `Interrupt`, 中断信号
+* `Stderr`, `Stdout`, `Stdin`
+* `Create(file_name)`, 创建文件用于读写
+* `Open(file_name)`, 打开文件用于只读
+* `OpenFile(file_name, flag, perm)`, 通用的打开文件
 
 `os/signal`:
 
 * `Notify(chan, sig)`, 向通道发送信号
 * `Stop(chan)`, 关闭通道
+
+`io`:
+
+* `MultiReader`, `MultiWriter`, 即多读多写
+* `Copy(dst, src)`, 复制内容
+
+`io/ioutil`:
+
+* `Discard`, 相当于`devNull`设备
 
 `fmt`:
 
@@ -95,10 +108,15 @@ close(buffered)       // 关闭
 
 `log`:
 
+* `Logger`, 类型
+* `New()`, 创建`Logger`类型
 * `Print`, `Printf`, `Println`
-* `Fatal`, `Fatalf`, `Fatalln`
-* `Panic`, `Panicf`, `Panicln`
-* `SetOutput`, `SetFlags`, `SetPrefix`
+* `Fatal`, `Fatalf`, `Fatalln`, 输出信息后调用`os.Exit(1)`
+* `Panic`, `Panicf`, `Panicln`, 输出信息后调用`
+* `SetOutput`, `SetFlags`, `SetPrefix`, 设置输出, 标志, 前缀
+  * 标志以`|`聚合
+  * `Ldate`, `Ltime`, `Lmicroseconds`, `LUTC`, 设置`UTC`则使用`UTC`时间而非本地时间
+  * `Llongfile`, `Lshortfile`, 文件的全路径和行号
 
 `math/rand`, 非负伪随机数:
 
@@ -111,3 +129,31 @@ close(buffered)       // 关闭
 `errors`, 错误
 
 * `New(str)`, 创建错误
+
+`encoding/xml`:
+
+* `xml.NewDecoder(str).Decode(var_struct)`
+
+`encoding/json`:
+
+* `json.NewDecoder(r).Decode(v)`, 从`r`中读, 解码成`v`
+* `json.NewEncoder(w).Encode(v)`, 将`v`编码, 写入`r`
+* `json.Unmarshal(var_byte_slice, var_struct)`, 解码`json`字串, 得到`go`值
+* `json.Marshal`, `json.MarshalIndent`, 编码`json`字串, 得到`json`字串
+
+`regexp`:
+
+* `MatchString(pat, str)`, 字串匹配
+
+`net/http`:
+
+* `Get(url)`
+* `NewRequest(method, url, body)`, 构造请求
+
+`bytes`:
+
+* `Buffer`
+  * `Write(byte_slice)`
+  * `Write(byte)`
+  * `WriteString(str)`
+  * `WriteTo(iowriter)`
