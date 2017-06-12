@@ -2,45 +2,6 @@
 
 >人生苦短, 我用 Ruby
 
-## 安装Ruby
-
-有多种方式将这最优秀的脚本语言安装到你的系统上. 
-
-在`Windows`上, 在官网[Ruby](www.ruby-lang.org)上下载二进制包直接安装. 在`Linux`下推荐使用`rvm`这个Ruby的多版本管理工具, 类似还有`rbenv`.
-
-```rb
-curl -sSL https://get.rvm.io | bash -s stable 
-```
-
-### rvm
-
-熟悉几个`rvm`子命令:
-
-* `rvm list [known]`: 列出已安装版本, `known`列出已支持的版本
-* `rvm install [ruby] [x.y.z]`: 安装指定版本
-* `rvm rvm implode`: 移除`rvm`
-* `rvm get stable/head`: 获取最新稳定版或开发版
-* `rvm docs generate [ri | rdoc | gem]`: 生成文档, 可指定格式
-
-### gem
-
-`gem`是`Ruby`的包管理工具, 能非常方便的安装第三方库和工具. 
-
-熟悉`gem`的几个子命令:
-
-* `gem search pkgname`: 搜索包 
-* `gem install pkgname`: 安装包
-* `gem update [pkgname]`: 更新包, 默认更新所有包
-
-默认的`gem`官方软件源访问不了. 现在主要使用的国内源是淘宝的.
-
-```rb
-gem sources -r https://rubygems.org/    #移除 
-gem sources -a https://ruby.taobao.org/ #添加 
-```
-
-如果你使用`bundle`来管理你的第三方依赖, 可能要改变你的`Gemfile`首行`source 'https://ruby.taobao.org/'`.
-
 ## 初步
 
 关于`Ruby`, 你需要先知道以下几点:
@@ -107,29 +68,6 @@ p "hello, world"        #=> 同puts, 但返回输出对象
 p "hello, world\n"      #=> 不转义特殊字符
 ```
 
-数字: `Ruby`中有`Integer`, `Complex`, `Rational`, `Fixnum`, `Float`等有关数字的类型, 都继承自`Numeric`类.
-
-```rb
-52, 0x32, 064, 0b110100  #十/十六/八/二进制
-120.5, 1.205e2           #浮点, 科学计数
-123456789.class          #=>Fixnum, 数超出范围, 自动转为Bignum
-123456789123456789123456789.class  #=>Bignum
-Complex(1, 2), 1+2i      #=>(1+2i), 复数
-0.5r, Rational(1, 2)     #=>(1/2), 分数
-```
-
-类型转换:
-
-```rb
-4.to_s           #=> "4"
-32.to_s(2/8/16)  #=> 整数转字串, 转二/八/十六进制
-"32abc".to_i     #=> 字串转整数, 32
-32.to_f          #=> 32.0
-0.5.to_r         #=> 浮点转分数(1/2)
-3.to_c           #=> 转复数3+0i
-"abc".to_sym     #=> :abc, 字串转符号
-:abc.to_s        #=> "abc", 符号转字串
-```
 
 条件表达式: 最常见的`if`和多分支的`case`.
 
@@ -196,12 +134,6 @@ end
 方法: `Ruby`的方法分为实例方法, 类方法和单件方法. 所有方法有统一的寻找链.
 
 ```rb
-# Proc对象
-add_two = proc {|x| x+2}  #定义
-add_two = Proc.new {|x| x+2}
-add_two = lambda {|x| x+2}
-add_two = -> (x) {x+2}
-add_two.(4), add_two[4], add_two.call(4)  #调用
 # def方法
 def add_two(x) x+2 end
 add_two(4)  #=> 6
@@ -273,122 +205,10 @@ raise
 块`block`: 所谓块即表达式的组合. `Ruby`有两种方式表示块, `do/end`和`{}`. 编码风格指导: `do/end`用于多行的块, 而`{}`用于一行的块. 块通常用于循环, 部分常规处理和替换部分算法.
 
 ```rb
-File.open(path) do |file|
-  file.each_line do |line|
-    ...
-  end
-end
-# 等价
-file = File.open(path)
-begin
-  file.each_line do |line|
-    ...
-  end
-ensure
-  file.close    #文件一定会关闭，无论是否异常
-end
 # 3,替换部分算法
 ary.sort {|a, b| a.size <=> b.size} # 对每两个元素基于.size比较排序
 ary.sort_by {|a| a.size}    # 对每个元素.size后再排序
 # 将块封装为对象
 hello = Proc.new {|name| puts "hello, #{name}"}
 hello.call("Ruby")
-```
-
-## 类型
-
-`Ruby`有一致的类体系.
-
-数字`Numeric`:
-* `Numeric`
-  - `Integer`
-    + `Fixnum`
-    + `Bignum`
-  - `Float`
-  - `Rational`
-  - `Complex`
-
-```rb
-52 0d52, 0x32, 064 0o64, 0b110100, 120.5, 1.205e-2  #进制, 浮点, 科学数
-123456789123456789123456789.class  #=>数超出范围, 自动转为Bignum
-1+2i, Complex(1, 2)      #=>(1+2i), 复数
-0.5r, Rational(1, 2)     #=>(1/2), 分数
-1+2, 1-2, 1*2, 1/2, 1%2, 1**2  #=>加减乘除余冥
-11.2.div 2.3   #=> 4, 浮点或整数, 结果都为整, 不同于/
-11.quo 7       #=> 11/7, 整数时返回Rational,有Float时返回Float
-11.modulo 7    #=> 4, 商向左舍入,[x]<=x
-11.divmod 7    #=> [1, 4]
-11.remainder 7 #=> (返回结果符号与x一致，商向原点舍入)
-1/0, 1.0/0, 0/0.0        #=> 错误, Infinity, NaN
-a = 0.1 + 0.2; b = 0.3; a != b  #=> 有些浮点无法精确存储
-```
-
-字串`String`:
-
-```rb
-s = "a b c"
-s = ?a         #=> "a", 单字符串
-s = %{a b c}   #=> "a b c"
-s = %Q{a b c}  #=> "a b c"
-s = %q{a b c}  #=> 'a b c', 单绰号不转义特殊字符, 不进行变量替换
-```
-
-## 数组Array
-
-创建数组:
-
-```rb
-["a", "b", "c", "d"], %w(a, b, c, d)   #=> ["a", "b", "c", "d"]
-%i(a b c d)      #=> [:a, :b, :c, :d]
-{a:1, b:2}.to_a        #=> [[:a, 1], [:b, 2]]
-"hello:world".split(':')  #=> ["hello", "world"], 默认为空格分隔
-Array.new(3, 4)  #=>[4, 4, 4]
-Array.new(3) {|i| i+1}  #=> [1, 2, 3]
-Array.new(3, [0, 0, 0]) #=> 元素指向同一对象[0,0,0], 一变则变
-Array.new(3) {[0, 0, 0]}  #=> 单独的对象
-```
-
-```rb
-ary << "e"  #=> ["a", "b", "c", "d", "e"]
-ary[6]  #=> nil  (越界索引元素)
-ary[6] = "g"  #=> ["a", "b", "c", "d", "e", nil, "g"]  (越界添加对象)
-ary.size  #=> 7  (ary.length是方法别名)
-```
-
-哈希`Hash`:
-
-```rb
-addr = {:name => "lzp", :pinyin => "lizp", :postal => "1245"}
-addr = {name: "lzp", pinyin: "lizp", postal: "1234"}  #=> 以符号为键
-```
-
-范围`Range`:
-
-```rb
-r = 0...5  #=>不包含2
-r = 0..5   #=>包含2
-```
-
-正则`Regexp`: 
-
-```rb
-reg = /abc/
-reg = %r(abc)    #=> /abc/, 正则对象
-/ll/ =~ "hello"  #=> 2  (返回匹配的位置)
-/ll/i =~ "heLLo"  #=> 2  (i表示不区分大小写)
-/ho/ !~ "hello"   #不匹配
-```
-
-
-文件:
-
-```rb
-file = File.open(fname)
-text = file.read  # 一次读入所有内容
-file.close
-File.open(path) do |f|  
-  f.each_line do |l|
-    ...
-  end
-end
 ```

@@ -1,6 +1,64 @@
 # Python Ruby Scala
 
+## 字符串
+
+长度: `py: len(s)`, `rb, scala, js: s.length`
+
+子串: `py: s[0:n]`, `rb: s[0..n], s[0...n], s.slice(0,n)`, `scala: s.slice(0,n)`, `js: s.slice(0,n)`
+
+去除空白: `py, rb: s.strip(), s.rstrip(), s.lstrip()`, `rb: `
+
 ## 控制
+
+条件语句: 
+
+`python`: `a == b, a is None, a is not None, it in [a,b], cond1 and cond2`
+```python
+if cond1:
+  stat1
+elif cond2:
+  stat2
+else
+  stat3
+```
+
+`ruby`:
+```ruby
+if cond
+  stat1
+elsif cond 
+  stat2
+else 
+  stat3
+end
+
+stat if cond  #修饰符
+stat unless cond
+
+case v_expr
+when v1, v2        #使用===检测相等
+  stat
+else               #默认情况
+  stat
+end
+```
+
+循环语句:
+
+`python`:
+```python
+while cond:
+  stat
+```
+
+`ruby`: 不推荐使用`while/for/until/loop`这些循环
+```ruby
+ary.each {|it| stat}  # 遍历列表
+n1.times {|n| stat}  # 0...n1
+n1.upto/downto/stepto(n2 [,step]) {|n| stat}
+hash.each {|k,v| stat}
+file.each_line {|l| stat}
+```
 
 ## 类
 

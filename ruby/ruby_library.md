@@ -14,8 +14,8 @@
 
 运算符: `+`, `-`, `*`, `/`, `%`, `**`
 数的表示: `123`, `0d123`, `0123`, `0o123`, `0x123`, `0b10011`, `1.23e4`, `1.23e-4`
-分数: `Rational(1,3)`
-复数: `Complex(1,3)`
+分数: `Rational(1,3), 0.5r`
+复数: `Complex(1,3), 1+3i`
 
 Float类的浮点小数用2的冥的倒数来表示，如`1/2`, `1/4`, `1/8`, 则`1/3`,`1/5`,`1/6`等无法精确表示
 
@@ -61,7 +61,7 @@ extra
 1.5.round #=> 四舍五入
 ```
 
-类型转换: `1.5.to_i`, `5.to_f`, `1.5.to_r`, `1.5.to_c`
+类型转换: `1.5.to_i`, `5.to_f`, `1.5.to_r`(分数), `1.5.to_c`(复数), `32.to_s(2/8/16)`
 
 位运算: `~` `&` `|` `^` `>>` `<<`
 
@@ -104,6 +104,12 @@ a.zip(b, c) #=> [['a', 'aa', 'aaa'], ['b', 'bb', 'bbb'], ['c', 'cc', 'ccc']]
 * `a.at[n]`, `a.slice(n)`, `a.slice(n..m)`, `a.slice(n, len)`
 * `a[n, len] = ['a', 'b', 'c']`, 形似替换,len为0时表现插入
 * `a.values_at(n1, n2, n3)`, 获取`n1`,`n2`,`n3`索引处的元素
+
+```ruby
+ary << "e"  #=> ["a", "b", "c", "d", "e"]
+ary[6]  #=> nil  (越界索引元素)
+ary[6] = "g"  #=> ["a", "b", "c", "d", "e", nil, "g"]  (越界添加对象)
+```
 
 集合运算:
 
@@ -168,7 +174,10 @@ a.sort_by{|i| …}
 
 创建字符串:
 
+* `s = "a b c"`
+* `s = ?a`, 单字符串
 * `%q(ruby said, "hello world")`: `()`为分界符,`{}`, `||`, `<>`
+* `%{a b c}`, `%Q{a b c}`, 双引号字串
 
 Here document:
 
@@ -186,6 +195,7 @@ EOB
 `printf`输出到`stdout`, `sprintf`则返回字符串对象，不输出
 
 ```ruby
+str.to_sym  # 转符号
 str.length
 str.size
 str.bytesize
@@ -619,8 +629,8 @@ d = Date.parse(str)     # require 'date'
   * `:block`  块参数, `&blk`
 
 ```ruby
-hello = Proc.new { |name| puts "hello, #{name}}
-hello = proc { |name| puts "hello, #{name}}     # 创建, 参数数量可以不同
+hello = Proc.new { |name| puts "hello, #{name}"}
+hello = proc { |name| puts "hello, #{name}"}     # 创建, 参数数量可以不同
 hello = lambda {|a, b, c| p [a, b, c]}  # call方法的参数与块变量的参数严格相同
 hello.call("ruby")
 hello["ruby"]
