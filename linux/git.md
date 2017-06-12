@@ -55,3 +55,23 @@ git config --global alias.rt remote
 通常, 将一个开源项目克隆到本地后, 包含了所有的分支, 但往往进行代码对比时, 需要
 切换到不同分支, 即为不同分支创建项目. 可能需要使用`-b branch_name`来指定克隆特定
 分支.
+
+## hub
+
+一个命令行的`Git`命令封装, 可更好地与`GitHub`配合使用.
+
+```sh
+mac$ brew install hub
+unix$ git clone https://github.com/github/hub.git && cd hub
+unix$ script/build -o ~/bin/hub  # 安装到~/bin目录
+```
+
+可以设置`alias git=hub`.
+
+`hub version`, 查看版本
+
+* `git clone your_project`, 克隆自己的项目, 提示登录
+* `git clone github/hub`, 克隆别人的项目
+* `git browse -- issues`, 打开当前项目的`issues`页面
+* `git browse mojombo/jekyll wiki`, 打开指定项目的`wiki`页面
+* `git fork`, 克隆当前项目到自己的帐户, 提示登录

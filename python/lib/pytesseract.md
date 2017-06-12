@@ -3,7 +3,7 @@
 ## 安装
 
 ```sh
-sudo apt install tesseract-ocr tesseract-orc-xxx  # 语言包
+sudo apt install tesseract-ocr tesseract-ocr-xxx  # 语言包
 pip install pytesseract
 pip install pillow  # Python的图像库
 ```

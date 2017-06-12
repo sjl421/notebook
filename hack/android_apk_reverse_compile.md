@@ -56,7 +56,7 @@
 
 关于框架文件, `apktool`依赖标准的`AOSP`应用框架来解码和构建`apk`, 但有些手机厂商的自带应用往往会加入不同的框架文件, 可能导致失败. 此时需要安装特定厂商的框架文件.
 
-这些框架文件多在`/system/framework`文件夹下, 也可能在`/data/system-framework`或`/system/app`或`/system/priv-app`中. 命名方面, 名字多有`resources`或`res`或`framework`等字串. 
+这些框架文件多在`/system/framework`文件夹下, 也可能在`/data/system-framework`或`/system/app`或`/system/priv-app`中. 命名方面, 名字多有`resources`或`res`或`framework`等字串.
 
 发现框架文件后, 可以通过`adb pull /path/to/file`来拖到本地.
 
@@ -112,10 +112,9 @@
 ## adb install apk
 
 安装`apk`本质上做了如下事情:
+
 - 将`apk`文件放在了`/data/app`目录下
 - 在`/data/system/packages.xml`中增加了条记录
 - 在`/data/data`增加`apk`使用的数据库目录.
 
 1, 在`.smali`文件中的自己添加2的注释会被删除
-
-

@@ -7,3 +7,4 @@
 1, `VsVim`, 提供`vim`的快捷键
 
 2, `Syntax Highlighting Pack`, 提供多语言的代码高亮和片断的支持
+

@@ -1,5 +1,7 @@
 # Vim Basic
 
+`sudo apt install vim`
+
 ## Vim初步
 
 * 移动光标: `h`, `j`, `k`, `l`

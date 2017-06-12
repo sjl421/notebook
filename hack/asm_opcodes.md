@@ -1,5 +1,13 @@
 # ASM汇编指令
 
+## push/pop
+
+`push reg/mem/seg`；`sp<-sp-2,ss<-reg/mem/seg`
+
+`pop reg/seg/mem`: `reg/seg/mem<-ss:[sp],sp<-sp+2`
+
+压栈, `sp`先减; 出栈, `sp`后加.
+
 ## rep
 
 重复指令`ecx`次.

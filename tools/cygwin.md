@@ -71,5 +71,7 @@ cygstart --action=runas "$@"
 另一个有用的技巧是, 建立对盘符的链接:
 ```sh
 ln -s /cygdrive/c /c
+ln -s /cygdrive/c/Users/xxx/Desktop Desktop
 ln -s /cygdrive/d /d
+ln -s /cygdrive/d/Downloads Downloads
 ```
