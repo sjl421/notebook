@@ -6,6 +6,7 @@
 ```scala
 import scala.language.postfixOps  // 后缀操作符, -language:postfixOps
 import scala.language.reflectiveCalls  // 反射调用
+import scala.language.implicitConversions  // 隐式方法, -language:implicitConversions
 ```
 
 参数化类型:
@@ -52,8 +53,14 @@ val c = "str a is %s".format(a)
 val a = Option(3)  // 等价Some(3)
 val a = None
 a.foreach(println)  // 若为Some, 则输出, 若为None, 什么也不做
+for { it <- a } {...}
 a.get  // 若为Some, 返回包装的值, 若为None, 抛出NoSuchElementException
 a.getOrElse(0)  // 若为None, 则给定默认值; 若为Some, 则返回包装的值
+// Either, Right, Left表示错误标志(Left)或某一对象值(Right)
+val b = Right(3); b.right
+val b = Left(s"wrong"); b.left
+// Try, Success, Failure(问题保存Throwable类型)
+Try { assert(i>0, s"nonpositive number $i"); i}  // 验证通过则返回Success, 有异常则返回Failure
 // 枚举
 object Breed extends Enumeration {
   type Breed = Value  // 将Breed标识符定义为Value的类型别名
@@ -77,6 +84,11 @@ val x = 1  // 不可变量
 val s = "hello"  // 类型推断
 val i: Int = 1  // 标注类型
 lazy val v = foo()  // 惰性赋值, 只在需要时计算, 且一旦结果不会重复计算, 不修饰var
+val Seq(a, b, c) = List(1, 2, 3)  // 应用模式匹配定义了3个变量
+val head +: tail = List(1, 2, 3)
+val Person(name, age) = Person("Dean", 29) // case class在定义变量时匹配
+val Date = """(\d+)-(\d+)-(\d+)""".r  // 定义正则表达式
+val Date(year, month, day) = "1997-04-29"  // 应用正则匹配定义变量
 ```
 
 ## control structures控制结构
@@ -174,7 +186,22 @@ def factorial(i: Int): Long = {
 }
 ```
 
+## 隐式
+
+作用: 减少代码, 向已有类型注入新的方法, 创建`DSL`
+
 `implicit`: 使得方法或变量值可以被用于隐含转换; 将方法参数标记为可选的, 只要在调用该方法时, 作用域内有类型匹配的候选对象, 就会使用该对象作为参数.
+
+可以将隐式理解为正常作用域的第二维空间, 用`implicit`声明一个变量或方法, 相当于将此变量和方法送入此空间; 而将方法参数声明为`implicit`就相当于告诉编译器, 若未指定此参数时, 自动从隐式空间去获取.
+
+```scala
+def calcTax(amount: Float)(implicit rate: Float): Float = amount * rate  // 隐式参数
+implicit val currentTaxRate = 0.08F  // 隐式变量, 重要的是值类型, 而非值变量名
+val tax = calcTax(50000F)  // 自动在作用域中调用类型兼容值
+implicit def rate(implicit n: Int): Float = 1.0f * n  // 重要的是类型, 即使rate是个函数, 但其返回Float
+implicit val n = 3
+val tax = calcTax(50000F)  // rate是calcTax的隐参, n是rate的隐参, 还是别搞这种多级的
+```
 
 ## data types数据类型
 
@@ -239,19 +266,7 @@ sealed abstract class Foo { ... }  // 只能在当前文件定义子类型
 case class Bar(s: String) extends Foo
 ```
 
-## traits特征
-
-## underscore下划线
-
-```scala
-strs.map(_.toUpperCase())  // 对集合的每个元素执行大写操作
-(1 to 10).map(_ * 2)
-nums.filter(_ < 10)  // 过滤
-nums.reduce(_ + _)   // 归约
-println(ary: _*)  // 解集合
-```
-
-## case classes
+`case class`:
 
 * 自动生成伴随对象及`apply`方法
 * 默认所有类参数为公开不可变域, 即默认`val`
@@ -265,6 +280,18 @@ val v = Var("lizp", 13)
 v.copy(age = 14)  // case类自动定义的copy, 可只给出与原对象不同部分的参数
 ```
 
+## traits特征
+
+## underscore下划线
+
+```scala
+strs.map(_.toUpperCase())  // 对集合的每个元素执行大写操作
+(1 to 10).map(_ * 2)
+nums.filter(_ < 10)  // 过滤
+nums.reduce(_ + _)   // 归约
+println(ary: _*)  // 解集合
+```
+
 ## case, match模式匹配
 
 * 模式匹配表达式中, 小写字母开头的标记解析为变量标示符, 大写字母开头的标记解析为常量标示符
@@ -272,21 +299,19 @@ v.copy(age = 14)  // case类自动定义的copy, 可只给出与原对象不同�
 * 在`case`类的匹配上, 默认调用其自动生成的伴随对象的`unapply`方法, `Seq`的伴随对象还实现了`unapplySeq`方法
 
 ```scala
-def f(x: Int) = x match {
-  case 1 | 2 | 3 => "1-2-3"  // 多匹配
-  case _ => "huh?"
-}
-
 def f(x: Any) = {
   val z = 3
+  val Date = """(\d+)-(\d+)-(\d+)""".r  // 创建正则表达式, """不转义\
   x match {
     case 1 => "one"  // 值匹配
-    case i: Int => "got an int" + i  // 类型匹配, i可省略
+    case "a" | "b" | "c" => println("mul match")  // 多匹配
+    case i: Int => "got an int" + i  // 类型匹配, 对容器类型无效, 因为JVM的类型擦除
     case _: String => "got an str" + x  // 省略变量 , 使用x
     case `z` => "found z"  // 使用已定义的变量
     case (a, b, c) => s"a=$a; b=$b; c=$c"  // 元组匹配
     case Var(name) => println(s"hello, $name")  // case类变量提取
     case _ if x%2 == 0 => println(s"even: $i")  // 条件式
+    case Date(year, month, day)  => println(s"$year")  // 正则匹配
     case _ => donothing  // 默认匹配, 省略值
     case x => donothing  // 默认匹配, 将对象赋予x变量
   }
@@ -305,8 +330,6 @@ a match {
   case _ => println("no")
 }
 ```
-
-## actor
 
 ## 并发
 
@@ -333,4 +356,88 @@ f.onComplete {  // 注册回调函数, 偏函数, 参数为Try[T]类型
   case Failure(th) => println(s"failure! returned: $th")  // 失败
 }
 val n = Await.result(f, Duration.Inf)  // 在指定时间内阻塞当前线程, 等待f值的计算
+```
+
+`Actor`, 构建并发, 分布式, 容错, 事件驱动的系统
+
+```scala
+import akka.actor.{ Actor, ActorLogging, ActorRef, ActorSystem, Props }
+import scala.io.StdIn
+
+// Greeter Actor的伴随对象, 用于定义Actor需要的消息类型, 以及props方法(描述Actor如何构建, 非必须)
+// 因为case class和case object能用于模式匹配, 因此常将消息类型定义为此
+object Greeter {
+  // Props是配置类, 用于描述Actor如何构建, 有类参数的常用Props(new A(args)); 没有类参数的常用Props[A]
+  def props(message: String, printerActor: ActorRef): Props = Props(new Greeter(message, printerActor))
+  final case class WhoToGreet(who: String)
+  case object Greet
+}
+
+// Greeter Actor, 继承Actor
+class Greeter(message: String, printerActor: ActorRef) extends Actor {
+  import Greeter._  // 导入伴随对象内容, 主要有props和消息类型
+  import Printer._
+
+  var greeting = ""  // 内部状态
+
+  // 所有Actor要定义receive方法, 偏函数, 只有case语句匹配
+  def receive = {
+    case WhoToGreet(who) =>
+      greeting = s"$message, $who"  // 消息, 改变内部状态
+    case Greet           =>
+      printerActor ! Greeting(greeting)  // 消息, 向另一个Actor发送消息
+  }
+}
+
+// Printer Actor的伴随对象, 定义了Greeting消息类
+object Printer {
+  def props: Props = Props[Printer]
+  final case class Greeting(greeting: String)
+}
+
+// Printer Actor, 因继承了ActorLogging, 所以可在内部使用log方法
+class Printer extends Actor with ActorLogging {
+  import Printer._
+
+  def receive = {
+    case Greeting(greeting) =>
+      log.info(s"Greeting received (from ${sender()}): $greeting")  // 只有一个Greeting消息, 打印
+  }
+}
+
+object AkkaQuickstart extends App {
+  import Greeter._
+
+  val system: ActorSystem = ActorSystem("helloAkka")  // 创建ActorSystem, 参数为系统名称
+
+  try {
+    // 创建Actor, 这里用工厂函数返回的只是引用ActorRef, 参数为Props和Actor的名称(可省略)
+    // val priter: ActorRef = system.actorOf(Props[Printer], "printerActor")  // props方法非必须
+    val printer: ActorRef = system.actorOf(Printer.props, "printerActor")
+
+    val howdyGreeter: ActorRef =
+      system.actorOf(Greeter.props("Howdy", printer), "howdyGreeter")
+    val helloGreeter: ActorRef =
+      system.actorOf(Greeter.props("Hello", printer), "helloGreeter")
+    val goodDayGreeter: ActorRef =
+      system.actorOf(Greeter.props("Good day", printer), "goodDayGreeter")
+
+    howdyGreeter ! WhoToGreet("Akka")  // 向howdyGreeter Actor发送WhoToGreet的消息
+    howdyGreeter ! Greet
+
+    howdyGreeter ! WhoToGreet("Lightbend")
+    howdyGreeter ! Greet
+
+    helloGreeter ! WhoToGreet("Scala")
+    helloGreeter ! Greet
+
+    goodDayGreeter ! WhoToGreet("Play")
+    goodDayGreeter ! Greet
+
+    println(">>> Press ENTER to exit <<<")
+    StdIn.readLine()
+  } finally {
+    system.terminate()  // 关闭系统
+  }
+}
 ```
