@@ -356,6 +356,13 @@ f.onComplete {  // 注册回调函数, 偏函数, 参数为Try[T]类型
   case Failure(th) => println(s"failure! returned: $th")  // 失败
 }
 val n = Await.result(f, Duration.Inf)  // 在指定时间内阻塞当前线程, 等待f值的计算
+// libraryDependencies += "org.scala-lang.modules" %% "scala-async" % "0.9.6"
+import scala.async.Async.{async, await}  // 提供更简洁的表示
+val future = async {  // async用于发起异步操作; await用于等待异步操作的完成
+  val f1 = async { ...; true }
+  val f2 = async { ...; 42 }
+  if (await(f1)) await(f2) else 0
+}
 ```
 
 `Actor`, 构建并发, 分布式, 容错, 事件驱动的系统

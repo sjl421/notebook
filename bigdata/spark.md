@@ -33,10 +33,13 @@
 作为资源调度, 则应用的执行进度, 只有在`8088`的`yarn`界面才能看到.
 
 运行示例程序:
+
 ```sh
 ./bin/spark-submit --class org.apache.spark.examples.SparkPi \
 --master yarn --deploy-mode cluster examples/jars/spark-examples*.jar 10
 ```
+
+`--master local[N]`, `--master spark://ip:7077`
 
 当在集群运行时,如果有依赖包,可以通过`--jars a1.jar a2.jar`来引入.
 
@@ -46,7 +49,7 @@
 即运行超出虚拟内存, 虽然不知道具体机制, 目前可以通过`spark.yarn.am.memory 2g`解决.
 
 一般`spark`的日志在安装目录的`logs`目录下, 但应用运行的日志并不在, 所以如果查看
-应用为什么运行出错, 需要配置`spark.eventLog.enabled true`和`spark.eventLog.dir 
+应用为什么运行出错, 需要配置`spark.eventLog.enabled true`和`spark.eventLog.dir
 hdfs:///logs`两个选项(注, 请创建`logs`目录), 这样就可以在`8088`端口的应用运行条目
 的`history`查看失败信息了. `8088`端口是`yarn`的资源管理器端口.
 
@@ -111,7 +114,6 @@ hdfs:///logs`两个选项(注, 请创建`logs`目录), 这样就可以在`8088`�
 * `spark.jars.excludes`, 去掉指定的`groupId:artifactId`, 用于解析`spark.jars.packages`依赖时, 避免依赖冲突, 相当于`--exclude-packages`
 * `spark.jars.ivy`, 额外的远程仓库, 相当于`--repositories`
 
-
 `spark.eventLog.compress/dir/enabled`, 事件日志
 
 `spark.ui`方面:
@@ -144,13 +146,49 @@ hdfs:///logs`两个选项(注, 请创建`logs`目录), 这样就可以在`8088`�
 
 执行行为
 
-* `executor.cores`, 每个执行器的`CPU`核心数量, 在`standalone`和`Mesos`模式下, 可允许一个应用在同一个`worker`运行多个执行器, 除此外, 每个应用在每个`worker`只能有一个执行器  
+* `executor.cores`, 每个执行器的`CPU`核心数量, 在`standalone`和`Mesos`模式下, 可允许一个应用在同一个`worker`运行多个执行器, 除此外, 每个应用在每个`worker`只能有一个执行器
 * `default.parallelism`, 默认的并行数, 即默认的分区数. 对分布式`shuffle`, 如`reduceByKey`和`join`, 是父`RDD`中最大的分区数, 对无父`RDD`的`parallelize`操作, 依赖于集群管理器, 本地模式为`CPU`的核心数, `Mesos`为8, 其他为在所有执行器节点的总核心数.
 * `executor.heartbeatInterval`, 心跳间隔, 默认10s.应该小于`spark.network.timeout`
-
 
 `spark.driver.host/port`, 驱动器的主机和端口, 用于执行器与`Master`沟通
 
 `spark.network.timeout`, 默认120s
 
 `spark.scheduler.mode`, 提交给同一个`SparkConf`的作业间的高度模式, 有`FIFO`, `FAIR`
+
+## 日志级别
+
+编辑`conf/log4j.properties`文件, 修改`log4j.rootCategory=INFO, console`中的`INFO`为任意你想要的级别, 如`WARN/ERROR`等.
+
+或者在`spark-shell`或程序中:
+
+```scala
+import org.apache.log4j.{Logger, Level}
+Logger.getRootLogger().setLevel(Level.WARN)  // #1, 以下三种取决于spark的logger怎么分布
+Logger.getLogger("org").setLevel(Level.OFF)
+Logger.getLogger("akka").setLevel(Level.OFF)  // #2
+sc.setLogLevel("WARN")  // #3
+```
+
+## 问题
+
+1, `SLF4J: Class path contains multiple SLF4J bindings`
+
+`SLF4J`的`API`被设计为仅能绑定一个日志框架, 如果在类路径中发现了超过一个的绑定, 则会抛出此消息.
+
+```xml
+<exclusions>
+    <exclusion>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+    </exclusion>
+</exclusions>
+```
+
+```scala
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.1.1" exclude("xxx", "xxx")
+```
+
+2, `Failed to load class org.slf4j.impl.StaticLoggerBinder`
+
+`SLF4J`没有合适的绑定在类路径中被发现.
