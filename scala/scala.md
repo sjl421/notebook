@@ -13,3 +13,5 @@
 但也可以在`class`中定义, 这样可以在实例化对象中, 调用`()`方法.
 
 `class A { def apply() ... }`, 可以使用`(new A)()`方法.
+
+5, `private[spark] class Hello`: 表示这个类只能在包名中含有`spark`的类中访问.

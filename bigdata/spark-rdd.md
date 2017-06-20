@@ -43,12 +43,12 @@ rdd1.mapPartitionsWithIndex(getEle).collect
 //       (1,"13 14 15 16 17 18 19 20 21 22 23 24 25 "),   //分区1
 //       (2,"26 27 28 29 30 31 32 33 34 35 36 37 "),   //分区2
 //       (3,"38 39 40 41 42 43 44 45 46 47 48 49 50 "))  //分区3
-rdd1.aggregate((1, "1:"))(  
+rdd1.aggregate((1, "1:"))(
      (acc, v) => (acc._1 + v, acc._2 + "+" + v),  //用+号连接分区内的聚合
      (acc1, acc2) => (acc1._1 + acc2._1, acc1._2 + "-" + acc2._2)  //用-号连接分区间的聚合
-)  
+)
 //=> (1280,        1:  //可见分区间聚合时, 也会加上这个初始值1  (treeAggregate不加1:)
-//           -1:+26+27+28+29+30+31+32+33+34+35+36+37  
+//           -1:+26+27+28+29+30+31+32+33+34+35+36+37
 //           -1:+1+2+3+4+5+6+7+8+9+10+11+12
 //           -1:+13+14+15+16+17+18+19+20+21+22+23+24+25
 //           -1:+38+39+40+41+42+43+44+45+46+47+48+49+50)
@@ -59,7 +59,7 @@ rdd17.mapPartitionsWithIndex(getEle).collect
      (acc, v) => (acc._1 + v, acc._2 + "+" + v.toString),  //用+号连接分区内的聚合
      (a1, a2) => (a1._1+a2._1, a1._2 + "-" + a2._2)).collect  //用-号连接分区间的聚合
 // Array((a,(12,1:+1 - 1:+3 - 1:+5)), (b,(12,1:+2 - 1:+8)), (c,(5,1:+4)))
-// 可见, 因为初始值是针对同键元素聚合时相加的, 因此在分区间聚合时, 不加初始值 
+// 可见, 因为初始值是针对同键元素聚合时相加的, 因此在分区间聚合时, 不加初始值
 ```
 
 在生成`RDD`时, 可能通过`partitionBy`指定分区器:
@@ -108,17 +108,18 @@ val rdd5 = rdd4.filter(_.length < 5)  //=> Seq("god", "me")
 ```scala
 // rdd1: Seq(1,2,3,4), rdd2: Seq(2, 3, 4, 5)
 //union 分区数增加, 为两rdd的分区数和, 所以不同于数据的并集去重
-val rdd6 = rdd1.union(rdd2)  //=> Seq(1,2,3,4,2,3,4,5)  // UnionRDD  
+val rdd6 = rdd1.union(rdd2)  //=> Seq(1,2,3,4,2,3,4,5)  // UnionRDD
 val rdd7 = rdd1.intersection(rdd2)  //=> Seq(4,2,3)
 val rdd8 = rdd1.subtract(rdd2)  //=> Seq(1)
 // cartesian 分区数增加, 为两rdd分区数积
 val rdd9 = rdd1.cartesian(rdd3)  //=> Seq((1,"hello world"), (1,"god bless me"),   // CartesianRDD
-                                 //       (2,"hello world"), (2,"god bless me"), 
-                                 //       (3,"hello world"), (3,"god bless me"), 
+                                 //       (2,"hello world"), (2,"god bless me"),
+                                 //       (3,"hello world"), (3,"god bless me"),
                                  //       (4,"hello world"), (4,"god bless me"))
 ```
 
 * `distinct`: 去重
+* 重复数据可能分散在不同的`partition`里面, 需要`shuffle`来进行`aggregate`后再去重. 然而`shuffle`要求数据类型是`<K, V>`, 如果原始数据只有`key`, 那么需要补充成`<K, Null>`, 这个补充过程由`map`完成, 生成`MappedRDD`, 然后调用`reduceByKey`来进行`shuffle`, 在`map`端进行`combine`, 然后`reduce`进一步去重, 生成`MapPartitionsRDD`, 最后将`<K, null>`还原成`K`, 仍然由`map`完成, 生成`MappedRDD`.
 
 ```scala
 // rdd6: Seq(1,2,3,4,2,3,4,5)
@@ -139,7 +140,7 @@ val rdd13 = rdd11.sample(true, 0.4, 32)  //=> 有放回抽样, 随机数种子32
 // rdd4: Seq("hello", "world", "god", "bless", "me")
 // 分区数不变, 但发生元素在分区间的移动
 val rdd14 = rdd4.groupBy(_.length)  //=> Array((5,CompactBuffer(hello, world, bless)),  //ShuffledRDD
-                                    //         (2,CompactBuffer(me)), 
+                                    //         (2,CompactBuffer(me)),
                                     //         (3,CompactBuffer(god)))
 ```
 
@@ -158,13 +159,15 @@ rdd11.coalesce(8).getNumPartitions  //=> 4  默认不shuffle, 则不能扩大分
 
 ### action
 
-* `reduce`, `fold`, `aggregate`, `treeAggregate`: 聚合, `aggregate`在分区间聚合时, 多进行了初始值的`combOp`;`aggregate`会将每个分区的结果全部传给`driver`, 并在`driver`端做聚合, 而`treeAggregate`, 则会在部分分区上做局部聚合, 再将聚合的结果传给`driver`, 这个局部聚合可能有多层, 构成一棵树(根是`driver`, 叶是`rdd`的分区) 
+`action`本质上也会先在每个分区上进行计算, 再将结果传到`Driver`进行汇总.
+
+* `reduce`, `fold`, `aggregate`, `treeAggregate`: 聚合, `aggregate`在分区间聚合时, 多进行了初始值的`combOp`;`aggregate`会将每个分区的结果全部传给`driver`, 并在`driver`端做聚合, 而`treeAggregate`, 则会在部分分区上做局部聚合, 再将聚合的结果传给`driver`, 这个局部聚合可能有多层, 构成一棵树(根是`driver`, 叶是`rdd`的分区)
 
 ```scala
 // rdd11: Seq(1,2,3,...,50)
 rdd11.reduce(_ + _)  //=> 1275
 rdd11.fold(0)(_ + _)  //=> 1275
-rdd11.fold(1)(_ + _)  //=> 1280, 注意: 此处同scala标准集合库的fold表现不同, 
+rdd11.fold(1)(_ + _)  //=> 1280, 注意: 此处同scala标准集合库的fold表现不同,
                                     // 先在每个分区fold, 再在分区间fold
                                     // 多"分区数+1" 个数
 rdd15.fold(1)(_ + _)  //=> 1284, rdd15分区数8
@@ -177,6 +180,8 @@ rdd11.aggregate((0,0))(  # 指定初始值
 * `first`: 返回`rdd`第1个元素
 * `persist`, `cache`: 持久化, `cache`相当于无参的`persist`, 默认缓存到内存
 * `count`, `countByValue`
+
+`checkpoint`方法也能使`RDD`存储到磁盘, 不同的是, `checkpoint`会删除`RDD`的`Lineage`, 且需要调用`setCheckpointDir(path)`来设置保存`RDD`数据的路径.
 
 ```scala
 // rdd6: Seq(1,2,3,4,2,3,4,5)
@@ -200,11 +205,12 @@ rdd16.takeSample(false, 4, 4)  //=>  Array(7, 6, 1, 3), 不放回, 4个元素, �
 
 ## Pair RDD
 
-`Pari RDD`可以应用所有普通`RDD`的`API`, 不同的是, 函数参数为`pair`. 
+`Pari RDD`可以应用所有普通`RDD`的`API`, 不同的是, 函数参数为`pair`.
 
 ### transaction
 
 * `reduceByKey`, `foldByKey`, `aggregateByKey`, `combineByKey`:  这几个操作都生成`shuffledRDD`(并非一定会生成, 可能生成别的), 意即计算时会发生数据的移动, 取决于元素的分布, 整体来看都比较耗时. 返回`hash`分区
+* `reduceByKey`默认在`map`端开启`combine`, 因此在`shuffle`之前先通过`mapPartitions`操作进行`combine`, 得到`MapPartitionsRDD`, 然后`shuffle`得到`ShuffledRDD`, 然后再进行`reduce`.
 
 ```scala
 val rdd17 = sc.parallelize(Seq(("a", 1), ("b", 2), ("a", 3), ("b", 8), ("c", 4), ("a", 5)))
@@ -238,8 +244,8 @@ rdd21.flatMapValues(_.split(" "))  //=> Array((a,hello), (a,world), (b,god), (b,
 
 ```scala
 // rdd17: Seq(("a", 1), ("b", 2), ("a", 3), ("b", 8), ("c", 4), ("a", 5))
-val rdd22 = rdd17.groupByKey  //=> Array((a,CompactBuffer(1, 3, 5)), 
-                                                    //                 (b,CompactBuffer(2, 8)), 
+val rdd22 = rdd17.groupByKey  //=> Array((a,CompactBuffer(1, 3, 5)),
+                                                    //                 (b,CompactBuffer(2, 8)),
                                                     //                 (c,CompactBuffer(4)))
 ```
 
@@ -284,19 +290,19 @@ val rdd31 = rdd26.leftOuterJoin(rdd27)  //=> Array((a,(1,None)), (b,(2,Some(3)))
 * `cogroup`, 设定结果`RDD`的分区方式为`hash`. 别名函数`groupWith`.
 
 ```scala
-val 32 = rdd26.cogroup(rdd27)  //=> Array((d,(CompactBuffer(),CompactBuffer(9))), 
-                               //         (a,(CompactBuffer(1),CompactBuffer())), 
-                               //         (b,(CompactBuffer(2),CompactBuffer(3, 2))), 
+val 32 = rdd26.cogroup(rdd27)  //=> Array((d,(CompactBuffer(),CompactBuffer(9))),
+                               //         (a,(CompactBuffer(1),CompactBuffer())),
+                               //         (b,(CompactBuffer(2),CompactBuffer(3, 2))),
                                //         (c,(CompactBuffer(3),CompactBuffer())))
 ```
 
-### action
+### Action
 
 * `countByKey`: 区别于应用普通`RDD`的`countByValue`
 
 ```scala
 // rdd17: Seq(("a", 1), ("b", 2), ("a", 3), ("b", 8), ("c", 4), ("a", 5))
-rdd17.countByKey  //=>Map(a -> 3, b -> 2, c -> 1)  
+rdd17.countByKey  //=>Map(a -> 3, b -> 2, c -> 1)
 rdd17.countByValue  //=> Map((a,5) -> 1, (b,2) -> 1, (a,3) -> 1, (b,8) -> 1, (c,4) -> 1, (a,1) -> 1)
 ```
 
