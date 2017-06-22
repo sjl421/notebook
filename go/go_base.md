@@ -431,23 +431,21 @@ var logger *log.Logger = server.Logger  // 嵌入类型的域名即其类型名
 
 ### Errors
 
-There is no exception handling. Functions that might produce an error just declare an additional return value of type `Error`. This is the `Error` interface:
+没有异常处理, 可能产生错误的函数声明一个额外的类型为`Error`的返回值即可.
 
 ```go
-type error interface {
+type error interface {  // 要实现Error方法
     Error() string
 }
 ```
 
-A function that might return an error:
-
 ```go
-func doStuff() (int, error) {
+func doStuff() (int, error) {  // 返回error的函数
 }
 
 func main() {
     result, error := doStuff()
-    if (error != nil) {
+    if (error != nil) {  // 最典型的错误处理
         // handle error
     } else {
         // all is good, use result
@@ -455,53 +453,47 @@ func main() {
 }
 ```
 
-# Concurrency
+## Concurrency, 并发
 
-## Goroutines
+### Goroutines
 
-Goroutines are lightweight threads (managed by Go, not OS threads). `go f(a, b)` starts a new goroutine which runs `f` (given `f` is a function).
+`Goroutine`是轻量级的线程, 由`Go`管理而非`OS`. `go f(a,b)`启动一个新的`goroutine`, 运行函数`f`.
 
 ```go
-// just a function (which can be later started as a goroutine)
-func doStuff(s string) {
+func doStuff(s string) {  // 简单定义一个函数
 }
 
 func main() {
-    // using a named function in a goroutine
-    go doStuff("foobar")
+    go doStuff("foobar")  // 在goroutine运行命名函数
 
-    // using an anonymous inner function in a goroutine
-    go func (x int) {
+    go func (x int) {  // 在goroutine启动匿名函数
         // function body goes here
     }(42)
 }
 ```
 
-## Channels
+### Channels, 通道
 
 ```go
-ch := make(chan int) // create a channel of type int
-ch <- 42             // Send a value to the channel ch.
-v := <-ch            // Receive a value from ch
+ch := make(chan int) // 整数类型的通道, 即只能传递整数
+ch <- 42             // 发送值到通道
+v := <-ch            // 从通道接收一个值
 
-// Non-buffered channels block. Read blocks when no value is available, write blocks if a value already has been written but not read.
+无缓冲通道阻塞, 当通道没有值时, 读操作被阻塞; 如果值被写入通道但未被读取, 则写操作被阻塞
 
-// Create a buffered channel. Writing to a buffered channels does not block if less than <buffer size> unread values have been written.
+// 创建有缓冲的通道. 若已写但未读的字节数小于缓冲大小, 则写操作不会阻塞.
 ch := make(chan int, 100)
 
-close(ch) // closes the channel (only sender should close)
+close(ch) // 关闭通道, 只有发送端能关闭
 
-// read from channel and test if it has been closed
-v, ok := <-ch
+// 从通道读并测试它是否已关闭
+v, ok := <-ch  // 如果ok是false, 则通道已关闭
 
-// if ok is false, channel has been closed
-
-// Read from channel until it is closed
-for i := range ch {
+for i := range ch {  // 读通道直到它关闭
     fmt.Println(i)
 }
 
-// select blocks on multiple channel operations, if one unblocks, the corresponding case is executed
+// 多个通道操作的select, 若某个通道不阻塞, 则执行相应的case
 func doStuff(channelOut, channelIn chan int) {
     select {
     case channelOut <- 42:
@@ -514,23 +506,23 @@ func doStuff(channelOut, channelIn chan int) {
 }
 ```
 
-### Channel Axioms
+#### Channel Axioms
 
-* A send to a nil channel blocks forever
+* 向`nil`通道的发送操作将永远被阻塞
 
   ```go
-  var c chan string
+  var c chan string  // nil通道
   c <- "Hello, World!"
   // fatal error: all goroutines are asleep - deadlock!
   ```
-* A receive from a nil channel blocks forever
+* 从`nil`通道的接收操作将永远被阻塞
 
   ```go
   var c chan string
   fmt.Println(<-c)
   // fatal error: all goroutines are asleep - deadlock!
   ```
-* A send to a closed channel panics
+* 向已关闭通道的发送操作引发`panic`错误
 
   ```go
   var c = make(chan string, 1)
@@ -539,7 +531,7 @@ func doStuff(channelOut, channelIn chan int) {
   c <- "Hello, Panic!"
   // panic: send on closed channel
   ```
-* A receive from a closed channel returns the zero value immediately
+* 从已关闭通道的接收操作立即得到0值
 
   ```go
   var c = make(chan int, 2)
@@ -552,13 +544,13 @@ func doStuff(channelOut, channelIn chan int) {
   // 1 2 0
   ```
 
-## Printing
+### Printing, 打印
 
 ```go
-fmt.Println("Hello, 你好, नमस्ते, Привет, ᎣᏏᏲ") // basic print, plus newline
+fmt.Println("Hello, 你好, नमस्ते, Привет, ᎣᏏᏲ") // 最基础的打印, 换行
 p := struct { X, Y int }{ 17, 2 }
 fmt.Println( "My point:", p, "x coord=", p.X ) // print structs, ints, etc
-s := fmt.Sprintln( "My point:", p, "x coord=", p.X ) // print to string variable
+s := fmt.Sprintln( "My point:", p, "x coord=", p.X ) // 返回字符串
 
 fmt.Printf("%d hex:%x bin:%b fp:%f sci:%e",17,17,17,17.0,17.0) // c-ish format
 s2 := fmt.Sprintf( "%d %f", 17, 17.0 ) // formatted print to string variable
@@ -566,12 +558,12 @@ s2 := fmt.Sprintf( "%d %f", 17, 17.0 ) // formatted print to string variable
 hellomsg := `
  "Hello" in Chinese is 你好 ('Ni Hao')
  "Hello" in Hindi is नमस्ते ('Namaste')
-` // multi-line string literal, using back-tick at beginning and end
+` //多行字串的字面量, 使用``
 ```
 
-# Snippets
+## Snippets
 
-## HTTP Server
+### HTTP Server
 
 ```go
 package main
@@ -584,7 +576,7 @@ import (
 // define a type for the response
 type Hello struct{}
 
-// let that type implement the ServeHTTP method (defined in interface http.Handler)
+// 在Hello类型上实现ServerHTTP方法, 此方法在http.Handler接口中定义
 func (h Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     fmt.Fprint(w, "Hello!")
 }
@@ -593,9 +585,4 @@ func main() {
     var h Hello
     http.ListenAndServe("localhost:4000", h)
 }
-
-// Here's the method signature of http.ServeHTTP:
-// type Handler interface {
-//     ServeHTTP(w http.ResponseWriter, r *http.Request)
-// }
 ```
