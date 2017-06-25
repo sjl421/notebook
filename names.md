@@ -1,11 +1,8 @@
 # name
 
-文件主要记录, 我曾经听过的一些名词, 往往是一些库或软件, 因为暂时不需要而没有深入,
-但又可能在未来的某个时候需要, 特记录在此.
+文件主要记录, 我曾经听过的一些名词, 往往是一些库或软件, 因为暂时不需要而没有深入, 但又可能在未来的某个时候需要, 特记录在此.
 
 ## editor
-
-[spf13-vim](https://github.com/spf13/spf13-vim), 一个`vim`的个人发行版, 提供模块化的配置和必要的插件, 开箱即用.
 
 [spacemacs](https://github.com/syl20bnr/spacemacs), 一个`emacs`的社区发行版, 提供易于使用的快捷键绑定.
 
@@ -19,12 +16,11 @@
 
 [swig](http://www.swig.org), 为脚本语言提供`c/cpp`库的接口
 
-## ruby 
+## ruby
 
 [faker gem](https://github.com/stympy/faker), 一个用户随机生成各种名称, 如人名, 邮箱, 地址, 电话号码等的库.
 
-[rubymotion](http://www.rubymotion.com), 一个用于开发`macos`, `ios`, `tvos`, `watchos`以及`android`应用的
-`ruby`库, 算是`macruby`的商业版, 个人免费版只`ios`和`android`的最新版.
+[rubymotion](http://www.rubymotion.com), 一个用于开发`macos`, `ios`, `tvos`, `watchos`以及`android`应用的`ruby`库, 算是`macruby`的商业版, 个人免费版只`ios`和`android`的最新版.
 
 [haml gem](http://haml.info), 类似于`erb`, 一个嵌套`Ruby`模板的库.
 
@@ -44,8 +40,6 @@
 
 [httpie](https://github.com/jkbrzt/httpie), 一个命令行的`http`工具, 提供比`wget`和`curl`更友好的选项和交互.
 
-[Canopy](http://enthought.com), 可以说是`Python`最好的`IDE`, 收费, 有学生`Licence`.
-
 [mininet](http://mininet.org), 网络模拟软件
 
 [ryu](https://osrg.github.io/ryu/), `python`实现的`SDN`控制器库
@@ -55,8 +49,6 @@
 [Ruff](http://ruff.io), 可使用`js`编程的硬件平台.
 
 ## mac
-
-`iShowU`, `mac`平台的录屏软件, 收费(非常贵)
 
 ## Linux
 

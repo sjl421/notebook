@@ -5,6 +5,7 @@
 ## 类
 
 `Python`:
+
 ```python
 class A(B):  #创建A类, 继承B类
   def __init__(self, name, age):  #构造函数, 初始化参数
@@ -20,6 +21,7 @@ str(a)  #=> "enali's age is 24"
 ```
 
 `Ruby`:
+
 ```ruby
 class A < B  #类A继承B
   def initialize(name, age)  #构造函数
@@ -39,6 +41,7 @@ a.to_s  #=> "enali's age is 24"
 ```
 
 `Scala`:
+
 ```scala
 class A(name: String, age: Int) extends B {  //继承B类,初始参数为name, age
   def hello = println(s"hello, $name")
@@ -52,10 +55,12 @@ a.toString  //=> "enali's age is 24"
 ## 文件
 
 `Python`:
+
 ```python
 ```
 
 `Ruby`:
+
 ```ruby
 f = open("fname.txt")
 f.each_line {|l| puts l} # each_byte, each_char, each_codepoint, each_with_index(带行号)
@@ -66,6 +71,7 @@ f.close   # 关闭文件流
 ```
 
 `Scala`:
+
 ```scala
 import scala.io.Source
 Source.fromFile(fname).getLines.foreach(println)  // 只要JVM运行, 则文件不会关闭
