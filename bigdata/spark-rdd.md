@@ -78,7 +78,7 @@ import org.apache.spark.RangePartitioner
 
 ### transformation
 
-* `map`, `flatMap`, `mapPartitions`, `mapPartitionsWithIndex`
+* `map`, `flatMap`, `mapPartitions`, `mapPartitionsWithIndex`, 生成`MapPartitionsRDD`
 
 ```scala
 val rdd1 = sc.parallelize(Seq(1,2,3,4))  // ParallelCollectionRdd
@@ -88,7 +88,8 @@ val rdd4 = rdd3.flagMap(_.split(" "))  //=> Seq("hello", "world", "god", "bless"
 rdd1.mapPartitions(_.map(_ + 1))  //参数为Iterator[T] => Iterator[U]的函数, 应用于RDD的每个分区
 ```
 
-* `zip`, `glom`
+* `zip`, `zipPartitions`, 生成`ZippedPartitionsRDDx`, 其中`x`为数字, 要求父`RDD`的分区数相同. `zip`创建的是两`RDD`元素元组的`RDD`, 而`zipPartitions`则随意, 只要`f`的参数为`Iterator`即可.
+* `glom`, 生成`MapPartitionsRDD`
 
 ```scala
 // rdd1: Seq(1,2,3,4), rdd01: Seq("a", "b", "c", "d")
@@ -96,14 +97,16 @@ rdd1.zip(rdd01)  //=> Array((1,a), (2,b), (3,c), (4,d))  //ZippedPartitionsRDD2
 rdd1.glom()  //=> Array(Array(1), Array(2), Array(3), Array(4))  //T => Array[T]
 ```
 
-* `filter`: 应用于`pair rdd`时, 因为不会改变键, 所以会设定子`RDD`的分区方式为父`RDD`.
+* `filter`: 生成`MapPartitionsRDD`, 应用于`pair rdd`时, 因为不会改变键, 所以会设定子`RDD`的分区方式为父`RDD`.
 
 ```scala
 // rdd4: Seq("hello", "world", "god", "bless", "me")
 val rdd5 = rdd4.filter(_.length < 5)  //=> Seq("god", "me")
 ```
 
-* `union`, `intersection`, `subtract`, `cartesian`: 并, 交, 差, 积, 注: 类型相同
+* `union`, 若求并集的`RDDs`的分区器都定义了且相同, 返回`PartitionerAwareUnionRDD`, 否则返回`UnionRDD`.
+
+* `intersection`, `subtract`, `cartesian`: 并, 交, 差, 积, 注: 类型相同
 
 ```scala
 // rdd1: Seq(1,2,3,4), rdd2: Seq(2, 3, 4, 5)
@@ -145,7 +148,7 @@ val rdd14 = rdd4.groupBy(_.length)  //=> Array((5,CompactBuffer(hello, world, bl
 ```
 
 * `repartition`: `shuffle`为`true`的`coalesce`
-* `coalesce`: 可指定是否`shuffle`
+* `coalesce`: 可指定是否`shuffle`, 生成`CoalescedRDD`
 
 ```scala
 // rdd11: Seq(1,2,3,...,50)

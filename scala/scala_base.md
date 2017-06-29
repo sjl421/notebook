@@ -73,6 +73,12 @@ import Breed._
 for (breed <- Breed.values) println(s"${breed.id}\t$breed)  // id即编号
 ```
 
+参数化类型:
+
+```scala
+Array[T <: { def close():Unit }]  // <:表示参数化类型的上界, 其要包含close方法
+```
+
 ## variables变量
 
 * 变量在用`val/var`声明时必须初始化
@@ -203,6 +209,19 @@ implicit val n = 3
 val tax = calcTax(50000F)  // rate是calcTax的隐参, n是rate的隐参, 还是别搞这种多级的
 ```
 
+若隐式参数的类型为参数化类型, 可以用上下文定界和`implicitly`方法结合, 提供更简单的定义.
+
+```scala
+case class MyList[A](list: List[A]) {
+  def sortBy1[B](f: A => B)(implicit ord: Ordering[B]): List[A] =  // 常规定义
+    list.sortBy(f)(ord)
+  def sortBy2[B : Ordering](f: A => B): List[A] =  // 等价定义
+    list.sortBy(f)(implicitly[Ordering[B]])
+}
+```
+
+`B : Ordering`, 即上下文定界, 暗指第二个参数列表(即隐式参数列表)将接受`Ordering[B]`实例. 即此处`B : xx`的`xx`必须是参数化类型, 才会有`xx[B]`的实例. 而在函数体内, 因为隐式参数没有变量名, 所以用`implicitly[Ordering[B]]`来引用.
+
 ## data types数据类型
 
 ```scala
@@ -285,11 +304,11 @@ v.copy(age = 14)  // case类自动定义的copy, 可只给出与原对象不同�
 ## underscore下划线
 
 ```scala
+import pkg._  // 导入pkg包对象的所有
 strs.map(_.toUpperCase())  // 对集合的每个元素执行大写操作
-(1 to 10).map(_ * 2)
-nums.filter(_ < 10)  // 过滤
-nums.reduce(_ + _)   // 归约
 println(ary: _*)  // 解集合
+val (a, b, _) = hello()  // 表示忽略匹配的值
+val a: Int = _  // 以该类型的默认值进行初始化
 ```
 
 ## case, match模式匹配

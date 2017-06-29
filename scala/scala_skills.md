@@ -18,6 +18,12 @@
 
 5, `private[spark] class Hello`: 表示这个类只能在包名中含有`spark`的类中访问.
 
+6, `sys.env`是一个字串到字串的映射, 保存系统的环境变量, 如`sys.env("HOME")`可取用户主目录
+
+7, 对于`.jar`文件, 可能通过`java.util.JarFile`类来处理
+
+8, `Ordering[T]`是一个`trait`, 表示元素间的序的关系. 通常要实现`compare`函数, 小于为负, 大于为正, 等于为0. 除此外, 还基于`compare`定义了一些方便的函数, 如`lteq/gteq/lt/gt/equiv/max/min`. 还有`reverse`返回其逆序关系实例. 还有个`on`, 接受函数参数, 返回基于此函数的序关系实例(即将函数应用于元素比较返回值, 而非比较元素).
+
 ## 自动关闭文件
 
 ```scala

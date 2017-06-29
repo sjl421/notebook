@@ -52,6 +52,10 @@ sudo apt install language-pack-zh-hans
 如果通过`cygwin`终端访问服务器版本,如果出现乱码,可以设置`cygwin`的选项:`options->text`,
 选择`utf-8`.
 
+需要复制字体文件到`/usr/share/fonts`目录, 再执行`fc-cache`命令.
+
+通过`fc-list :lang=zh`可列出中文字体文件.
+
 ## 更改locale
 
 `locale`列出当前系统的语言环境
