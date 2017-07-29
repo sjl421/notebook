@@ -135,3 +135,14 @@ hadoop  -       nproc   32000
 ### 负载均衡
 
 在`hbase shell`中, `balance_switch true/false`可开关负载均衡.
+
+`hbase`在`zookeeper`中存储了一个`hbase:meta`表, 保存系统中所有`regions`的列表. `HBase Client`通过查询`hbase:meta`表定位请求的`region`, 并联系服务此`region`的`RegionServer`, 发送读写请求(并不经过`Master`). `Client`会缓存这些信息以便后续的请求利用. 若此`region`被`master`的负载均衡或`RegionServer`死掉了, 则`Client`会重新查询并定位`region`的位置.
+
+`HMaster`负责监视集群中所有的`HRegionServer`实例, 是所有元数据改变的接口. 在分布式集群中, `HMaster`通常运行在`NameNode`的结点上.
+
+`HRegionServer`负责服务和管理`regions`. 在分布式集群中, `HRegionServer`运行在`DataNode`的结点上.
+
+个人理解:
+
+* `Region`就是表的某个行范围, 如`10000-15000`行
+* 每个`HRegionServer`管理很多个`Region`

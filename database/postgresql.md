@@ -7,6 +7,7 @@
 图形界面: `sudo apt-get install pgadmin3`
 
 Mac:
+
 * `brew install postgresql`
 * `brew services start postgresql`, 开机启动服务
 * `postgres -D /usr/local/var/postgres`, 启动服务
@@ -17,7 +18,7 @@ Mac:
 
 配置文件在`/etc/postgresql/9.x/main`目录下:
 
-1, 修改`postgresql.conf`文件, 令`listen_addresses = *`, 意为监听所有`IP`地址, 
+1, 修改`postgresql.conf`文件, 令`listen_addresses = *`, 意为监听所有`IP`地址,
 默认只监听`localhost`.
 
 2, 修改`pg_hba.conf`文件, 添加`host all all ip/xx md5`, 字段分别意为主机, 数据库,
@@ -109,3 +110,10 @@ Mac:
 在每条`SQL`命令的前面加上`explain`或`explain analyze`即可以查看此条命令的`Query Plan`. 后者是真正执行时的计划.
 
 简单地说, 在`SQL`语言的背后, 还有更低层的语言, 其构成查询计划, 并真正执行查询. 通常的`SQL`性能优化, 或`SQL`调试都是在此.
+
+## 横向扩展
+
+分布式关系型数据库, 基于`pg`:
+
+* `postgresql-XL`
+* `CitusData`

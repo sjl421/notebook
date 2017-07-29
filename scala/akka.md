@@ -23,3 +23,10 @@
 `Actor`的工厂函数`actorOf`更像一个`Actor`容器, 并管理其生命周期.
 
 `Actor`的`MailBox`, 即其消息队列, 保证发自同一个`Actor`的消息是有序的, 不同`Actor`的消息则可能交错.
+
+## API
+
+```scala
+system.actorOf()  // 创建actor并返回引用
+context.actorOf()  // 创建子actor并返回引用
+```
