@@ -30,6 +30,9 @@
 
 `anaconda`参数表示同时安装大量`anaconda`维护的用于科学计算的常量包.或者可以单独列出想安装的包.`--clone env`表示可以克隆某个环境.
 
+`conda update python`将升级`python`到小版本的最新版本, 如`3.5`到`3.5.x`的最新.
+
+`conda install python=3.6`则将安装`3.6`的大版本.
 
 ## 换源
 
