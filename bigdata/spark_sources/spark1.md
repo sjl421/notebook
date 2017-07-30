@@ -90,3 +90,6 @@
 `rdd1.union(rdd2, rdd3, ...)`, 有趣的是, 若所有父`RDD`的分区器定义且相同, 则生成`PartitionerAwareUnionRDD`, 否则生成`UnionRDD`
 
 `UnionRDD`的有趣处在于, 其每个分区对应某个父`RDD`的某个分区, `1:1`对应. 感觉就像把父`RDD`的分区累起来了一样.
+
+### ShuffleRDD
+

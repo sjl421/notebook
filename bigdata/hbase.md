@@ -52,7 +52,11 @@
 > drop 'test'  # 删除表
 ```
 
-6, `bin/stop-hbase.sh`关闭程序
+6, 启动`thrift/thrift2`服务: `bin/hbase thrift2 -b host -p port start|stop`
+
+需要详细说的是, 启动服务后, 则别的语言可通过`thrift`服务来操作`hbase`, 但需要从`Hbase.thrift`文件来生成不同语言的包. 此文件在源码的`hbase-thrift\src\main\resources\org\apache\hadoop\hbase\thrift2`目录中.
+
+7, `bin/stop-hbase.sh`关闭程序
 
 ## 运行模式
 

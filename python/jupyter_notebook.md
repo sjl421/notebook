@@ -2,7 +2,7 @@
 
 安装: `conda install jupyter`
 
-执行命令`jupyter notebook`会在当前目录打开`notebook`.
+执行命令`jupyter notebook --ip 0.0.0.0`会在当前目录打开`notebook`.
 
 在`markdown`模式下, 以`$...$`包围`tex`格式字串, 以渲染数学公式.
 
@@ -13,6 +13,7 @@
 主要分命令模式和编辑模式, `h`显示帮助.
 
 命令模式, `c-m`进入命令模式:
+
 * `k/j`, 上下移动单元格
 * `s-k/j`, 上/下选择多个单元格
 * `a/b`, 在当前单元格上下插入新单元格
@@ -24,6 +25,7 @@
 * `m/y`, 进入`markdown`/代码模式
 
 编辑模式, `enter`回车进入编辑模式:
+
 * `c-a/e`, 定位单元格当前行的首尾
 * `c-b/f`, 移动光标左/右一字符
 * `c-h`, 删除光标左一字符
@@ -31,6 +33,29 @@
 * `cmd-[/]`, 控制缩进
 * `s-enter`, 执行单元格
 
+## 插件
+
+```sh
+pip install jupyter_contrib_nbextensions
+jupyter contrib nbextension install --user  # 安装js/css文件
+jupyter nbextension enable/disable <nbextension require path>  # 使能/禁止插件
+pip install jupyter_nbextensions_configurator  # 安装web界面的管理插件
+jupyter nbextensions_configurator enable --user  # 使能, 即可在根URL找到nbextension的tab
+```
+
+## 主题
+
+```sh
+pip install --upgrade jupyterthemes
+```
+
+Usage:
+
+* `jt -l`, 列出主题
+* `jt -t theme_name`, 应用主题
+* `jt -r`, 恢复默认主题
+
+大体上, 先用这个吧: `jt -t monokai -f ubuntu -fs 12`, 即应用`monokai`主题, 字体为12的`ubuntumono`.
 
 ## 魔法命令
 

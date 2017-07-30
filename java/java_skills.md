@@ -13,3 +13,5 @@ private void writeObject(java.io.ObjectOutputStream out) throws IOException
 private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException;
 private void readObjectNoData() throws ObjectStreamException;
 ```
+
+4, `Thread.isInterrupted`返回中断标记, 而`interrupted`则还会清除中断标记.
