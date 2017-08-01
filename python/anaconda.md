@@ -12,7 +12,7 @@
 
 * 帮助: `conda subcmd --help`
 * 搜索包: `conda search pkgname`
-* 安装包: `conda install pkgname[=x.y.z] [-n myenv]`
+* 安装包: `conda install [-c channel] pkgname[=x.y.z] [-n myenv]`, 从别的源安装包, `conda-forge`
 * 若`anaconda`不维护的包: `pip install pkgname`
 * 列出包: `conda list [-n myenv]`
 * 更新包: `conda update [conda]`
@@ -42,3 +42,5 @@
 conda config --add channels 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/'
 conda config --set show_channel_urls no
 ```
+
+`conda`的第三方源: `conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/`
