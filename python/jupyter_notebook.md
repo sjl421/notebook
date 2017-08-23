@@ -2,7 +2,7 @@
 
 安装: `conda install jupyter`
 
-执行命令`jupyter notebook --ip 0.0.0.0 --NotebookApp.password=xxx`会在当前目录打开`notebook`.
+执行命令`jupyter notebook --ip 0.0.0.0`会在当前目录打开`notebook`.
 
 在`markdown`模式下, 以`$...$`包围`latex`格式字串, 以渲染行内数学公式, `$$...$$`是渲染块公式.
 
@@ -10,7 +10,7 @@
 
 `jupyter notebook --generate-config`生成默认的配置文件. 以上指定`ip/password`的也可以在生成的配置文件中配置.
 
-关于密码, 无论是在命令行还是`~/.jupyter/jupyter_notebook_config.py`文件, `NotebookApp.password`的设定并不是明文字串, 而是加密后的字串. 这个字串由`from notebook.auth import passwd; passwd()`按提示输入密码后会返回加密字串, 此字串才是要设置的密码.
+关于设置密码, 执行`jupyter notebook password`即可.
 
 ## 快捷键
 
@@ -153,6 +153,6 @@ iruby register --force  # 注册核到`~/.ipython/kernels`目录中
 
 多光标: 按住`alt`键拖动鼠标可实现, 感觉这样的话, 光标都是挨着的.
 
-`conda install -c damianavila82 rise`为`jupyter/ipython`提供类似`PPT`的展示效果, 主要结合使用`Reveal.js`库, 但似乎在`markdown`的写法上要有点区别, 即你要定义哪一页是一个`slide`.
+`conda install -c damianavila82 rise`为`jupyter/ipython`提供类似`PPT`的展示效果, 主要结合使用`Reveal.js`库, 在`view/Cell Toolbar/Slideshow`菜单, 会在每个`cell`的右上角显示`Slide Type`. 其中, `slide`为单独一页`PPT`, `sub_slide`为子`PPT`, `fragment`则为同页`PPT`的一部分.
 
 `rpy2`库提供`R/python`两种语言的混合使用.

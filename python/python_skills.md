@@ -31,9 +31,11 @@
 ## 字符串格式化
 
 有三种:
+
 * `"%s, %d" % (s, n)`
 * `"{}, {}".format(s, n)`
 * `format(12, "010d")`,  结果`0000000012`
+* `"%010d" % 12`, 同上
 
 第3种可以使用命名参数, `"{name}, {age}".format(name='lizp', age=12)`
 
@@ -67,7 +69,7 @@ print("载入c.py")
 print("载入b.py")
 import a
 ######
-python b.py  
+python b.py
 #=> 载入b.py
 #   载入a.py
 #   载入c.py
@@ -86,3 +88,54 @@ python b.py
 ## 编码
 
 抛开`2/3`默认`str`编码不谈, 将`unicode`字串转为`bytes`字串: `s.encode()`, 相反的, `b.decode('utf-8')`.
+
+## min/max/sort
+
+```py
+l = [1, 3, -2, -4]
+sorted(l); min(l); max(l);
+sorted(l, key=lambda x: abs(x))
+min(l, key=lambda x: abs(x))
+max(l, key=lambda x: abs(x))
+```
+
+## 正则表达式
+
+正则表达式的匹配无非就两种, 一种是从给定的字符串中找某种匹配的子串, 另一种是判断给定的字符串是否符合某种匹配.
+
+简单地说, 就是全匹配还是子匹配. 两种方式某种意义上是等价的, 因为全匹配中可以通过捕获组`()`获得某种形式子串.
+
+`python`的正则表达式跟`Java`的很像, 也是用`re.compile(r"reg_str")`编译成正则对象, 执行`pat.search(str)`作子匹配, 执行`pat.match(str)`作起始匹配, 执行`pat.fullmatch(str)`作全匹配, 获得`Match`对象. 再通过`m.start(group_n)`, `m.end(group_n)`, `m.group(group_n)`这三个方法分别获取匹配的起始/结束索引, 以及匹配到的字串.
+
+* `split(reg)`, 以匹配的子串为切分点, 分割字符串
+* `findall(str)`, 以列表形式返回能匹配的所有子串
+* `finditer(str)`, 以迭代器形式返回能匹配的所有子串
+* `sub(repl, str)`, 进行匹配字串的替换
+* `subn(repl, str)`, 会同时返回替换的次数
+
+## 近似
+
+* `math.ceil`, 向上取整
+* `math.floor`, 向下取整
+* `round`, 四舍五入
+
+## zip
+
+```py
+a = ['a', 'b', 'c']
+b = [1, 2, 3]
+x = zip(a, b)  #=> [('a', 1), ('b', 2), ('c', 3)]
+y = zip(*x)  #=> [('a', 'b', 'c'), (1, 2, 3)]
+```
+
+`zip`的参数为两个或多个可迭代对象, 因为某种程度上, `zip`能够同时实现`zip/unzip`的功能.
+
+## 编码检测
+
+```py
+import chardet
+f = open(file, 'rb')
+enc = chardet.detect(f.read())  # 参数为字节序列
+import codecs
+codecs.lookup(enc['encoding']).name  # 编码的名称
+```

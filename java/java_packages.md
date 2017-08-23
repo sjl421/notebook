@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 // 继承java.io.IOException -> java.lang.Exception -> java.lang.Throwable
 ```
 
-## java.util.Scanner, java.nio.file.Paths
+## java.util.Scanner
 
 ``` java
 Scanner in = new Scanner(System.in); //new Scanner()调用Scanner的构造器。
@@ -82,11 +82,20 @@ String completeString = builder.toString();
 
 ## java.io.BufferedReader ->java.io.Reader
 
+读文件:
+
 ``` java
 BufferedReader in = new BufferedReader(new FileReader("foo.in"));
-BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 in.readLine();in.read();in.skip(10)
 in.close(); in.ready();
+```
+
+写文件:
+
+```java
+BufferedWriter bw = new BufferedWriter(new FileWriter("foo.out"));
+bw.write("hello, world");
+bw.close();
 ```
 
 ## Math
@@ -124,10 +133,11 @@ Arrays.deepToString(a);
 Arrays.copyOf(a,10);
 Arrays.copyOf(a,2,8);
 Arrays.sort(a);
-Arrays.binarySearch(a,value);
+Arrays.binarySearch(a,value);  // 在数组a中进行二分查找, a应该是有序的
 Arrays.binarySearch(a, start, end, value);
-Arrays.fill(a, value);
-Arrays.equals(a,b);Arrays.hashCode();
+Arrays.fill(a, value);  // 以指定值填充数组
+Arrays.equals(a,b);  // 比较数组是否相等
+Arrays.hashCode();
 ```
 
 ## java.util.Date, java.util.GregorianCalendar -> java.util.Calendar

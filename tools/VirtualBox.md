@@ -6,7 +6,9 @@
 * get key `wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -`
 * update and install `sudo apt-get update && sudo apt-get install virtualbox-5.0`
 * select install `dkms`
-* 手动安装拓展
+* 手动安装拓展, 或`vboxmanage extpack install --replace /path/to/ext-pack`, 前提是没有虚拟机在运行.
+
+清华源: `deb https://mirrors.tuna.tsinghua.edu.cn/virtualbox/apt/ trusty contrib`
 
 ## cli manage
 
@@ -15,6 +17,7 @@ First, add your install directory to system path.
 Type `VBoxManage --help` to get help infomation.
 
 基本命令:
+
 * 列出已有的虚拟机: `VBoxManage list vms`
 * 列出当前正在运行的虚拟机: `VBoxManage list runningvms`
 * 列出支持的系统类型: `VBoxManage list ostypes`
@@ -52,10 +55,10 @@ Type `VBoxManage --help` to get help infomation.
 
 ### createvm
 
-创建一个虚拟机: 
+创建一个虚拟机:
 
-    VBoxManage createvm --name <name> 
-                        --groups <group>,... 
+    VBoxManage createvm --name <name>
+                        --groups <group>,...
                         --ostype <ostype>
                         --register
                         --basefolder <path>
@@ -88,10 +91,10 @@ Type `VBoxManage --help` to get help infomation.
 导入虚拟机: `VBoxManage import ovafile|ovffile`
 
 * 列出支持的更改选项: `-n`;
-* 若要改变虚拟机名: `--vsys 0 --vmname newname`; 
-* 若要改变系统类型: `--vsys 0 --ostype newtype`; 
-* 若要改变cpu数: `--vsys 0 --cpus n`; 
-* 若要改变内存: `--vsys 0 --memory newmb`; 
+* 若要改变虚拟机名: `--vsys 0 --vmname newname`;
+* 若要改变系统类型: `--vsys 0 --ostype newtype`;
+* 若要改变cpu数: `--vsys 0 --cpus n`;
+* 若要改变内存: `--vsys 0 --memory newmb`;
 * 若要禁止声卡,各种控制器: `--vsys 0 --unit x --ignore`
 * 改变虚拟磁盘路径: `--vsys 0 --unit x --disk newpath`
 
@@ -108,16 +111,19 @@ Type `VBoxManage --help` to get help infomation.
 列出已建立的网络: `vboxmanage list natnetworks`
 
 创建同时打开dhcp:
+
 ```sh
-vboxmanage natnetwork add --netname bigdata --network "192.168.15.0/24" --enable --dhcp on  
+vboxmanage natnetwork add --netname bigdata --network "192.168.15.0/24" --enable --dhcp on
 ```
 
 创建后打开dhcp:
+
 ```sh
 vboxmanage natnetwork modify --netname bigdata --dhcp on/off
 ```
 
 开始和关闭, 移除网络:
+
 ```sh
 vboxmanage natnetwork start/stop/remove --netname bigdata
 ```
@@ -158,5 +164,3 @@ vboxmanage guestproperty set vmname /VirtualBox/GuestAdd/SharedFolders/MountDir 
 ```sh
 vboxmanage clonevm vmname --name new_vm_name --register
 ```
-
-

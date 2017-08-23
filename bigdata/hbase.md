@@ -62,7 +62,7 @@
 
 `HMaster`服务器控制`HBase`集群, 可启动备份进程: `bin/local-master-backup.sh start/stop 2 3 5`, 此处的`2,3,5`是端口偏移, 在`16010`的基础上. 可最多启动9个备份.
 
-`HRegionServer`服务器在`HMaster`的指示下管理`StoreFiles`中的数据, 可启动备份进程: `bin/local-regionservers.sh start/stop 2 3 4 5`, 端口在`16200`和`16300`基础上偏移.
+`HRegionServer`服务器在`HMaster`的指示下管理`StoreFiles`中的数据, 可启动备份进程: `bin/local-regionservers.sh start/stop 2 3 4 5`, 端口在`166200`和`16300`基础上偏移.
 
 `HQuorumPeer`是由`HBase`控制和启动的`ZooKeeper`实例.
 
