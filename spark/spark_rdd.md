@@ -13,14 +13,19 @@
 
 * `toDebugString`可查看`rdd`谱系, 事实上, 输出的谱系图通过缩进表示`stage`. 一定程度上可以看出`DAG`图, 也可以看到`ShuffledRDD`是`stage`的分割点. 强调下, 不是说`reduceByKey`这样生成`ShuffledRDD`的`API`是`stage`的分割点, 而是说`ShuffledRDD`是分割点, 因为`reduceByKey`可能也不生成`ShuffledRDD`, 而是别的`RDD`.
 
+补充: 也不是`ShuffledRDD`, 而是在两个有`shuffle`依赖的`RDD`间是`Stage`的分隔点. 除了`ShuffledRDD`还有别的`RDD`也会产生`shuffle`依赖.
+
 非常有趣的是, 你可以在`4040`页面查看应用的`DAG Visualization`, 会展示`stage`和执行流程.
 
 `RDD`有不同的子类型, 以下`rddx`除非特别声明, 默认全为`MapPartitionsRDD`.
 
-* `partitions`, 返回分区集合
-* `partitioner`, 返回`RDD`使用的分区方式, 返回`spark.Partitioner`对象
-* `preferredLocations(p)`, 返回指定分区的优先计算位置
-* `dependencies`, 返回`rdd`的依赖关系
+`RDD`的5个主要属性:
+
+* `partitions`, 分区集合
+* `compute`, 计算每个分区的函数
+* `dependencies`, 依赖关系
+* `partitioner`, 分区方式
+* `preferredLocations(p)`, 分区的位置偏好
 
 一个间接的方法可以知道, 一个`RDD`的各个分区都包含那些元素:
 

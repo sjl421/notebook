@@ -4,11 +4,11 @@
 
 关于指定的内存, 对于`executor`, 除了计算用以外, 当调用`RDD`的`persist`缓存数据时, 也会存储在`executor`的`JVM`进程的堆内, 即堆内缓存.
 
-可以通过`spark.driver.cores`或`--driver-cores`指定`Driver`使用的`cpu`核心数, 在`Standalone`和`YARN`模式下都默认为1, 只对`cluster`部署模式有效. 
+可以通过`spark.driver.cores`或`--driver-cores`指定`Driver`使用的`cpu`核心数, 在`Standalone`和`YARN`模式下都默认为1, 只对`cluster`部署模式有效.
 
 通过`spark.executor.cores`或`--executor-cores`指定每个`Executor`使用的`cpu`核心数, `Standalone`默认使用全部, `YARN`默认为1. 可以设置后, 让`Standalone`模式下, 每个应用可以在单个`Worker`上运行多个`Executor`.
 
-这一定程度上, 也说明对`Standalone`模式来说, 任一时刻只能运行一个应用, 每个节点只能启动一个`Executor`. 而对`YARN`来说, 则每个节点可启动多个`Executor`, 并运行多个应用, 因此可以延伸出应用的队列和对应用的调度. 
+这一定程度上, 也说明对`Standalone`模式来说, 任一时刻只能运行一个应用, 每个节点只能启动一个`Executor`. 而对`YARN`来说, 则每个节点可启动多个`Executor`, 并运行多个应用, 因此可以延伸出应用的队列和对应用的调度.
 
 `spark.default.parallelism`用于设定默认的分区数. 本地模式等于主机的核心数, `Standalone`或`YARN`为所有执行器节点的总核心数.
 
@@ -27,6 +27,7 @@
 * 可以通过`8080`的`master`页面查看效果
 
 看来有点小看`Standalone`了 TODO 存疑:
+
 * `spark.dynamicAllocation.enabled`, 设置是否允许根据工作负载动态调整应用的`executor`数目
 * `spark.dynamicAllocation.minExecutors`
 * `spark.dynamicAllocation.maxExecutors`
@@ -39,16 +40,17 @@
 * `spark.rpc.askTimeout`, `rpc ask`操作的等待时间
 * `spark.rpc.lookupTimeout`, `rpc`远程端点`lookup`操作的等待时间
 
-
 * `spark.dynamicAllocation.executorIdleTimeout`, 在动态分配中, `executor`在被移除前的`idle`时间. 默认60s
 * `spark.dynamicAllocation.cachedExecutorIdleTimeout`, 在动态分配中, 已缓存数据块的`executor`在被移除前的`idle`时间. 默认无限, 即若`executor`缓存了数据块, 则默认不会被移除
 
 * `spark.files.fetchTimeout`, 在获取通过`SparkContext.addFile()`添加的文件时的超时
 
 应用外:
+
 * 使用`kryo`序列化库, `spark.serializer`
 
 应用内:
+
 * 为数据选择合适的分区方式避免跨节点的数据混洗
 * 适当重分区来指定适当的并行度
 * 完成同样的任务, 使用合适的`API`
