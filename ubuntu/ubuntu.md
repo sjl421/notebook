@@ -63,3 +63,9 @@ sudo apt install language-pack-zh-hans
 `localectl list-locales`列出当前系统中所有可用的`locale`
 
 `localectl set-locales "LANG=zh_CN-utf8"`设置语言环境变量 
+
+## 管理开机自启动服务
+
+`sudo systemctl enable/disable service_name`
+
+或`sudo update-rc.d -f service_file remove`

@@ -37,6 +37,7 @@
 除以下已包含的仓库,需要添加额外的仓库请向管理员申请.
 
 已包含的`proxy`仓库:
+
 * `https://repo1.maven.org/maven2/`,`Maven`中心仓库
 * `http://repo.typesafe.com/typesafe/ivy-releases/`,`scala`相关仓库
 * `http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/`,`sbt`插件仓库
@@ -56,6 +57,7 @@
 运行: `sudo bin/nexus start`
 
 作为服务运行,`/etc/systemd/system/nexus.service`:
+
 ```systemd
 [Unit]
 Description=nexus service
@@ -70,7 +72,8 @@ Restart=on-abort
 WantedBy=multi-user.target
 ```
 
-执行: 
+执行:
+
 ```sh
 sudo systemctl daemon-reload
 sudo systemctl enable nexus.service
@@ -205,8 +208,7 @@ sudo systemctl start nexus.service
 [repositories]
 local
 nexus: http://192.168.0.200:8081/repository/maven-public/
-nexus-ivy: http://192.168.0.200:8081/repository/maven-public/, 
-[organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
+nexus-ivy: http://192.168.0.200:8081/repository/maven-public/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]
 ```
 
 以上指定了`sbt`在下载依赖包时的顺序,`local`表示本地的`.ivy2`仓库,`nexus`是搭建的
@@ -258,4 +260,3 @@ version := "1.0-SNAPSHOT"  //项目版本
 ```scala
 libraryDependencies += "org.example" %% "my-project" % "1.0-SNAPSHOT"  //添加项目依赖
 ```
-

@@ -8,7 +8,7 @@ environment variable: `$HOME`, `$PATH`.
 file=lzp     #=> no space between the 'file', '=' and 'lzp'
 echo "$file" #=> use the var by '$var'
 $0...$9      #=> 引用脚本参数
-$#           #=> 脚本的参数个数
+$#           #=> 脚本的参数个数数
 $$           #=> 脚本的进程ID
 $*,$@        #=> 所有的脚本参数
 ```
