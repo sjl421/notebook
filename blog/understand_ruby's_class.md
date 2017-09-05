@@ -20,12 +20,13 @@ my_object = ObjectCreator.new  #=>#<ObjectCreator:0x00000000b41400>
 print my_object  #=>nil
 ```
 
-说明: 
+说明:
+
 * 类默认继承自`Object`, 因此`< Object`非必要. 原文的`Python`代码也是.
 * 在Ruby 中, 在不引起歧义的前提下, 函数调用的`()`可以省略. 这里同原文的Python 代码虽然看起来相同, 但原理完全不同.Python2.7中, `print`实现为语句, 但在Python 3.x中, 实现为全局函数, 则必须加`()`表示调用.
 * 这里的`#=>`表示输出的结果, `print`无输出, 即`nil`来表示无
 
-同Python, Ruby的类同样也是对象. 不同于Python, Ruby中的`class`实际是打开一个类, 如果类不存在则创建它. 换句话说, 在Python中重复`class`定义同一类, 后者会覆盖前者, 而在Ruby中, 类是同一个, 后者只是给这个类添加了新的方法或变量. 
+同Python, Ruby的类同样也是对象. 不同于Python, Ruby中的`class`实际是打开一个类, 如果类不存在则创建它. 换句话说, 在Python中重复`class`定义同一类, 后者会覆盖前者, 而在Ruby中, 类是同一个, 后者只是给这个类添加了新的方法或变量.
 
 Python:
 
@@ -67,17 +68,20 @@ N1("lzp").hello(" is good man")  #=> "lzp is good man"
 N1("lzp").world(" is good man")  #=> "lzp is good man"
 ```
 
-* Ruby少了无语的`self`, 但多了无语的`end`. 
+* Ruby少了无语的`self`, 但多了无语的`end`.
 * Ruby的函数默认返回最后一个表达式的值, 但在Python中则必须显示地`return`.
 * Ruby的方法定义可以写成一行,Python来咬我啊
 
 很多语言都声称 _xx语言中一切都是对象_, 包括Java. 很明显, 不同语言中的对象概念应该是有区别的, 那么如何来理解对象呢. 这里我基本同意原文中所说, 可赋值, 可拷贝, 可增加属性, 可作参传递.
 
-注意, 不要将对象和对象的引用混淆, 对象的引用往往表现为常见的各种标识符. 
+注意, 不要将对象和对象的引用混淆, 对象的引用往往表现为常见的各种标识符.
 
+```Ruby
+ObjectCreator.to_s  #=> "ObjectCreator"
 ```
-Rb: ObjectCreator.to_s  #=> "ObjectCreator"
-Py: str(ObjectCreator)  #=> <class '__main__.ObjectCreator'>
+
+```Python
+str(ObjectCreator)  #=> <class '__main__.ObjectCreator'>
 ```
 
 由于`print`函数实际是调用对象转字符串后输出, 并无特殊意义. 下面的例子更好地展示了, 作参传递.
@@ -98,12 +102,12 @@ oc1 = new(ObjectCreator)  #=>#<ObjectCreator:0x...>, 新的实例对象
 
 ## Python属性操作
 
-Python 中有3个全局函数, 用于对象的属性操作. 
+Python 中有3个全局函数, 用于对象的属性操作.
 
-* `hasattr(obj, 'attr_name')`判断对象是否有此属性, 
-* `getattr(obj, 'attr_name')`获取对象指定属性, 
+* `hasattr(obj, 'attr_name')`判断对象是否有此属性
+* `getattr(obj, 'attr_name')`获取对象指定属性
 * `setattr(obj, 'attr_name', attr_value)`则是设置指定属性
-* `obj.new_attr = attr_value`设置属性. 
+* `obj.new_attr = attr_value`设置属性
 * `delattr(obj, 'attr_name')`删除属性.
 
 Python中的属性是一个宽泛的概念, 包括类变量, 实例变量, 类方法和实例方法. 这其中的区别是非常经典的, 且在不同语言中有不同的名称, 有不同的书面写法.
@@ -196,7 +200,7 @@ N1.singleton_methods  # 列出所有非继承的类方法
 
 Ruby中, 一切皆对象. 因此有必要来理解下Ruby的对象模型, 详细地建议看 _Ruby元编程_一书.
 
-对象由状态, 所属类的引用和操作构成. 状态和操作都是专属的, 只能由本对象进行`.`运算. 普通对象的状态即实例变量, 操作即单件方法, 类对象的状态即类的实例变量即类变量, 类对象的操作即类的单件方法即类方法, 其实本质是相同的. 每个对象都存储有对所属类的引用, 以此来知晓可调用的实例方法. 
+对象由状态, 所属类的引用和操作构成. 状态和操作都是专属的, 只能由本对象进行`.`运算. 普通对象的状态即实例变量, 操作即单件方法, 类对象的状态即类的实例变量即类变量, 类对象的操作即类的单件方法即类方法, 其实本质是相同的. 每个对象都存储有对所属类的引用, 以此来知晓可调用的实例方法.
 
 所谓所属类的引用, 很简单, 在对象上调用`#class`方法即可
 
@@ -256,7 +260,7 @@ MyClass().hello()  #=> "hello"
 
 但不同于Ruby, `type`的第一个参数即类名, 跟`MyClass`无关, 即赋值不会改变类名. 但Ruby是在将类对象第一次赋值给常量时生成类名的, 之后赋值也不会改变.
 
-在Ruby中, `Class.new(superclass)`来表示继承类.Ruby中只支持单继承, 通过模块来添加不同的功能. 
+在Ruby中, `Class.new(superclass)`来表示继承类.Ruby中只支持单继承, 通过模块来添加不同的功能.
 
 前文提到,Ruby的类有打开性质, 给类添加方法和变量是非常方便.
 
@@ -290,15 +294,15 @@ Fixnum.ancestors  #=> [Fixnum, Integer, Numeric, Comparable, Object, Kernel, Bas
 
 Ruby也有一些钩子方法:
 
-* `included`表示模块被包含时执行, 
-* `extended`表示模块被后扩展时执行, 
-* `prepended`表示模块被前扩展时执行, 
-* `inherited`表示类被继承时执行, 
-* `method_missing`表示对象调用不存在的方法时执行. 
+* `included`表示模块被包含时执行
+* `extended`表示模块被后扩展时执行
+* `prepended`表示模块被前扩展时执行
+* `inherited`表示类被继承时执行
+* `method_missing`表示对象调用不存在的方法时执行
 
 但目前没找到当定义类时被执行的钩子方法. 所以像原文的大写属性名的操作, 还真不知道如何进行. 但事实上,Ruby的对应属性的标识符有严格的规定, 不可能大写首字母. 如类变量`@@var`, 实例变量`@var`, 方法名`two_method`.
 
-但如果实现不了这个, 总觉得Ruby有种被比下去的感觉, 虽然大写所有属性首字母的操作似乎没有意义. 
+但如果实现不了这个, 总觉得Ruby有种被比下去的感觉, 虽然大写所有属性首字母的操作似乎没有意义.
 
 ```rb
 class N
@@ -337,7 +341,7 @@ N.class_eval {@Name}  #=> "lzp"
 N.class_eval {@name}  #=> nil
 ```
 
-这是大写所有的类的实例变量. 
+这是大写所有的类的实例变量.
 
 由于Ruby的实例变量默认是不能从外部访问的, 不得不使用`.class_eval`来打开类的上下文.
 
@@ -363,7 +367,7 @@ reduce(lambda x,y: x+":"+y, a)  #=> "he:hk:ok"
 
 > Py: dict(map(lambda i: (i[0].upper(), i[1]), filter(lambda i: not i[0].startswith("__"), future_class_attr.items())))
 
-好吧, 我承认我的Python技术真不高, 如果真写成一行, 完全看不懂了, 原文作者那样写更清晰简洁易懂, 当然更主要的是, 用`map/filter`会引入新的难点, 容易偏离主题. 
+好吧, 我承认我的Python技术真不高, 如果真写成一行, 完全看不懂了, 原文作者那样写更清晰简洁易懂, 当然更主要的是, 用`map/filter`会引入新的难点, 容易偏离主题.
 
 希望有高手能告诉我, 将一个类的所有非"__"的属性的键变为大写如何以更函数式的方式表达出来.
 
@@ -381,9 +385,9 @@ a.reduce {|sum, x| sum + ":" + x}  #=> "he:hk:ok"
 
 > Rb: future_class_attr.reject {|k,v| k.start_with? "__"}.map {|k,v| k.upcase}
 
-Python3.x删除了`reduce`函数, 推荐使用`for`循环, 也可以使用`funtools.reduce`. 这跟Ruby完全不同,Ruby提倡使用`each`, `map`等迭代, 而`for`在底层也是在调用`each`. 
+Python3.x删除了`reduce`函数, 推荐使用`for`循环, 也可以使用`funtools.reduce`. 这跟Ruby完全不同,Ruby提倡使用`each`, `map`等迭代, 而`for`在底层也是在调用`each`.
 
-## 一切皆对象.
+## 一切皆对象
 
 Python和Ruby都号称一切皆对象, 但很明显两个的对象概念并不完全对等.
 
@@ -441,8 +445,3 @@ hello = Proc.new {|name| "hello" + name}
 ## 后记
 
 事实上, `Class.new` 属于 Ruby 元编程的一部分, 但 Ruby 的元编程就像普通编程一样, 没有任何神秘复杂的语法. 这里真的只是冰山一角.
-
-
-
-
-

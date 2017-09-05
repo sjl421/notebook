@@ -21,30 +21,23 @@ import java.io.FileNotFoundException;
 // 继承java.io.IOException -> java.lang.Exception -> java.lang.Throwable
 ```
 
+## java.net.URI
+
+```java
+val uri = new URI("http://lzp@192.168.0.1:3000/hello.html")
+uri.getHost();  //=> 192.168.0.1
+uri.getPort();  //=> 3000
+uri.getScheme();  //=> http
+uri.getPath();  //=> /hello.html
+uri.getUserInfo();  //=> lzp
+```
+
 ## java.util.Scanner
 
 ``` java
 Scanner in = new Scanner(System.in); //new Scanner()调用Scanner的构造器。
 Scanner in = new Scanner(Paths.get("file.txt")); //文件输入
 in.nextLine(); in.next(); in.nextInt(); in.nextDouble();
-```
-
-## java.io.PrintWriter -> java.io.Writer
-
-``` java
-PrintWriter out = new PrintWriter("fileout.txt");
-// throws FileNotFoundException 文件输出
-out.print(); out.printf();
-out.println(); System.out.println();
-infile.close(); outfile.close();                  // 文件关闭
-```
-
-## java.io.Console
-
-``` java
-Console cons = System.console();                 // 从控制台读取密码
-String username = cons.readLine("User name: ");
-char[] passwd = cons.readPassword("Password: ");
 ```
 
 ## 格式输出
@@ -188,10 +181,13 @@ Integer, Long, Float, Double, Short, Byte, Character, Void, Boolean 全不可变
 
 ``` java
 ArrayList<Integer> list = new ArrayList<>();
-list.add(3); <=>list.add(Integer.valueOf(3));                     // 装箱
-list.get(i); <=>list.get(i).intValue();                           // 拆箱
-a.inValue(); Integer.toString(<int>[进制]);
-Integer.parseInt(<String>[进制]);Integer.valueOf(<String>[进制]);
+list.add(3); // list.add(Integer.valueOf(3));                     // 装箱
+list.get(i); // list.get(i).intValue();                           // 拆箱
+Integer.valueOf(3);  // 转int到Integer
+num.intValue()  // 转Integer到int
+Integer.toString(32, 2);  // 输出32的二进制
+Integer.parseInt("aef", 16);  // 输出16进制下的aef表示的整数
+Integer.valueOf("aef", 16);  // 返回Integer而非int
 ```
 
 ## Enum
@@ -211,7 +207,11 @@ enum Size //java.lang.Enum<E>, java.lang.Class<T> {
 ## Exception
 
 ``` java
-try {statements} catch (Exception e) {handler}
+try {
+    statements
+} catch (Exception e) {
+    handler
+}
 ```
 
 ## Equals
@@ -230,13 +230,6 @@ public boolean equals(Object otherObject) {
 }
 ```
 
-## android.util.Log
-
-``` java
-Log.v("tag", "message");    ->verbose
-Log.w(); Log.i(); Log.e(); Log.d(); -> warning,info,error,debug
-```
-
 ## java.io.File
 
 ``` java
@@ -251,35 +244,4 @@ File.separator;     ->'/' ; File.pathSeparator;     ->':'
 ``` java
 Process p = Runtime.getRuntime().exec("shell cmd");
 p.waitFor();p.destroy();
-```
-
-## android.graphics.Point, android.graphics.Rect
-
-``` java
-Rect rect = obj.getBounds();
-Point p = new Point(12, 23);
-p.x = rect.centerX(); p.y = rect.centerY();
-```
-
-## android.graphics.Bitmap, android.graphics.BitmapFactory
-
-``` java
-Bitmap map = BitmapFactory.decodeFile(mappath);
-Bitmap.createBitmap(map, x1,y1,x2,y2);
-```
-
-## android.app.Instrumentation
-
-``` java
-Instrumentation inst = new Instrumentation();
-inst.sendKeySync(KeyEvent event);
-inst.sendPointerSync(MotionEvent event);
-inst.sendStringSync(String text);
-```
-
-## android.view.KeyEvent, android.view.MotionEvent -> android.veiw.InputEvent
-
-``` java
-KeyEvent kd = new KeyEvent(KeyEvent.ACTION_DOWN, key);
-MotionEvent md = MotionEvent.obtain(...)
 ```

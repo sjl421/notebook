@@ -89,7 +89,7 @@ import org.apache.spark.RangePartitioner
 val rdd1 = sc.parallelize(Seq(1,2,3,4))  // ParallelCollectionRdd
 val rdd2 = rdd1.map(_ + 1)  //=> Seq(2, 3, 4, 5)
 val rdd3 = sc.parallelize(Seq("hello world", "god bless me"))  // 虽然只有两个元素, 但事实上有4个分区
-val rdd4 = rdd3.flagMap(_.split(" "))  //=> Seq("hello", "world", "god", "bless", "me")
+val rdd4 = rdd3.flatMap(_.split(" "))  //=> Seq("hello", "world", "god", "bless", "me")
 rdd1.mapPartitions(_.map(_ + 1))  //参数为Iterator[T] => Iterator[U]的函数, 应用于RDD的每个分区
 ```
 

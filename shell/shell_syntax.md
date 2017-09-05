@@ -1,5 +1,7 @@
 # shell
 
+`$(( 1 + 2))`, 或`expr 1 + 2`, 进行运算
+
 ## variable
 
 environment variable: `$HOME`, `$PATH`.
@@ -8,9 +10,10 @@ environment variable: `$HOME`, `$PATH`.
 file=lzp     #=> no space between the 'file', '=' and 'lzp'
 echo "$file" #=> use the var by '$var'
 $0...$9      #=> 引用脚本参数
-$#           #=> 脚本的参数个数数
+$#           #=> 脚本的参数个数
 $$           #=> 脚本的进程ID
 $*,$@        #=> 所有的脚本参数
+$!           #=> 最近执行后台命令的PID
 ```
 
 ## condition
@@ -49,6 +52,14 @@ fi
 ```sh
 for var in vals; do
   statements
+done
+
+for ((i=0; i<4; i++)); do
+  echo $i
+done
+
+for i in {1..10}; do  # 集合, {1, 2, 3, 4}
+  echo $i
 done
 ```
 

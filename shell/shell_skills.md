@@ -28,3 +28,7 @@ lsb_release  #显示发行版信息
 ## eject
 
 若计算机的光驱, 可使用`eject`来弹出光驱, 使用`eject -t`来收回光驱.
+
+## ps
+
+`ps -p pid -o comm=`, 输出指定`pid`的命令名
