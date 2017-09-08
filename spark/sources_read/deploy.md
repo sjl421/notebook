@@ -15,3 +15,7 @@
 `master`的状态: `stanby`, `alive`, `recovering`, `completing_recovery`
 
 `worker`的状态: `alive`, `dead`, `decommissioned`, `unknown`
+
+## 变量
+
+`SPARK_PUBLIC_DNS`  ??轮询

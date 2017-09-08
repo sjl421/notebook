@@ -71,16 +71,6 @@ libraryDependencies ++= Seq(
 项目的`lib`目录下, 不实用; 另一种方式是在`build.sbt`目录下, 配置`unmanagedBase :=
 new File("jars_path")`. 后一种方式有个致命的问题, 即在`IDEA`中无法被识别.
 
-## 插件
-
-添加插件需要在`project`目录下新建`.sbt`文件,声明要添加的插件,如`sbt-assembly`用于
-打包`fat jar`的插件:
-
-```scala
-//assembly.sbt
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.3")
-```
-
 ## revision
 
 在指定依赖的版本号时, 除了固定的, 还可以别的形式

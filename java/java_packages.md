@@ -21,6 +21,19 @@ import java.io.FileNotFoundException;
 // 继承java.io.IOException -> java.lang.Exception -> java.lang.Throwable
 ```
 
+## java.util.Properties
+
+表示一系列的属性的键值对, 键值都是字串.
+
+```java
+val p  = new Properties();
+p.setProperty("cn.enali.age", "13");
+p.getProperty("cn.enali.age");
+p.stringPropertyNames();
+p.loadFromXML(xml);  // 可从xml文件载入
+p.storeToXML(xml);   // 可存储到xml文件中
+```
+
 ## java.net.URI
 
 ```java

@@ -57,3 +57,14 @@ Integer.decode(a);  //=> 174
 * server：是否监听debuger的调试请求
 * suspend：是否等待启动，也即设置是否在debuger调试链接建立后才启动debugee JVM
 * address：debugee的地址，用于debuger建立调试链接
+
+## 获取resources目录的文件路径
+
+对于标准的`maven`目录结构, `resources`目录中的文件通常会在编译后复制到`classes`目录中, 此目录也是上下文的类载入路径. 因此, 可用`classloader.getResource(fname)`获取.
+
+除此外, 在类代码中出现的文件路径, 通常假定在项目的根目录, 因此, 可用`src/main/resources/fname`来指定相对路径.
+
+```java
+ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+classloader.getResource(fname).getFile();  // fname是相对resources目录的路径
+```

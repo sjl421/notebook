@@ -1,11 +1,11 @@
 # javascript
 
 命名规范:
+
 * 变量和函数使用驼峰法来命名
 * 全局变量和常量为大写
 * 一条语句通常以`;`结束
 * 块`{}`不加`;`
-
 
 引入:
 
@@ -51,7 +51,7 @@ o.info()  //调用方法, 或o['info']()
 
 `null`是一个只有一个值的特殊类型, 表示一个空对象引用. 可以给对象设置`null`来清空对象.
 
-数组:
+## 数组
 
 ```javascript
 var ary = [1,2,3,4];
@@ -76,7 +76,7 @@ ary.toString()  //默认的split()
 Array.prototype.ucase = function() {...}  //为数组添加新的方法
 ```
 
-函数:
+## 函数
 
 函数声明后不会立即执行, 直到调用. 不以`;`号结束.
 
@@ -122,7 +122,7 @@ fa.apply(a, [24])  //参数以数组形式提供
 
 不属于任何对象的函数默认是全局对象的, 在`HTML`中默认的全局对象是页面本身, 在浏览器中页面对象是浏览器窗口, 即`window`对象.
 
-闭包:
+## 闭包
 
 内嵌函数作为对象被返回时, 会保存外层函数的局部变量, 俗称闭包.
 
@@ -135,7 +135,7 @@ add()
 add()
 ```
 
-事件:
+## 事件
 
 `HTML`事件是发生在`HTML`元素上的事情. 当在`HTML`而面中使用`javascript`时, 可以触发这些事件.
 
@@ -151,6 +151,7 @@ function displayDate() {document.getElementById("demo").innerHTML=Date(); }
 ```
 
 有如下事件:
+
 * `onchange`, 改变元素内容
 * `onclick`, 点击元素
 * `onmouseover`, 移动鼠标到元素上
@@ -158,8 +159,7 @@ function displayDate() {document.getElementById("demo").innerHTML=Date(); }
 * `onkeydown`, 按下键盘按键
 * `onload`, 完成页面加载
 
-
-字串:
+## 字串
 
 字串的断行要明确的`\\`.
 
@@ -199,7 +199,7 @@ x.substring(1,2) //=> "e", 同slice, start, end
 "hello" + 3  //=> "hello3"
 ```
 
-运算符:
+## 运算符
 
 支持`++`和`--`, 遵循`C`的规则, 后加先用, 先加后用.
 
@@ -216,6 +216,8 @@ x.substring(1,2) //=> "e", 同slice, start, end
 逻辑运算符: `&& || !`
 
 条件运算符: `condition ? v1 : v2`
+
+## 控制结构
 
 条件语句:
 
@@ -260,6 +262,7 @@ label:  //跳到标记处, 但并不执行标记的语句, 而是进入下一条
 ```
 
 类型转换:
+
 * `Number()`, 转换为数字
 * `String()`, 转换为字串, 或`.toString`
 * `Boolean()`, 转换为布尔值
@@ -286,7 +289,7 @@ Number(undefined)  //=> NaN
 "5" - 1  //=> 4, 因为-没重载...
 ```
 
-数字:
+## 数字
 
 ```javascript
 var n = 12300
@@ -298,7 +301,7 @@ n.toFixed(2)  //=>3.14, 设置小数位数
 
 注意, `new Date()`返回当前日期对象, 而`Date()`则返回当前日期字串.
 
-日期:
+## 日期
 
 ```javascript
 Date()  //当前时间字串
@@ -315,7 +318,7 @@ n.getMillseconds()  //毫秒
 n.getTime()  //返回1970年1月1日至今的毫秒数
 ```
 
-正则:
+## 正则
 
 ```javascript
 var patt = /name/i  //=> 不分大小写
@@ -328,7 +331,7 @@ pat.test(str)  //如果匹配则返回true
 pat.exec(str)  //相当str.match(pat)
 ```
 
-异常:
+## 异常
 
 ```javascript
 try {

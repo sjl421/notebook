@@ -2,16 +2,13 @@
 
 ## 快捷键
 
-* `C+A+s`, 打开终端, `windows`上默认为`cmd.exe`
 * `C+P`, 快速打开, 可模糊搜索文件名, 输入`>`可转为命令面板
-* `C+A+P`, 打开命令面板, 命令以组划分, 有相同前缀
+* `C+S+P`, 打开命令面板, 命令以组划分, 有相同前缀
   * `git: xxx`, 输入`git`相关的命令
 * `C+,`, 打开配置文件
 * `C+\`, 在右侧打开垂直窗口
 
 * `A+1-9`, 切换标签
-
-* `C+n v`, 打开`markdown`的预览
 
 ## 命令
 
@@ -20,6 +17,7 @@
 * `ext`, 关于插件
 * `edt`, 关于编辑窗口
 * `task tkname`, 执行任务, `A-T`
+* `term tername`, 打开终端
 * `@ symname`, 跳转到文件的符号处, `A-F`
 * `@: symname`, 同上, 以不同类别的形式
 * `# symname`, 跳转到项目的符号处(必须是可公开访问的), `A-S`
@@ -68,3 +66,31 @@
 3, 快捷键
 
 `C+S+P -> Preferences: Keyboard Shortcuts`, 可修改快捷键
+
+"selectNextSuggestion", `C-j`, 在补全建议中, 上下移动
+"selectPrevSuggestion", `C-k`
+"workbench.action.quickOpenNavigateNext", `C-j`, 在快速打开中, 上下移动
+"workbench.action.quickOpenNavigatePrev", `C-k`
+"command": "code-runner.run", `S-F10`, 运行代码
+"command": "workbench.action.debug.stepOver", `F8`, 单步跳过
+"command": "workbench.action.debug.stepInto", `F7`, 单步进入
+
+`vim`:
+
+* `C-F`, 向上滚动一屏, 可关
+* `C-B`, 向下滚动一屏, 或在命令行(`VSCode`无)移动光标到行首, 可关
+* `C-E`, 向上滚动一行, 或命令行行尾, 或插入光标下方字符, 可关
+* `C-Y`, 向下滚动一行, 或插入光标上方字符, 可关
+* `C-c`, 命令行取消命令, 可关
+* `C-A`, 插入上次插入模式下输入的字符, 或在数字日期上进行增加
+* `C-x`, 在数字日期上进行减
+
+通过将`Ctrl-]`映射到块可视, 从而将`Ctrl-v`解放出来, 如此`Ctrl-c/v/x`都可以使用了.
+
+* `C-D`, 向下滚动半屏, 或插入模式中减少缩进
+* `C-T`, 标签跳转, 或插入模式下增加缩进
+* `C-h`, 插入模式下, 左删一个字符
+* `C-O/I`, 光标跳转到上/下一个位置
+* `C-U`, 删除光标到行首的字符, (应该是Bug, 因为删除了整行字符)
+* `C-w`, 左删一个word
+* `C-o`, 在插入模式下执行一个普通模式的命令
