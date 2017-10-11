@@ -54,3 +54,18 @@ def readTextFile(filename: String): Option[List[String]] =
         case e: Exception => None
     }
 ```
+
+## DynamicVariable
+
+类似一个栈, 使用`withValue`来添加新值, 但这个新值只在`withValue`的`2nd`参数可见, 一旦离开`2nd`参数的作用域, 则新值相当于执行了出栈, 变量又返回了原值.
+
+`DynamicVariable`很适合实现上下文.
+
+```scala
+val context = new scala.util.DynamicVariable[String]("000")
+println(context) // -> DynamicVariable(000)
+context.withValue("111") {
+    println(context) // -> DynamicVariable(111)
+}
+println(context) // -> DynamicVariable(000)
+```

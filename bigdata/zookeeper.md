@@ -84,12 +84,12 @@ delquota [-n|-b] path
 getAcl path
 setAcl path acl
 
-history 
+history
 redo cmdno
 printwatches on|off
 addauth scheme auth
 quit  # 退出
-close 
+close
 connect host:port
 ```
 
@@ -107,4 +107,28 @@ aclVersion = 0  # acl版本
 ephemeralOwner = 0x0  # 临时节点所属的会话
 dataLength = 0   # 数据字节长度
 numChildren = 1  # 子节点数, /默认有zookeeper的子节点
+```
+
+## 集群配置
+
+```config
+#### 要在各节点的dataDir目录中新建myid文件写入对应的1/2/3
+#### 在各节点执行 bin/zkServer.sh start 即可
+
+# 基础时间单元, 用于心跳, 最小会话超时为其2倍
+tickTime=2000
+# 存储内存数据库快照的位置, 除非额外指定, 数据库更新的事务日志也记录于此
+dataDir=/home/ivic/zk
+# 日志文件的存放目录
+# dataLogDir=/home/ivic/zk/logs
+# 客户端连接的监听端口
+clientPort=2181
+# 初始化连接时, follower/leader间最长心跳时间, 5*tickTime
+initLimit=5
+# leader/follower间发送消息, 请求和应答间最长时间长度, 2*tickTime
+syncLimit=2
+# 1st个端口号是follower/leader通信端口; 2nd个端口是选举leader的通信端口
+server.1=test57:2888:3888
+server.2=test58:2888:3888
+server.3=test59:2888:3888
 ```

@@ -16,6 +16,7 @@ if you have install the android-sdk to your disk.
 * `adb install/uninstall *.apk`: install/uninstall app
 * `adb connect/disconnect ip:port`: connect phone by wifi
 * `adb logcat`: get the log of phone
+* `adb forward tcp:8022 tcp:8022`: 开启端口转发
 
 ## adb shell
 
