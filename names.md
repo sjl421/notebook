@@ -65,3 +65,5 @@
 [vulkan](https://www.khronos.org/vulkan/), 跨平台的图形`API`, 类似`openGL`.
 
 [protonmail](https://protonmail.com/), 安全邮箱
+
+[Syncthing](https://syncthing.net/), 局域网同步软件

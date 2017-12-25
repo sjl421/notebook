@@ -68,3 +68,25 @@ Integer.decode(a);  //=> 174
 ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 classloader.getResource(fname).getFile();  // fname是相对resources目录的路径
 ```
+
+## 多线程
+
+每个`Java`程序启动时都会有多个线程:
+
+* `Signal Dispatcher`, 分发处理发送给JVM信号的线程
+* `Finalizer`, 调用对象`finalize`方法的线程
+* `Reference Handler`, 清除`Reference`的线程
+* `main`, `main`线程, 用户程序的入口
+
+## 添加钩子函数
+
+可以添加钩子函数, 当`JVM`正在关闭时会执行注册的函数.
+
+```scala
+val hook = new Thread {
+  override def run() {
+    println("hello")
+  }
+}
+Runtime.getRuntime.addShutdownHook(hook)
+```

@@ -69,3 +69,63 @@ context.withValue("111") {
 }
 println(context) // -> DynamicVariable(000)
 ```
+
+## scala与java的类型转换
+
+```scala
+import scala.collection.JavaConverters._
+val a = Vector(1, 2, 3)
+a.asJava
+val b = new java.util.ArrayList[Int]()
+b.add(1)
+b.add(2)
+b.asScala
+```
+
+## scala.util.Properties
+
+有大量的属性
+
+```scala
+Properties.jaavVersion
+```
+
+## Hadoop HDFS
+
+从`hadoop`文件系统中获取文件:
+
+```scala
+import org.apache.hadoop.fs.{FileSystem, FileUtils, Path}
+import org.apache.hadoop.conf.Configuration
+val s = "hdfs://test57/user/ivic/README.md"
+// 方式1
+val uri = new URI(s)
+val fs = FileSystem.get(uri, conf)  // 指sc.hadoopConfiguration
+// 方式2
+val path = new Path(s)
+val fs2 = path.getFileSystem(conf)
+fs.isFile(path) // 判断是否是文件
+fs.isDirectory(path) // 判断是否是目录
+fs.open(path) // 打开文件获取输入流
+fs.listStatus(dirPath)  // 列出目录所有文件的状态
+fs.getFileStatus(path)  // 获取指定文件的状态
+```
+
+## Hadoop User
+
+```scala
+import org.apache.hadoop.security.UserGroupInformation
+val user = UserGroupInformation.getCurrentUser  // 获取当前用户
+user.getUserName; user.getShortUserName  // 用户名
+user.getGroupNames; user.getPrimaryGroupName  // 组名
+```
+
+## Hadoop Conf
+
+```scala
+import org.apache.hadoop.conf.Configuration
+val hconf = new Configuration  // 实例化配置, 会默认载入classPath中的xml配置文件
+val hconf = new Configuration(false)  // 不载入配置文件的配置
+hconf.get("fs.defaultFS")  // 获取配置文件中定义的属性值
+hconf.set("property.name", "value")  // 设置属性
+```
