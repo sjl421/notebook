@@ -1,0 +1,40 @@
+# 可配置属性:
+# 1, style: filled
+# 2, color, 可以是英文单词, 也可以是RGB
+# 3, label
+# 4, shape: box, record, diamond, invtriangle, hexagon, invtrapezium, circle, doublecircle
+# 5, image, 节点可以是一张图, 在有label和image时, 通过labelloc指定位置是t(top)/b(bottom)
+# 6, height/width, 可指定节点的宽高
+# 要注意的是, 一张图由节点和边构成, 这些属性描述节点或边时并不相同
+# a -> b [ prop=value ] # 具体边的属性
+# a [ prop=value ]      # 具体节点的属性
+# node [ prop=value ];  # 所有节点的属性
+# edge [ prop=value ];  # 所有边的属性
+
+digraph G {
+  subgraph cluster_0 {
+    style=filled;  # 表示子图的风格是填充
+    color=lightgrey;  # 子图的填充颜色
+    node [style=filled, color=white];  # 节点的风格和颜色
+    a0 -> a1 -> a2 -> a3;  # 边
+    label = "process #1";  # 子图的标签
+  }
+
+  subgraph cluster_1 {
+    node [style=filled];  # 表示节点的风格是填充
+    b0 -> b1 -> b2 -> b3;
+    label = "process #2";
+    color = blue;
+  }
+
+  start -> a0;  # 直接描述边, 若节点不存在则创建
+  start -> b0;
+  a1 -> b3;
+  b2 -> a3;
+  a3 -> a0;
+  a3 -> end;
+  b3 -> end;
+
+  start [shape=Mdiamond];
+  end [shape=Msquare];
+}

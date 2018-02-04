@@ -45,20 +45,22 @@ curl -X POST http://spark-cluster-ip:6066/v1/submissions/kill/driver-20151008145
 ```sh
 curl -X POST http://spark-cluster-ip:6066/v1/submissions/create --header "Content-Type:application/json;charset=UTF-8" --data '{
   "action" : "CreateSubmissionRequest",
-  "appArgs" : [ "myAppArgument1" ],
+  "clientSparkVersion" : "2.2.1",
   "appResource" : "file:/myfilepath/spark-job-1.0.jar",
-  "clientSparkVersion" : "1.5.0",
+  "mainClass" : "com.mycompany.MyJob",
+  "appArgs" : [ "myAppArgument1" ],
   "environmentVariables" : {
     "SPARK_ENV_LOADED" : "1"
   },
-  "mainClass" : "com.mycompany.MyJob",
   "sparkProperties" : {
-    "spark.jars" : "file:/myfilepath/spark-job-1.0.jar",
-    "spark.driver.supervise" : "false",
-    "spark.app.name" : "MyJob",
-    "spark.eventLog.enabled": "true",
-    "spark.submit.deployMode" : "cluster",
     "spark.master" : "spark://spark-cluster-ip:6066"
+    "spark.submit.deployMode" : "cluster",
+    "spark.app.name" : "MyJob",
+    "spark.driver.supervise" : "false",
+    "spark.driver.cores": 2,
+    "spark.cores.max": 12,
+    "spark.driver.memory": "1g",
+    "spark.executor.memory": "1g"
   }
 }'
 ```

@@ -6,7 +6,7 @@
 
 [spacemacs](https://github.com/syl20bnr/spacemacs), 一个`emacs`的社区发行版, 提供易于使用的快捷键绑定.
 
-[lighttable](http://lighttable.com), 编辑器
+[spacevim](https://github.com/SpaceVim/SpaceVim), 一个`vim`的社区发行版
 
 ## c/cpp
 
@@ -67,3 +67,7 @@
 [protonmail](https://protonmail.com/), 安全邮箱
 
 [Syncthing](https://syncthing.net/), 局域网同步软件
+
+## apache
+
+[SystemML](https://systemml.apache.org/), 构建在spark之上的机器学习的框架

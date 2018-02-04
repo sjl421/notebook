@@ -129,3 +129,22 @@ val hconf = new Configuration(false)  // 不载入配置文件的配置
 hconf.get("fs.defaultFS")  // 获取配置文件中定义的属性值
 hconf.set("property.name", "value")  // 设置属性
 ```
+
+## scala xml
+
+`scala`在语言层面提供对`XML`的支持.
+
+```scala
+import scala.xml.Node
+val a = <a>1</a>  //=> 能自动转换为xml.Node
+val b = <b>{a}</b>  //=> xml嵌套
+case class X(name: String)
+val x = X("lizp")
+val c = <c>{x.name}</c>  //=> 引用外部变量
+```
+
+## 获取包名
+
+```scala
+obj.getClass.getPackage.getName
+```
