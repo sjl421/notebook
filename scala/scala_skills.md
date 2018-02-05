@@ -54,3 +54,97 @@ def readTextFile(filename: String): Option[List[String]] =
         case e: Exception => None
     }
 ```
+
+## DynamicVariable
+
+类似一个栈, 使用`withValue`来添加新值, 但这个新值只在`withValue`的`2nd`参数可见, 一旦离开`2nd`参数的作用域, 则新值相当于执行了出栈, 变量又返回了原值.
+
+`DynamicVariable`很适合实现上下文.
+
+```scala
+val context = new scala.util.DynamicVariable[String]("000")
+println(context) // -> DynamicVariable(000)
+context.withValue("111") {
+    println(context) // -> DynamicVariable(111)
+}
+println(context) // -> DynamicVariable(000)
+```
+
+## scala与java的类型转换
+
+```scala
+import scala.collection.JavaConverters._
+val a = Vector(1, 2, 3)
+a.asJava
+val b = new java.util.ArrayList[Int]()
+b.add(1)
+b.add(2)
+b.asScala
+```
+
+## scala.util.Properties
+
+有大量的属性
+
+```scala
+Properties.jaavVersion
+```
+
+## Hadoop HDFS
+
+从`hadoop`文件系统中获取文件:
+
+```scala
+import org.apache.hadoop.fs.{FileSystem, FileUtils, Path}
+import org.apache.hadoop.conf.Configuration
+val s = "hdfs://test57/user/ivic/README.md"
+// 方式1
+val uri = new URI(s)
+val fs = FileSystem.get(uri, conf)  // 指sc.hadoopConfiguration
+// 方式2
+val path = new Path(s)
+val fs2 = path.getFileSystem(conf)
+fs.isFile(path) // 判断是否是文件
+fs.isDirectory(path) // 判断是否是目录
+fs.open(path) // 打开文件获取输入流
+fs.listStatus(dirPath)  // 列出目录所有文件的状态
+fs.getFileStatus(path)  // 获取指定文件的状态
+```
+
+## Hadoop User
+
+```scala
+import org.apache.hadoop.security.UserGroupInformation
+val user = UserGroupInformation.getCurrentUser  // 获取当前用户
+user.getUserName; user.getShortUserName  // 用户名
+user.getGroupNames; user.getPrimaryGroupName  // 组名
+```
+
+## Hadoop Conf
+
+```scala
+import org.apache.hadoop.conf.Configuration
+val hconf = new Configuration  // 实例化配置, 会默认载入classPath中的xml配置文件
+val hconf = new Configuration(false)  // 不载入配置文件的配置
+hconf.get("fs.defaultFS")  // 获取配置文件中定义的属性值
+hconf.set("property.name", "value")  // 设置属性
+```
+
+## scala xml
+
+`scala`在语言层面提供对`XML`的支持.
+
+```scala
+import scala.xml.Node
+val a = <a>1</a>  //=> 能自动转换为xml.Node
+val b = <b>{a}</b>  //=> xml嵌套
+case class X(name: String)
+val x = X("lizp")
+val c = <c>{x.name}</c>  //=> 引用外部变量
+```
+
+## 获取包名
+
+```scala
+obj.getClass.getPackage.getName
+```

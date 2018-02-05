@@ -10,7 +10,22 @@
 
 `jupyter notebook --generate-config`生成默认的配置文件. 以上指定`ip/password`的也可以在生成的配置文件中配置.
 
-关于设置密码, 执行`jupyter notebook password`即可.
+关于设置密码, 执行`jupyter notebook password`即可, 修改下面提到的文件
+
+大部分的配置都可以直接修改`~/.jupyter/jupyter_notebook_config.json`文件来进行.
+
+```json
+{
+  "NotebookApp": {
+    "password": "xxxx",
+    "ip": "0.0.0.0",
+    "port": 8890,
+    "nbserver_extensions": {
+      "jupyter_nbextensions_configurator": true
+    }
+  }
+}
+```
 
 ## 快捷键
 

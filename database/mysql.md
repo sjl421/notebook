@@ -45,3 +45,17 @@ sudo apt install mysql-client libmysqlclient-dev
 pip install mysql-python
 ```
 
+## 远程连接
+
+1, `/etc/mysql/my.cnf`, 将`bind-address=127.0.0.1`注释掉.
+
+2, `mysql -uroot -p`登录控制台, 修改用户为`%`:
+
+```sql
+update mysql.user set host='%' where user='username';
+flush privileges;
+grant all privileges on dbname.* to 'username'@'%' identified by 'password';
+flush privileges;
+```
+
+3, 以`mysql -h remote_ip -u username -D dbname -p`登录

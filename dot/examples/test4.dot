@@ -1,0 +1,19 @@
+digraph G {
+    subgraph cluster_1 {
+      style=filled; color=lightgrey;
+      label="g_2";
+      hello -> world -> python;
+
+      subgraph cluster_2 {
+        label="g_2_2"
+        style=filled; color=blue
+        o -> p -> q;
+      }
+    }
+
+    subgraph g3 {
+      a -> b -> c;
+    }
+
+    x -> y;
+}

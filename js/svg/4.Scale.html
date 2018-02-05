@@ -1,0 +1,46 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>比例尺的使用</title>
+</head>
+
+<body>
+
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script>
+
+		var dataset = [1.2, 2.3, 0.9, 1.5, 3.3];
+
+		var min = d3.min(dataset);
+		var max = d3.max(dataset);
+
+		// 线性比例尺, 范围映射
+		var linear = d3.scale.linear()
+			.domain([min, max])
+			.range([0, 300]);
+
+		// 以函数的方式使用
+		linear(0.9);	//返回 0
+		linear(2.3);	//返回 175
+		linear(3.3);	//返回 300
+
+
+		var index = [0, 1, 2, 3, 4];
+		var color = ["red", "blue", "green", "yellow", "black"];
+
+		// 序数比例尺, 一对一映射
+		var ordinal = d3.scale.ordinal()
+			.domain(index)
+			.range(color);
+
+		ordinal(0);	//返回 red
+		ordinal(2);	//返回 green
+		ordinal(4);	//返回 black
+
+
+	</script>
+
+</body>
+
+</html>
